@@ -12,17 +12,34 @@
     />
 
     <link rel="stylesheet" href="play-game.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+
     <title>Play!</title>
   </head>
-  <body>
-    <h2>Before you begin, give your group a name!</h2>
 
-    <div class="grpForm">
-      <form>
-        <label for="grpName">Enter your group's name: </label>
-        <input type="text" id="grpName" name="grpName" /><br />
-        <button type="submit">Start Game!</button>
-      </form>
+  <body>
+    <div class="parent">
+      <div class="child">
+        <!-- <div class="title"> -->
+        <p id="title">Before you begin, give your group a name!</p>
+        <p>
+          <!-- </div>
+      <div class="grpForm"> -->
+        </p>
+
+        <form>
+          <label for="grpName">Enter your group's name: </label>
+          <input type="text" id="grpName" name="grpName" />
+          <br /><br />
+          <button type="submit" btn btn-warning>Start Game!</button>
+        </form>
+      </div>
     </div>
   </body>
 </html>
