@@ -9,27 +9,6 @@ const canvas = document.getElementById('cloudCanvas');
 const ctx = canvas.getContext('2d');
 
 /*=================
-MODAL SYSTEM
-=================*/
-
-// Open modal
-document.querySelectorAll('[data-modal]').forEach(trigger => {
-  trigger.addEventListener('click', () => {
-    const modalId = trigger.getAttribute('data-modal');
-    const modal = document.getElementById(modalId);
-    if (modal) modal.classList.add('show');
-  });
-});
-
-// Close modal
-document.querySelectorAll('.close-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const modal = btn.closest('.modal');
-    if (modal) modal.classList.remove('show');
-  });
-});
-
-/*=================
 CANVAS SETUP
 =================*/
 
