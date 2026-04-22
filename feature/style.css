@@ -143,21 +143,22 @@ body, html {
 /* ==========================
    ANIMATIONS  
 ===========================*/
-@keyframes pulse {
-  0%, 100% { transform: scale(1); text-shadow: 2px 2px 0 #000; }
-  50% { transform: scale(1.1); text-shadow: 2px 2px 0 #000, 0 0 10px #fff; }
-}
 
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+@keyframes startPulse {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    text-shadow: 2px 2px 0 #000;
+  }
+  50% {
+    transform: translateY(-8px) scale(1.08);
+    text-shadow: 2px 2px 0 #000, 0 0 10px #fff;
+  }
 }
 
 @keyframes menuPulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.08); }
 }
-
 
 /*=========================
     HOVER EFFECTS (ACTIVE/INACTIVE STATES)
