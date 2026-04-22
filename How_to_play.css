@@ -1,5 +1,10 @@
 
 
+body {
+  padding: 2rem 4rem;
+  font-family: 'Press Start 2P', monospace;
+}
+
 .background-container {
   position: fixed;
   top: 0;
@@ -14,6 +19,25 @@
   object-fit: cover; /* fills the screen without stretching */
 }
 
+h1 {
+    color: #ffea00;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9);
+}
+h2 {
+    color: #ffea00;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+}
+
 .card {
   background-color: rgba(255, 255, 255, 0.75);
+}
+
+h3.card-title {
+  font-size: 1.2rem;
+}
+
+.card-text {
+  color: #5d5c5c;
+  font-size: 0.8rem;
+
 }
