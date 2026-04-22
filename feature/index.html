@@ -36,7 +36,7 @@
     <!-- Menu List  -->
     <div class="menu-list mt-3">
       <div class="menu-item">Sign Up / Log in</div>
-      <div class="menu-item" data-modal="gamelogModal">Game Log / Resume</div>
+      <div class="menu-item" data-toggle="modal" data-target="#gamelogModal">Game Log / Resume</div>
       <div class="menu-item">Settings</div>
       <div class="menu-item">Leaderboard </div>
       <!-- Moving selector arrow -->
@@ -48,43 +48,57 @@
 
   </div>
 
-    <!-- Instructions Modal -->
-    <div class="instructions-modal" id="instructionsModal">
-      <div class="instructions-content">
-        <span class="close-btn">&times;</span>
-
-        <h2>Game Instructions</h2>
-
-        <p>
-          A choice-based game that takes on a typical university group project with exaggerated situations.
-        </p>
-
-        <p>
-          You will be given several choices in each scenario. 
-        </p> 
-
-        <p><span style="color:aqua;">Game can end by:</span></p>
-
-        <ul>
-          <li>Submitting on time with a good grade.</li>
-          <li>Submitted mediocre work.</li>
-          <li><span style="color:red;">Failing to submit</span></li>
-        </ul>
-      </div>
-    </div>
-    
-    <div class="modal" id="gamelogModal">
-     <div class="modal-content">
-        <span class="close-btn" id="gamelogClose">&times;</span>
-
-        <h2>Game Log / Resume</h2>
-
-        <div id="gamelogContent">
-          <p>No previous games found.</p>
+    <!-- Instructions Modal; Using Bootstrap -->
+    <div class="modal fade" id="instructionsModal" tabindex="-1" aria-labelledby="instructionsModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" game-modal-content>
+          <div class="modal-header border-0">
+            <h2 class="modal-title" id="instructionsModalLabel">Summarized Game Instructions</h2>
+            <button type="button" class="close text-white ml-auto" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>A choice-based game that takes on a typical university group project with exaggerated situations.</p>
+            <p>You will be given several choices in each scenario.</p>
+            <p><span class="text-info">Game can end by:</span></p>
+            <ul>
+              <li>Submitting on time with a good grade.</li>
+              <li>Submitted mediocre work.</li>
+              <li><span class="text-danger">Failing to submit</span></li>
+            </ul>
+            
+            <!--Link to full guide; added as a hyperlink to full instructions/how to play-->
+            <hr class="border-secondary">
+            <a href="How_to_play.html" class="how-to-play-link">Detailed instructions</a>
+          </div>
         </div>
       </div>
-    </div> 
+    </div>
+       
+          
+    <!--Game Log Model- Bootstrap -->
+    <div class="modal fade" id="gamelogModal" tabindex="-1" aria-labelledby="gamelogModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content game-modal-content">
+        <div class="modal-header border-0">
+          <h2 class="modal-title" id="gamelogModalLabel">Game Log / Resume</h2>
+          <button type="button" class="close text-white ml-auto" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="gamelogContent">
+            <p>No previous games found.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- Bootstrap JS Bundle; jQuery first, then Bootstrap JS, and custom JS-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 
 </body>
