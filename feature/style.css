@@ -28,9 +28,6 @@ body, html {
   object-fit: cover;
 }
 
-/* 
-    CANVAS LAYER
-*/
 #cloudCanvas {
   position: fixed;
   top: 0;
@@ -41,40 +38,26 @@ body, html {
   pointer-events: none;
 }
 
-
-/* 
-   MAIN MENU LAYOUT
-*/
 .menu-overlay {
   z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
 }
 
 /* ================
    COMPONENTS
 =================*/
-/* 
-    TITLE 
-*/
+
+/* TITLE */
 .title-box {
   background-color: rgba(0, 0, 0, 0.7);
-  padding: 20px 40px;
-  border-radius: 12px;
-  margin-bottom: 30px;
 }
 
 .game-title {
   font-size: 2.5rem;
   text-shadow: 2px 2px 0 #000;
+  margin: 0;
 }
 
-/* 
-   START BUTTON
-*/
+/* START BUTTON*/
 .start-game {
   font-family: 'Press Start 2P', monospace;
   font-size: 2rem;
@@ -82,12 +65,16 @@ body, html {
   border: none;
   color: white;
   cursor: pointer;
-  animation: pulse 1s infinite, bounce 1s infinite;
+  animation: startPulse 1s infinite;
 }
 
-/*
-    MENU 
-  */
+.start-game:hover {
+  transform: scale(1.15);
+  color: #fcff50;
+  text-shadow: 2px 2px 0 #0a0061, 0 0 15px #fff;
+}
+
+/*MENU LIST */
 .menu-list {
   position: relative;
   display: flex;
@@ -98,60 +85,60 @@ body, html {
 }
 
 .menu-item {
-  padding-left: 30px; /* space for arrow */
+  padding-left: 30px; 
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
-/* 
-    SELECTOR ARROW
-*/
+/* SELECTOR ARROW*/
 .selector {
   position: absolute;
   left: 0;
   width: 0;
   height: 0;
-
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
   border-left: 15px solid #fcff50;
-
   transition: top 0.2s ease;
 }
 
-/*
-    MODAL
-*/
-.modal {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  background: rgba(0,0,0,0.9);
-  padding: 20px;
-  border-radius: 12px;
-  max-width: 500px;
-  z-index: 20;
-  transition: transform 0.3s ease;
-}
-
-.modal.show {
-  display: block;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.modal-content {
-  text-align: left;
-}
-
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 1.2rem;
+/* INSTRUCTIONS TRIGGER */
+.instructions-trigger {
   cursor: pointer;
+  transition: all 0.2s ease;
 }
+
+.instructions-trigger:hover {
+  color: #fcff50;
+  text-shadow: 2px 2px 0 #000, 0 0 10px #fff;
+  transform: scale(1.08);
+}
+
+/*BOOTSTRAP MODAL*/
+.game-modal-content {
+  font-family: 'Press Start 2P', monospace;
+  background: rgba(0, 0, 0, 0.92);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  font-size: 0.65rem;
+  line-height: 1.8;
+}
+
+.game-modal-content .modal-title {
+  font-size: 0.9rem;
+}
+
+.game-modal-content .close {
+  font-size: 1.5rem;
+  opacity: 0.8;
+}
+
+.game-modal-content .close:hover {
+  opacity: 1;
+  color: #fcff50 !important;
+}
+
 
 /* ==========================
    ANIMATIONS  
