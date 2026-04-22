@@ -163,11 +163,6 @@ body, html {
 /*=========================
     HOVER EFFECTS (ACTIVE/INACTIVE STATES)
 ===========================*/
-.start-game:hover {
-  transform: scale(1.15);
-  color: #fcff50;
-  text-shadow: 2px 2px 0 #0a0061, 0 0 15px #fff;
-}
 
 .menu-item.active {
   color: #fcff50;
@@ -175,14 +170,5 @@ body, html {
   animation: menuPulse 0.8s infinite;
 }
 
-.instructions-trigger {
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
 
-.instructions-trigger:hover {
-  color: #fcff50;
-  text-shadow: 2px 2px 0 #000, 0 0 10px #fff;
-  transform: scale(1.08);
-} 
 
