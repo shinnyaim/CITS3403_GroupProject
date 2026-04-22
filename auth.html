@@ -26,6 +26,72 @@
         <button class="auth-tab active" id="loginTab">LOG IN</button>
         <button class="auth-tab" id="signupTab">SIGN UP</button>
     </div>
+
+    <!-- Login Form-->
+     <div class="auth-form-box" id=""loginForm">
+      <form method="POST" action="{{ url_for('auth.login') }}">
+
+        <!-- CSRF token Flask-WTF-->
+        {{ form.hidden_tag() if form else '' }}
+        <input type="hidden" name="action" value="login">
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          class="auth-input"
+          autocomplete="email"
+          required
+        >
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          class="auth-input"
+          autocomplete="current-password"
+          required
+        >
+        <button type="submit" class="auth-submit">START →</button>
+    </form> 
+    </div>
+
+    <!-- Sign Up Form (hidden by default) -->
+    <div class="auth-form-box" id="signupForm" style="display:none;">
+      <form method="POST" action="{{ url_for('auth.login') }}">
+
+        {{ form.hidden_tag() if form else '' }}
+        <input type="hidden" name="action" value="signup">
+
+        <input
+          type="text"
+          name="username"
+          placeholder="Username"
+          class="auth-input"
+          autocomplete="username"
+          required
+        >
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          class="auth-input"
+          autocomplete="email"
+          required
+        >
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          class="auth-input"
+          autocomplete="new-password"
+          required
+        >
+        <button type="submit" class="auth-submit">JOIN GAME →</button>
+      </form>
+    </div>
+    
+    <!-- Back to main menu -->
+    <a href="{{ url_for('main.index') }}" class="back-link mt-4">← Back to Menu</a>
+
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
