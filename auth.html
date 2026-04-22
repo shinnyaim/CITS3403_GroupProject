@@ -25,7 +25,18 @@
       <div class="auth-tabs mb-3">
         <button class="auth-tab active" id="loginTab">LOG IN</button>
         <button class="auth-tab" id="signupTab">SIGN UP</button>
-    </div>
+      </div>
+
+      <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} flash-alert mb-3">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
 
     <!-- Login Form-->
      <div class="auth-form-box" id=""loginForm">
@@ -88,7 +99,7 @@
         <button type="submit" class="auth-submit">JOIN GAME →</button>
       </form>
     </div>
-    
+
     <!-- Back to main menu -->
     <a href="{{ url_for('main.index') }}" class="back-link mt-4">← Back to Menu</a>
 
