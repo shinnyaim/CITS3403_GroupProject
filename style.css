@@ -168,3 +168,115 @@ body, html {
   text-shadow: 2px 2px 0 #000, 0 0 10px #fff;
   animation: menuPulse 0.8s infinite;
 }
+
+/* ==========================
+   AUTH PAGE
+   auth.html specific styles
+===========================*/
+
+/* Tab row */
+.auth-tabs {
+  display: flex;
+  gap: 1rem;
+}
+
+.auth-tab {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.7rem;
+  background: none;
+  border: 2px solid white;
+  color: white;
+  padding: 8px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+}
+
+/* Active tab flips to white background, black text */
+.auth-tab.active {
+  background: white;
+  color: black;
+}
+
+.auth-tab:not(.active):hover {
+  border-color: #fcff50;
+  color: #fcff50;
+}
+
+/* Form card */
+.auth-form-box {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 2rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 320px;
+}
+
+/* Inputs */
+.auth-input {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.6rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: white;
+  padding: 12px 10px;
+  width: 100%;
+  border-radius: 6px;
+  transition: border-color 0.2s ease;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: #fcff50;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.auth-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* Submit button */
+.auth-submit {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.75rem;
+  background: #fcff50;
+  color: black;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+.auth-submit:hover {
+  background: white;
+  transform: scale(1.04);
+}
+
+/* Back to menu link */
+.back-link {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.back-link:hover {
+  color: #fcff50;
+  text-shadow: 0 0 8px #fff;
+}
+
+/* Flash error/success messages */
+.flash-alert {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem;
+  max-width: 360px;
+  text-align: center;
+  border-radius: 6px;
+}
