@@ -11,9 +11,56 @@
       crossorigin="anonymous"
     />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="loading.css" />
 
     <title>Picking your teammates...</title>
   </head>
-  <body></body>
+  <body>
+    <div class="parent">
+      <p id="mainTitle">ASSIGNING YOUR TEAMMATES...</p>
+
+      <div class="progress">
+        <div
+          class="progress-bar"
+          id="loadingBar"
+          role="progressbar"
+          style="width: 25%"
+          aria-valuenow="25"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        ></div>
+      </div>
+
+      <div class="cardsRow">
+        <div class="teammateCard" id="card1">
+          <p class="card-emoji">?</p>
+          <p class="cardName">???</p>
+          <p class="cardRole">Identifying...</p>
+          <p class="cardDesc">???</p>
+        </div>
+
+        <div class="teammateCard" id="card2">
+          <p class="card-emoji">?</p>
+          <p class="cardName">???</p>
+          <p class="cardRole">Identifying...</p>
+          <p class="cardDesc">???</p>
+        </div>
+
+        <div class="teammateCard" id="card3">
+          <p class="card-emoji">?</p>
+          <p class="cardName">???</p>
+          <p class="cardRole">Identifying...</p>
+          <p class="cardDesc">???</p>
+        </div>
+      </div>
+    </div>
+    <script src="loading.js"></script>
+  </body>
 </html>
