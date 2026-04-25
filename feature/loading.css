@@ -1,0 +1,16 @@
+
+body {
+    background-image: url(uwaBG.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+     min-height: 100vh; /* USER CAN SEE FULL CONTENT */
+    font-family: "Press Start 2P", system-ui;
+    margin: 0;
+}
+
+.press-start-2p-regular {
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
