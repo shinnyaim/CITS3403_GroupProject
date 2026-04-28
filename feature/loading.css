@@ -100,3 +100,35 @@ body {
     margin-top: 0.5rem;
     opacity: 0.8;
 }
+
+#beginBtn {
+    font-size: 19px;
+    margin-top: 15px;
+    background-color: yellow;
+    width: 180px;
+    height: 47px;
+    border-radius: 12px;
+    animation: blinkColors 1s infinite;
+}
+
+@keyframes blinkColors {
+    0% {
+        background-color: yellow;
+        color: black;
+    }
+    50% {
+        background-color: black;
+        color: white;
+    }
+    100% {
+        background-color: yellow;
+        color: black;
+    }
+}
+
+#beginBtn:hover {
+    transform: scale(1.05) translateY(-3px);  
+    cursor: pointer;    
+    transition: all 0.2s ease;   
+    cursor: pointer;
+}
