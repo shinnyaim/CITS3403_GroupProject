@@ -64,11 +64,12 @@ body {
 .teammateCard {
     background-color: rgba(0, 0, 0, 0.75);
     border: 3px solid #2d3561;
+    border-radius: 12px;
     padding: 1.2rem 1rem;
     justify-content: center;
     text-align: center;
     width: 220px;
-    height: 220px;
+    height: 290px;
     opacity: 0.3;
     transition: all 0.5s ease;
     font-size: 50px;
@@ -94,7 +95,7 @@ body {
 
 .cardDesc {
     color: white;
-    font-size: 11px;
+    font-size: 9.5px;
     line-height: 1.8;
     margin-top: 0.5rem;
     opacity: 0.8;
