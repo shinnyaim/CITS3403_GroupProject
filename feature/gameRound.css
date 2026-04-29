@@ -70,3 +70,10 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+hr {
+    margin-bottom: 8px;
+    border: 2px solid yellow;
+    border-radius: 100px;
+    width: 95%;
+}
