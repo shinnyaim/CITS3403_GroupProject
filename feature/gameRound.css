@@ -19,3 +19,54 @@ body {
     width: 78%;
     height: 790px;
 }
+
+.gameInfo {
+    /* border: 4px solid blue; */
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 35px;
+}
+
+.topLeft {
+    /* border: 4px solid pink; */
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+}
+
+.topRight {
+    /* border: 4px solid green;     */
+    width: 50%;
+    height: 100%;  
+    display: flex;
+    gap: 40px;
+    justify-content: flex-end;
+}
+
+.playerName {
+    color: rgb(190,190,190);
+}
+
+.dayCounter {
+    display: flex;
+    align-items: center;
+}
+
+.grpName {
+    color: yellow;
+}
+
+/* REMEMBER TO ADD A BLINKING EFFECT BETWEEN RED AND WHITE */
+.timer {
+    border: 4px solid red;
+    border-radius: 12px;
+    width: 120px;
+    height: 50px;
+    color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
