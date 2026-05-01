@@ -75,7 +75,7 @@ hr {
     margin-bottom: 8px;
     border: 2px solid yellow;
     border-radius: 100px;
-    width: 95%;
+    /* width: 95%; */
 }
 
 /* PROGRESS BAR AS IN FOR BOTH BARS */
@@ -109,7 +109,7 @@ hr {
 }
 
 #morale {
-    color: red;
+    color: rgb(180, 33, 33);
     font-size: 13px;
     margin: 0;
     white-space: nowrap;
@@ -117,7 +117,7 @@ hr {
 }
 
 #moraleProgress {
-    background-color: red;
+    background-color: rgb(180, 33, 33);
     width: 70%;
     height: 8px;
     border-radius: 50px;
@@ -141,7 +141,7 @@ hr {
 }
 
 #moralePercentage {
-    color: red;
+    color: rgb(180, 33, 33);
 }
 
 #progressPercentage {
@@ -155,9 +155,31 @@ hr {
     flex-direction: row;
 }
 
+#urTeam {
+    color: yellow;
+    font-size: 12px;
+    margin-top: 14px;
+}
+
 .teammates {
     border: 2px solid white;
     width: 25%;
+
+}
+
+.teammate1 {
+    border: 2px solid red;
+    height: 30%;
+}
+
+.teammate2 {
+    border: 2px solid purple;
+    height: 30%;
+}
+
+.teammate3 {
+    border: 2px solid orange;
+    height: 30%;
 }
 
 .gamePlay {
