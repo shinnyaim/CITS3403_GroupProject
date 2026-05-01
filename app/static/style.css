@@ -255,7 +255,7 @@ body, html {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.25);
   color: white;
-  padding: 12px 10px;
+  padding: 16px 12px;
   width: 100%;
   border-radius: 6px;
   transition: border-color 0.2s ease;
@@ -278,31 +278,40 @@ body, html {
   background: #fcff50;
   color: black;
   border: none;
-  padding: 12px;
+  padding: 14px;
   width: 100%;
   cursor: pointer;
   border-radius: 6px;
-  transition: all 0.2s ease;
   margin-top: 0.5rem;
+  animation: submitPulse 1s infinite;
+  transition: all 0.2s ease;
 }
 
+/* Stop pulse on hover so scale takes over cleanly */
 .auth-submit:hover {
   background: white;
-  transform: scale(1.04);
+  transform: scale(1.06);
 }
 
 /* Back to menu link */
 .back-link {
   font-family: 'Press Start 2P', monospace;
-  font-size: 0.6rem;
-  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.65rem;
+  color: white;
   text-decoration: none;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   transition: all 0.2s ease;
+  margin-top: 1rem;
 }
 
 .back-link:hover {
   color: #fcff50;
+  border-color: #fcff50;
   text-shadow: 0 0 8px #fff;
+  transform: scale(1.05);
 }
 
 /* Flash error/success messages */
