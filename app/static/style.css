@@ -139,6 +139,19 @@ body, html {
   color: #fcff50 !important;
 }
 
+/* HOW TO PLAY LINK */
+.how-to-play-link {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.6rem;
+  color: #fcff50;
+  text-decoration: none;
+}
+ 
+.how-to-play-link:hover {
+  color: white;
+  text-shadow: 0 0 10px #fff;
+}
+
 /* ==========================
    ANIMATIONS
 ===========================*/
