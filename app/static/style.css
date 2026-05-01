@@ -173,6 +173,23 @@ body, html {
   50% { transform: scale(1.08); }
 }
 
+/* Auth tab active pulse */
+@keyframes tabPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0px #fff;
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #fff;
+  }
+}
+ 
+/* Auth submit button pulse */
+@keyframes submitPulse {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-3px) scale(1.03); }
+}
 /* ==========================
    ACTIVE / HOVER STATES
 ===========================*/
