@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<head>
+    <title>How to Play</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="How_to_play.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Backround image -->
+    <div class="background-container">
+        <img src="uwa-background.png" alt="Pixel Art Background" class="bg-image">
+    </div>
+
+    <h1>How To Play</h1>
+
+    <!-- Goals -->
+    <div class="mt-4">
+        <h2>Goal</h2>
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text">Survive 14 days of university group project chaos. Make decisions, manage your teammates, and submit your project before the deadline. Every choice you make affects your Progress and Morale — balance both to get the best grade possible.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Basics -->
+    <div class="mt-4">
+        <h2>The Basics</h2>
+        <p>Four simple steps to get started</p>
+
+        <div class="row">
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title">1. Create an Account</h3>
+                        <p class="card-text">Sign up or log in to save your progress. Your runs, grades, and history are tied to your profile.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title">2. Meet Your Teammates</h3>
+                        <p class="card-text">At the start of each run, 2 teammates are randomly picked from the personality pool and assigned to your group.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title">3. Draw Event Cards</h3>
+                        <p class="card-text">Each day draws a new event card. Read the situation and pick one of the three choices presented to you.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title">4. Submit & Get Graded</h3>
+                        <p class="card-text">After 14 days (or earlier if you choose), your final grade is determined by your progress and morale scores.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="mt-4">
+        <h2>Your Stats</h2>
+        <p>Three bars to watch throughout your run</p>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="mb-3">
+                    <p><strong>Progress</strong></p>
+                    <p class="text-muted">How complete your project is. Aim to keep this high before submitting.</p>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <p><strong>Morale</strong></p>
+                    <p class="text-muted">How well your team is functioning. If this hits 0, the game ends early!</p>
+                    <div class="progress">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%</div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <p><strong>Days Left</strong></p>
+                    <p class="text-muted">You have 14 days. Each event card advances the day counter by 1.</p>
+                    <div class="progress">
+                        <div class="progress-bar bg-info" role="progressbar" style="width: 50%;" aria-valuenow="7" aria-valuemin="0" aria-valuemax="14">Day 7 of 14</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TEAMATES -->
+    <div class="mt-4">
+        <h2>Your Teammates</h2>
+        <p>2 are randomly assigned at the start of every run</p>
+
+        <div class="row">
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">The Overachiever</h5>
+                        <p class="card-text">Does everything their way — whether you asked or not. Great for progress, rough on morale.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">The Ghost</h5>
+                        <p class="card-text">Reads messages but never replies. Disappears when work is due. Where did they go?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">The Slacker</h5>
+                        <p class="card-text">Full of ideas, short on output. "I'll do it tonight" — they won't do it tonight.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">The Critic</h5>
+                        <p class="card-text">Tears apart every draft. Sometimes useful. Mostly exhausting. Your work is never good enough.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EVENT CARDS -->
+
+    <div class="mt-4">
+        <h2>Event Cards</h2>
+        <p>Each day, a new card presents a unique challenge. Choose wisely!</p>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">The Disappearing Act</h5>
+                <p class="card-text">"Josh has not responded to any messages for 4 days. His section was due yesterday. The group chat shows he has read every single message."</p>
+
+                <p class="mt-3"><strong>Pick one of three options:</strong></p>
+                <div class="row">
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h6 class="card-title">Option A</h6>
+                                <p class="card-text">Cover for Josh and split his work among the group. Progress +5, Morale -10.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h6 class="card-title">Option B</h6>
+                                <p class="card-text">Send a firm message to the whole group calling it out publicly. Morale -5, but Josh finally responds.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h6 class="card-title">Option C</h6>
+                                <p class="card-text">Do nothing and hope for the best. No immediate change, but the deadline inches closer.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GAME OVER CONDITIONS -->
+    <div class="mt-4 mb-5">
+        <h2>Game Over Conditions</h2>
+        <p>The run ends when one of these happens</p>
+
+        <div class="row">
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">14 Days Are Up</h5>
+                        <p class="card-text">The deadline has arrived! Your final grade is calculated based on whatever progress and morale you finished with.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Morale Hits Zero</h5>
+                        <p class="card-text">Your team has completely fallen apart. The project is abandoned and you receive a failing grade.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Early Submission</h5>
+                        <p class="card-text">Feeling confident? You can choose to submit before Day 14. Risk vs reward — is your progress high enough?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
