@@ -77,3 +77,73 @@ hr {
     border-radius: 100px;
     width: 95%;
 }
+
+/* PROGRESS BAR AS IN FOR BOTH BARS */
+.progressBars {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 95%;
+    height: 100px;
+    margin: 0 auto;
+    margin-top: 18px;
+    flex-direction: column;
+}
+
+.moraleBar {
+    width: 90%;
+    height: 50%;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    display: flex;
+}
+
+/* USER'S ACTUAL WORK PROGRESS IN-GAME */
+.progressBar {
+    width: 90%;
+    height: 50%;
+    flex-direction: row;
+    align-items: center;
+    display: flex;
+}
+
+#morale {
+    color: red;
+    font-size: 13px;
+    margin: 0;
+    white-space: nowrap;
+    min-width: 100px;
+}
+
+#moraleProgress {
+    background-color: red;
+    width: 70%;
+    height: 8px;
+    border-radius: 50px;
+    flex: 1;
+}
+
+#progressText {
+    color: rgb(28, 201, 28);
+    font-size: 13px;
+    margin: 0;
+    white-space: nowrap;
+    min-width: 100px;
+}
+
+#workProgress {
+    background-color: rgb(28, 201, 28);
+    width: 70%;
+    height: 8px;
+    border-radius: 50px;
+    flex: 1;
+}
+
+#moralePercentage {
+    color: red;
+}
+
+#progressPercentage {
+    color: rgb(28, 201, 28);
+}
