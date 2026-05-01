@@ -147,3 +147,25 @@ hr {
 #progressPercentage {
     color: rgb(28, 201, 28);
 }
+
+.secParent {
+    border: 2px solid blue;
+    height: 65%;
+    display: flex;
+    flex-direction: row;
+}
+
+.teammates {
+    border: 2px solid white;
+    width: 25%;
+}
+
+.gamePlay {
+    border: 2px solid pink;
+    flex: 1;
+}
+
+.eventLogs {
+    border: 2px solid green;
+    width: 25%;
+}
