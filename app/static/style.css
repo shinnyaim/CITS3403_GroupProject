@@ -244,7 +244,7 @@ body, html {
   border-radius: 12px;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 0.5rem;
   min-width: 340px;
 }
 
@@ -259,6 +259,7 @@ body, html {
   width: 100%;
   border-radius: 6px;
   transition: border-color 0.2s ease;
+  margin-bottom: 1rem;
 }
 
 .auth-input:focus {
