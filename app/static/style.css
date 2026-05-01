@@ -188,31 +188,34 @@ body, html {
   color: white;
   padding: 8px 20px;
   cursor: pointer;
-  transition: all 0.2s ease;
   border-radius: 4px;
+  transition: all 0.2s ease;
 }
 
-/* Active tab flips to white background, black text */
+.auth-tab:hover {
+  border-color: #fcff50;
+  color: #fcff50;
+  transform: scale(1.08);
+  text-shadow: 0 0 10px #fff;
+}
+
+/* Active tab flips to white background, black text, and pulses */
 .auth-tab.active {
   background: white;
   color: black;
-}
-
-.auth-tab:not(.active):hover {
-  border-color: #fcff50;
-  color: #fcff50;
+  animation: tabPulse 1s infinite;
 }
 
 /* Form card */
 .auth-form-box {
   background: rgba(0, 0, 0, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 2rem;
+  padding: 2.5rem;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  min-width: 320px;
+  gap: 1.5rem;
+  min-width: 340px;
 }
 
 /* Inputs */
