@@ -108,3 +108,13 @@ hr {
 #percentageDays {
     color: white;
 }
+
+.buttons {
+    margin-top: 0 auto;
+
+}
+
+.Btn {
+    background-color: yellow;
+    border-radius: 7px;
+}
