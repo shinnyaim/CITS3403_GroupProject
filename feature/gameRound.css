@@ -17,7 +17,7 @@ body {
     background-color: rgba(0, 0, 0, 0.73);
     color: white;
     width: 78%;
-    height: 790px;
+    height: 800px;
 }
 
 .gameInfo {
@@ -159,6 +159,7 @@ hr {
     color: yellow;
     font-size: 12px;
     margin-top: 14px;
+    margin-left: 10px;
 }
 
 .teammates {
@@ -168,7 +169,8 @@ hr {
 }
 
 .teammateProfile {
-    margin: px;
+    margin: 5px;
+    border-radius: 10px;
     border: 2px solid yellow;
     height: 30%;
     display: flex;
@@ -196,12 +198,10 @@ hr {
 }
 
 .pfp {
-    border: 2px solid green;
     width: 40%;
 }
 
 .nameDesc {
-    border: 2px solid blue;
     flex: 1;
     padding: 9px;
 }
@@ -213,4 +213,21 @@ hr {
 .desc {
     color: yellow;
     font-size: 9px;
+}
+
+#eventLog {
+    color: yellow;
+    margin-left: 10px;
+}
+
+.eventLogDay {
+    border-radius: 5px;
+    padding: 8px;
+    border: 1px solid yellow;
+    color: yellow;
+    font-size: 12px;
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+    text-align: left;
 }
