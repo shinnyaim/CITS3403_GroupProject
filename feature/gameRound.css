@@ -242,3 +242,17 @@ hr {
     margin-top: 8px;
     margin-left: 12px;
 }
+
+.eventCard {
+    color: yellow;
+    border: 2px solid yellow;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+}
+
+.eventCardDesc {
+    font-size: 11px;
+}
