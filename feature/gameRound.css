@@ -149,7 +149,7 @@ hr {
 }
 
 .secParent {
-    border: 2px solid blue;
+    /* border: 2px solid blue; */
     height: 65%;
     display: flex;
     flex-direction: row;
@@ -163,7 +163,7 @@ hr {
 }
 
 .teammates {
-    border: 2px solid white;
+    /* border: 2px solid white; */
     width: 25%;
 
 }
@@ -188,12 +188,12 @@ hr {
 } */
 
 .gamePlay {
-    border: 2px solid pink;
+    /* border: 2px solid pink; */
     flex: 1;
 }
 
 .eventLogs {
-    border: 2px solid green;
+    /* border: 2px solid green; */
     width: 25%;
 }
 
