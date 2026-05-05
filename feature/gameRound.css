@@ -250,9 +250,36 @@ hr {
     display: flex;
     flex-direction: column;
     text-align: center;
+    width: 550px;
+    margin: 0 auto;
+    border-radius: 10px;
 
 }
 
 .eventCardDesc {
     font-size: 11px;
+}
+
+.options {
+    color: yellow;
+    font-size: 11px;
+    border: 1px solid yellow;
+    border-radius: 10px;
+    padding: 20px;
+    width: 550px;
+    display: flex;
+    align-items: center;
+    margin: 15px auto;
+    background-color: transparent;
+    height: 20px;
+}
+
+#submitEarly {
+    color: yellow;
+    background-color: transparent;
+    border: 2px solid yellow;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    margin: 38px auto 0 auto;
 }
