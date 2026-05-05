@@ -232,6 +232,13 @@ hr {
     text-align: left;
 }
 
-.eventCardTitle {
-    
+#eventCardTitle {
+    color: yellow;
+    font-size: 13px;
+    /* border: 2px solid yellow; */
+    max-width: fit-content;
+    /* border-radius: 5px;
+    padding: 8px; */
+    margin-top: 8px;
+    margin-left: 12px;
 }
