@@ -2,10 +2,12 @@ from app import db
 
 class Teammate(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)                       
+    name = db.Column(db.String(50), nullable=False)
+    role = db.Column(db.String(100))                        
     description = db.Column(db.Text)                     
     image = db.Column(db.String(200))                    
     emoji = db.Column(db.String(10))
+    events = db.relationship('EventCard', back_populates='teammate')
 
 
 class EventCard(db.Model):
