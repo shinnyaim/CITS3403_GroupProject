@@ -1,0 +1,120 @@
+body {
+    background-image: url(uwaBG.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    min-height: 100vh; /* USER CAN SEE FULL CONTENT */
+    font-family: "Press Start 2P", system-ui;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    color: yellow;
+    width: fit-content;
+    margin: 45px auto;
+}
+
+.mainParent {
+    border: 5px solid yellow;
+    width: 55%;
+    height: 700px;
+    background-color: rgba(0, 0, 0, 0.73);
+    border-radius: 10px;
+}
+
+#urOutcome {
+    color: yellow;
+    font-size: 14px;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.HD {
+    color: rgb(41, 214, 41);
+    border: 3px solid;
+    border-radius: 10px;
+    width: 400px;
+    font-size: 20px;
+    margin: 20px auto 0;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.emoji {
+    font-size: 90px;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+hr {
+    border: 1px solid yellow;
+    width: 80%;
+    margin-top: 30px;
+}
+
+.outcomeDesc {
+    color: rgb(41, 214, 41);
+    font-size: 11px;
+    width: 600px;
+    margin: 10px auto 0;
+    text-align: center;
+}
+
+.secParent {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 87px;
+}
+
+.scores {
+    border: 2px solid white;
+    background-color: rgb(32, 32, 109);
+    height: 80px;
+    width: 180px;
+    border-radius: 10px;
+    /* display: flex; */
+    /* flex-direction: column; */
+    justify-content: center;
+    text-align: center;
+    flex-direction: row;
+}
+
+#progress {
+    color: rgb(28, 201, 28);
+}
+
+#percentageProgress {
+    color: rgb(28, 201, 28);
+}
+
+#morale {
+    color: rgb(180, 33, 33);
+}
+
+#percentageMorale {
+    color: rgb(180, 33, 33);
+}
+
+#days {
+    color: white;
+}
+
+#percentageDays {
+    color: white;
+}
+
+.buttons {
+    margin-top: 0 auto;
+
+}
+
+.Btn {
+    background-color: yellow;
+    border-radius: 7px;
+}
