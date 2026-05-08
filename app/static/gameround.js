@@ -192,7 +192,7 @@ function addToEventLog(title, choiceText) {
     const log = document.querySelector('.eventLogs');
     const entry = document.createElement('div');
     entry.className = 'eventLogDay';
-    entry.textContent = `DAY ${14 - daysLeft}: ${title}`;
+    entry.textContent = `DAY ${14 - daysLeft + 1}: ${title}`;
     log.appendChild(entry);
 }
 
