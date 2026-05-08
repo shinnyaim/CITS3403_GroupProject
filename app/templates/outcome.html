@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="/static/outcome.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <title>Outcome</title>
+  </head>
+  <body>
+    <div class="mainParent">
+      <h1>GAME OVER</h1>
+      <p id="urOutcome">Your group's outcome...</p>
+      <div class="grade"></div>
+      <p class="emoji"></p>
+      <p class="outcomeDesc"></p>
+      <hr />
+      <div class="secParent">
+        <div class="scores">
+          <p id="progress">Progress:</p>
+          <p id="percentageProgress"></p>
+        </div>
+        <div class="scores">
+          <p id="morale">Morale:</p>
+          <p id="percentageMorale"></p>
+        </div>
+        <div class="scores">
+          <p id="days">Days Taken:</p>
+          <p id="percentageDays"></p>
+        </div>
+      </div>
+      <div class="buttons">
+        <button class="Btn">Home</button>
+        <button class="Btn">PLAY AGAIN?</button>
+        <button class="Btn">LEADERBOARD</button>
+      </div>
+    </div>
+    <script src="/static/outcome.js"></script>
+  </body>
+</html>
