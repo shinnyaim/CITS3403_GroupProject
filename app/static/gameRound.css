@@ -274,6 +274,23 @@ hr {
     height: 20px;
 }
 
+.options.selected {
+    background-color: rgba(255, 255, 0, 0.15);
+    border-color: white;
+    color: white;
+}
+
+#confirmChoice {
+    color: black;
+    background-color: yellow;
+    border: 2px solid yellow;
+    padding: 10px 24px;
+    border-radius: 10px;
+    display: none;
+    margin: 0 auto 0 auto;
+    cursor: pointer;
+}
+
 #submitEarly {
     color: yellow;
     background-color: transparent;
@@ -281,5 +298,6 @@ hr {
     padding: 10px;
     border-radius: 10px;
     display: flex;
-    margin: 38px auto 0 auto;
+    margin: 10px auto 0 auto;
+    cursor: pointer;
 }

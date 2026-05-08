@@ -10,7 +10,7 @@
       crossorigin="anonymous"
     />
 
-    <link rel="stylesheet" href="outcome.css" />
+    <link rel="stylesheet" href="/static/outcome.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,25 +24,22 @@
     <div class="mainParent">
       <h1>GAME OVER</h1>
       <p id="urOutcome">Your group's outcome...</p>
-      <div class="HD">HIGH DISTINCTION</div>
-      <p class="emoji">🏆</p>
-      <p class="outcomeDesc">
-        Against all odds, your group actually functioned like a team. Do you
-        know how rare that is?
-      </p>
+      <div class="grade"></div>
+      <p class="emoji"></p>
+      <p class="outcomeDesc"></p>
       <hr />
       <div class="secParent">
         <div class="scores">
           <p id="progress">Progress:</p>
-          <p id="percentageProgress">90%</p>
+          <p id="percentageProgress"></p>
         </div>
         <div class="scores">
           <p id="morale">Morale:</p>
-          <p id="percentageMorale">60%</p>
+          <p id="percentageMorale"></p>
         </div>
         <div class="scores">
           <p id="days">Days Taken:</p>
-          <p id="percentageDays">12</p>
+          <p id="percentageDays"></p>
         </div>
       </div>
       <div class="buttons">
@@ -51,5 +48,6 @@
         <button class="Btn">LEADERBOARD</button>
       </div>
     </div>
+    <script src="/static/outcome.js"></script>
   </body>
 </html>
