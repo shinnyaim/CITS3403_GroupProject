@@ -1,6 +1,6 @@
 from flask import jsonify, request, render_template
 from app import app, db
-from app.models import EventCard
+from app.models import EventCard, Teammate
 import random
 
 # --- Page routes --- serve each HTML page when the browser navigates to that URL
@@ -20,6 +20,16 @@ def game():
 @app.route('/outcome')
 def outcome():
     return render_template('outcome.html')
+
+@app.route('/api/random-teammates')
+def random_teammates():
+    all_teammates = Teammate.query.all()
+    chosen = random.sample(all_teammates, 3)
+    return jsonify([
+        {'id': t.id, 'name': t.name, 'role': t.role, 'description': t.description, 'emoji': t.emoji}
+        for t in chosen
+    ])
+
 
 @app.route('/api/random-event')
 def random_event():

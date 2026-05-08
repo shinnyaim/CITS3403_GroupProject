@@ -4,12 +4,14 @@ let progress = 0;       // starts at 0 as per project spec
 let daysLeft = 14;
 let currentEvent = null;
 let seenCardIds = [];   // tracks seen cards to avoid repeats
-const teammateIds = [1, 2, 3]; // hardcoded for now, will come from session later
+const teammates = JSON.parse(sessionStorage.getItem('teammates') || '[]');
+const teammateIds = teammates.map(t => t.id);
 let selectedOptionIndex = null;
 
 // --- On page load ---
 document.addEventListener('DOMContentLoaded', () => {
     updateGroupName();
+    loadTeammates();
     updateBars();
     updateDayCounter();
     fetchEventCard();
@@ -18,6 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
 function updateGroupName() {
     const groupName = sessionStorage.getItem('groupName') || 'BOBBERS';
     document.querySelector('.grpName').textContent = `GROUP: ${groupName.toUpperCase()}`;
+}
+
+function loadTeammates() {
+    teammates.forEach((t, i) => {
+        const card = document.getElementById(`teammate${i + 1}`);
+        card.querySelector('.name').textContent = t.name;
+        card.querySelector('.desc').textContent = t.description;
+    });
 }
 
 // --- Fetch a random event card from the API ---
