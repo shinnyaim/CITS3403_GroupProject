@@ -5,9 +5,17 @@ import random
 
 # --- Page routes --- serve each HTML page when the browser navigates to that URL
 
+@app.route('/instructions')
+def instructions():
+    return render_template('How_to_play.html')
+
 @app.route('/')
 def index():
     return render_template('grp-project-name.html')
+
+@app.route('/home')
+def home():
+    return render_template('index.html')
 
 @app.route('/loading')
 def loading():
