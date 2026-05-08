@@ -26,7 +26,7 @@ CLOUD SPRITES
 
 // Load cloud image
 const cloudImage = new Image();
-cloudImage.src = "clouds.png";
+cloudImage.src = "/static/clouds.png";
 
 /*=================
 CLOUD CLASS
