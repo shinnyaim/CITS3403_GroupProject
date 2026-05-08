@@ -8,6 +8,11 @@ const teammates = JSON.parse(sessionStorage.getItem('teammates') || '[]');
 const teammateIds = teammates.map(t => t.id);
 let selectedOptionIndex = null;
 
+// --- Timer State ---
+const TIMER_SECONDS = 30;
+let timerInterval = null;
+let timeRemaining = TIMER_SECONDS;
+
 // --- On page load ---
 document.addEventListener('DOMContentLoaded', () => {
     updateGroupName();
@@ -45,6 +50,57 @@ async function fetchEventCard() {
     displayEventCard(event);
 }
 
+// --- Timer: start a 30-second countdown for the current card ---
+function startTimer() {
+    stopTimer();
+    timeRemaining = TIMER_SECONDS;
+    document.querySelector('.timer').textContent = timeRemaining + 's';
+
+    timerInterval = setInterval(() => {
+        timeRemaining--;
+        document.querySelector('.timer').textContent = timeRemaining + 's';
+
+        if (timeRemaining <= 0) {
+            stopTimer();
+            onTimerExpired();
+        }
+    }, 1000);
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+}
+
+
+// --- Called when the timer hits 0 without a player choice ---
+function onTimerExpired() {
+    document.getElementById('confirmChoice').style.display = 'none';
+
+    morale -= 5;
+    progress -= 5;
+    if (morale < 0) morale = 0;
+    if (progress < 0) progress = 0;
+    updateBars();
+
+    addToEventLog('Timeout', 'Time ran out! (-5 morale, -5 progress)');
+
+    if (morale <= 0) {
+        endGame('morale');
+        return;
+    }
+
+    daysLeft--;
+    updateDayCounter();
+
+    if (daysLeft <= 0) {
+        endGame('days');
+        return;
+    }
+
+    fetchEventCard();
+}
+
 // --- Update the event card UI with the fetched event ---
 function displayEventCard(event) {
     document.querySelector('.eventCard h6').textContent = event.title;
@@ -61,6 +117,7 @@ function displayEventCard(event) {
     buttons[2].onclick = () => selectOption(2);
 
     enableOptions();
+    startTimer();
 }
 
 // --- Player highlights an option (before confirming) ---
@@ -78,6 +135,7 @@ function selectOption(index) {
 // --- Player confirms their selected option ---
 function chooseOption() {
     if (selectedOptionIndex === null) return;
+    stopTimer();
 
     const option = currentEvent.options[selectedOptionIndex];
 
