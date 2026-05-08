@@ -9,10 +9,16 @@ let selectedOptionIndex = null;
 
 // --- On page load ---
 document.addEventListener('DOMContentLoaded', () => {
+    updateGroupName();
     updateBars();
     updateDayCounter();
     fetchEventCard();
 });
+
+function updateGroupName() {
+    const groupName = sessionStorage.getItem('groupName') || 'BOBBERS';
+    document.querySelector('.grpName').textContent = `GROUP: ${groupName.toUpperCase()}`;
+}
 
 // --- Fetch a random event card from the API ---
 async function fetchEventCard() {
