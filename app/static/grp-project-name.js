@@ -62,3 +62,15 @@ function animate() {
 }
 
 animate();
+
+const groupNameForm = document.getElementById("groupNameForm");
+
+groupNameForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const groupNameInput = document.getElementById("grpName");
+  const groupName = groupNameInput.value.trim() || "BOBBERS";
+
+  sessionStorage.setItem("groupName", groupName);
+  window.location.href = "/loading";
+});

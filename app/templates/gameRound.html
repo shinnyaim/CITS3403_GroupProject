@@ -20,10 +20,13 @@
       rel="stylesheet"
     />
 
-    <title>Round 1!</title>
+    <title>Game Round</title>
   </head>
+
   <body>
     <div class="parent">
+
+      <!-- Top bar: player info + timer -->
       <div class="gameInfo">
         <div class="topLeft">
           <p class="playerName">PLAYER: BOB</p>
@@ -34,10 +37,13 @@
           <p class="dayCounter">14 DAYS LEFT</p>
         </div>
       </div>
+
       <hr />
+
+      <!-- Progress bars -->
       <div class="progressBars">
         <div class="moraleBar">
-          <p id="morale">MORALE:</p>
+          <p id="morale">TEAM MORALE:</p>
           <div id="moraleProgress">
             <div
               class="progress-bar"
@@ -49,8 +55,9 @@
           </div>
           <p id="moralePercentage">100%</p>
         </div>
+
         <div class="progressBar">
-          <p id="progressText">PROGRESS:</p>
+          <p id="progressText">PROJECT PROGRESS:</p>
           <div id="workProgress">
             <div
               class="progress-bar"
@@ -60,72 +67,80 @@
               aria-valuemax="100"
             ></div>
           </div>
-          <p id="progressPercentage">100%</p>
+          <p id="progressPercentage">0%</p>
         </div>
       </div>
+
       <hr />
+
+      <!-- Main game area -->
       <div class="secParent">
+
+        <!-- Teammates panel -->
         <div class="teammates">
           <p id="urTeam">YOUR TEAMMATES:</p>
-          <div class="teammateProfile">
+
+          <div class="teammateProfile" id="teammate1">
             <div class="pfp"></div>
             <div class="nameDesc">
-              <p class="name">Josh</p>
-              <p class="desc">
-                Disappears without warning. Last seen 4 days ago. May or may not
-                resurface before the deadline.
-              </p>
+              <p class="name"></p>
+              <p class="desc"></p>
             </div>
           </div>
-          <div class="teammateProfile">
+
+          <div class="teammateProfile" id="teammate2">
             <div class="pfp"></div>
             <div class="nameDesc">
-              <p class="name">Priya</p>
-              <p class="desc">
-                Rewrites your work at 2am. Means well, but absolutely
-                exhuasting.
-              </p>
+              <p class="name"></p>
+              <p class="desc"></p>
             </div>
           </div>
-          <div class="teammateProfile">
+
+          <div class="teammateProfile" id="teammate3">
             <div class="pfp"></div>
             <div class="nameDesc">
-              <p class="name">David</p>
-              <p class="desc">
-                Will submit something. Just lower your expectations... By a lot.
-              </p>
+              <p class="name"></p>
+              <p class="desc"></p>
             </div>
           </div>
         </div>
+
+        <!-- Event card + choices -->
         <div class="gamePlay">
           <p id="eventCardTitle">EVENT CARD</p>
+
           <div class="eventCard">
             <h6>The Unsolicited Rewrite</h6>
             <br />
             <p class="eventCardDesc">
               Priya rewrote your entire introduction section at 2am without
               telling anyone. She says it was 'not up to standard.' Your
-              original draft is gone
+              original draft is gone.
             </p>
           </div>
+
           <button class="options">
-            <span>A)</span>Revert to your original draft
+            <span>A)</span> Revert to your original draft
           </button>
           <button class="options">
-            <span>B)</span>Keep her version and adapt your sections
+            <span>B)</span> Keep her version and adapt your sections
           </button>
           <button class="options">
-            <span>C)</span>Call an emergency group meeting to discuss
+            <span>C)</span> Call an emergency group meeting to discuss
           </button>
-          <button id="confirmChoice" style="display:none">CONFIRM</button>
+
+          <button id="confirmChoice" style="display: none;">CONFIRM</button>
           <button id="submitEarly">SUBMIT EARLY?</button>
         </div>
+
+        <!-- Event log panel -->
         <div class="eventLogs">
           <p id="eventLog">EVENT LOG:</p>
-          <div class="eventLogDay">DAY 1</div>
         </div>
+
       </div>
     </div>
+
     <script src="/static/gameround.js"></script>
   </body>
 </html>

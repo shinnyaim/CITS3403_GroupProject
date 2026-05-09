@@ -14,7 +14,7 @@ body {
 .parent {
     border-radius: 12px;
     border: 4px solid yellow;
-    background-color: rgba(0, 0, 0, 0.73);
+    background-color: rgba(0, 0, 0, 0.8);
     color: white;
     width: 78%;
     height: 800px;
@@ -117,11 +117,19 @@ hr {
 }
 
 #moraleProgress {
-    background-color: rgb(180, 33, 33);
+    background-color: rgba(180, 33, 33, 0.25);
     width: 70%;
     height: 8px;
     border-radius: 50px;
     flex: 1;
+    overflow: hidden;
+}
+
+#moraleProgress .progress-bar {
+    background-color: rgb(180, 33, 33);
+    height: 100%;
+    border-radius: 50px;
+    transition: width 0.4s ease;
 }
 
 #progressText {
@@ -133,11 +141,19 @@ hr {
 }
 
 #workProgress {
-    background-color: rgb(28, 201, 28);
+    background-color: rgba(28, 201, 28, 0.25);
     width: 70%;
     height: 8px;
     border-radius: 50px;
     flex: 1;
+    overflow: hidden;
+}
+
+#workProgress .progress-bar {
+    background-color: rgb(28, 201, 28);
+    height: 100%;
+    border-radius: 50px;
+    transition: width 0.4s ease;
 }
 
 #moralePercentage {
@@ -195,6 +211,8 @@ hr {
 .eventLogs {
     /* border: 2px solid green; */
     width: 25%;
+    overflow-y: auto;
+    max-height: 400px;
 }
 
 .pfp {
