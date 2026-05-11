@@ -1,6 +1,6 @@
 from flask import jsonify, request, render_template
 from app import app, db
-from app.models import EventCard
+from app.models import EventCard, GameResult
 import random
 
 # --- Page routes --- serve each HTML page when the browser navigates to that URL
@@ -55,3 +55,50 @@ def random_event():
             {'text': event.option_c, 'morale': event.option_c_morale, 'progress': event.option_c_progress},
         ]
     })
+
+# Serves the leaderboard page
+@app.route('/leaderboard')
+def leaderboard():
+    results = GameResult.query.order_by(
+        GameResult.progress.desc(),
+        GameResult.morale.desc()
+    ).all()
+    return render_template('leaderboard.html', results=results)
+
+# AJAX endpoint — returns fresh leaderboard data as JSON
+@app.route('/api/leaderboard')
+def leaderboard_data():
+    results = GameResult.query.order_by(
+        GameResult.progress.desc(),
+        GameResult.morale.desc()
+    ).all()
+    data = [{
+        'username': r.username,
+        'group_name': r.group_name,
+        'progress': r.progress,
+        'morale': r.morale,
+        'days_taken': r.days_taken,
+        'outcome': r.outcome,
+        'chaos_score': r.chaos_score
+    } for r in results]
+    return jsonify(data)
+
+# Saves a completed game result to the database
+@app.route('/api/save-result', methods=['POST'])
+def save_result():
+    data = request.get_json()
+
+    result = GameResult(
+        username=data['username'],
+        group_name=data['group_name'],
+        progress=data['progress'],
+        morale=data['morale'],
+        days_taken=data['days_taken'],
+        outcome=data['outcome'],
+        chaos_score=data['chaos_score']
+    )
+
+    db.session.add(result)
+    db.session.commit()
+
+    return jsonify({'message': 'Result saved successfully'}), 201
