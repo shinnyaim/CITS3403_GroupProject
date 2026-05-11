@@ -6,25 +6,26 @@
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous"
     />
-
-    <link rel="stylesheet" href="../static/leaderboard.css" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
       rel="stylesheet"
     />
+    <!-- <link
+      rel="stylesheet"  
+      href="{{ url_for('static', filename='static/leaderboard.css') }}"
+    /> -->
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='leaderboard.css') }}"
+    />
     <title>Leaderboard</title>
   </head>
   <body>
-    {% extends "base.html" %} {% block content %}
+    <!-- <p id="leaderboardTitle">LEADERBOARD</p> -->
+    <h1>LEADERBOARD</h1>
     <div class="parent">
-      <p id="leaderboardTitle">HALL OF SURVIVORS</p>
-
       <table id="leaderboardTable">
         <thead>
           <tr>
@@ -52,8 +53,8 @@
         </tbody>
       </table>
     </div>
-    {% endblock %} {% block scripts %}
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="{{ url_for('static', filename='js/leaderboard.js') }}"></script>
-    {% endblock %}
   </body>
 </html>
