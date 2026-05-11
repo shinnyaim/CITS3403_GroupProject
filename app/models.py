@@ -31,4 +31,15 @@ class EventCard(db.Model):
     option_c = db.Column(db.String(200))
     option_c_morale = db.Column(db.Integer, default=0)
     option_c_progress = db.Column(db.Integer, default=0)
+
+class GameResult(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), nullable=False)
+    group_name = db.Column(db.String(50), nullable=False)
+    progress = db.Column(db.Integer, nullable=False)
+    morale = db.Column(db.Integer, nullable=False)
+    days_taken = db.Column(db.Integer, nullable=False)
+    outcome = db.Column(db.String(50), nullable=False)
+    chaos_score = db.Column(db.Integer, nullable=False)
+    date_completed = db.Column(db.DateTime, default=datetime.utcnow)
                 
