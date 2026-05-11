@@ -11,6 +11,15 @@ body {
     align-items: center;
 }
 
+h1 {
+    color: white;
+    margin: auto;
+}
+
 .parent {
-    border: 2px solid red;
+    border: 5px solid yellow;
+    background-color: rgba(0, 0, 0, 0.73);
+    border-radius: 12px;
+    width: 75%;
+    padding: 25px;
 }
