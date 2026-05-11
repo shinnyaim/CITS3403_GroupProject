@@ -40,6 +40,4 @@ class GameResult(db.Model):
     morale = db.Column(db.Integer, nullable=False)
     days_taken = db.Column(db.Integer, nullable=False)
     outcome = db.Column(db.String(50), nullable=False)
-    chaos_score = db.Column(db.Integer, nullable=False)
-    date_completed = db.Column(db.DateTime, default=datetime.utcnow)
                 

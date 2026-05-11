@@ -78,8 +78,7 @@ def leaderboard_data():
         'progress': r.progress,
         'morale': r.morale,
         'days_taken': r.days_taken,
-        'outcome': r.outcome,
-        'chaos_score': r.chaos_score
+        'outcome': r.outcome
     } for r in results]
     return jsonify(data)
 
@@ -94,8 +93,7 @@ def save_result():
         progress=data['progress'],
         morale=data['morale'],
         days_taken=data['days_taken'],
-        outcome=data['outcome'],
-        chaos_score=data['chaos_score']
+        outcome=data['outcome']
     )
 
     db.session.add(result)
