@@ -12,6 +12,24 @@ body {
     flex-direction: column;
 }
 
+.titleRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-bottom: 10px;
+}
+
+.titleSpacer {
+    width: 50px; 
+}
+
+.titleRight {
+    width: 50px;
+    display: flex;
+    justify-content: flex-end;
+}
+
 h1 {
     color: white;
     margin: auto;

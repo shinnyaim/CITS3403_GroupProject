@@ -26,10 +26,18 @@
     <!-- <p id="leaderboardTitle">LEADERBOARD</p> -->
 
     <div class="parent">
-      <h1>🏆 LEADERBOARD 🏆</h1>
-      <button id="filterBtn">
-        <img src="static/filtericon.png" alt="" srcset="" />
-      </button>
+      <div class="titleRow">
+        <div class="titleSpacer"></div>
+        <h1>🏆 LEADERBOARD 🏆</h1>
+        <div class="titleRight">
+          <button id="filterBtn">
+            <img
+              src="{{ url_for('static', filename='filtericon.png') }}"
+              alt="filter"
+            />
+          </button>
+        </div>
+      </div>
       <table id="leaderboardTable">
         <br />
         <thead>
