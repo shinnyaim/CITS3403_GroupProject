@@ -16,7 +16,10 @@ h1 {
     color: white;
     margin: auto;
     text-align: center;
+    animation: blink 1s infinite;
 }
+
+
 
 .parent {
     border: 5px solid yellow;
