@@ -93,6 +93,33 @@ img {
     border-radius: 5px;
 }
 
+.dropdown {
+    position: relative;
+}
+
+.dropdownMenu {
+    display: none;
+    position: absolute;
+    background-color: black;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); 
+}
+
+.dropdownMenu a {
+    color: black;
+    pad: 12px 6px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown:hover .dropdownMenu {
+    display: block;
+}
+
+.dropdown:hover .filterBtn {
+    background-color: blue;
+}
+
 #leaderboardTable {
     width: 100%;
     table-layout: fixed;
