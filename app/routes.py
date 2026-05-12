@@ -63,6 +63,16 @@ def leaderboard():
         GameResult.progress.desc(),
         GameResult.morale.desc()
     ).all()
+
+    if not results:
+        from collections import namedtuple
+        FakeResult = namedtuple('FakeResult', ['username', 'group_name', 'outcome', 'progress', 'morale', 'days_taken'])
+        results = [
+            FakeResult('Jozelle', 'Team Ctrl+Alt+Defeat', 'High Distinction', 95, 80, 12),
+            FakeResult('Bob', 'Bobbers', 'Pass', 62, 25, 14),
+            FakeResult('Alice', '404 Not Found', 'Fail', 38, 10, 14),
+        ]
+        
     return render_template('leaderboard.html', results=results)
 
 # AJAX endpoint — returns fresh leaderboard data as JSON
