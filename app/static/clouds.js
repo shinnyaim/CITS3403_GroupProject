@@ -12,7 +12,7 @@ if (canvas) {
   });
 
   const cloudImage = new Image();
-  cloudImage.src = "/static/images/clouds.png";
+  cloudImage.src = "static/clouds.png";
 
   class Cloud {
     constructor() {
