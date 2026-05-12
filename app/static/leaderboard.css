@@ -51,6 +51,7 @@ th {
 }
 
 tr {
-    border: 2px solid red;
+    border-top: 2px solid red;
+    border-bottom: 2px solid red;
     height: 50px;
 }
