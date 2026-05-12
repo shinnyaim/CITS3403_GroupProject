@@ -70,3 +70,8 @@ tr {
     border-bottom: 2px solid yellow;
     height: 50px;
 }
+
+td {
+    color: white;
+    font-size: 10px;
+}
