@@ -30,12 +30,19 @@
         <div class="titleSpacer"></div>
         <h1>🏆 LEADERBOARD 🏆</h1>
         <div class="titleRight">
-          <button id="filterBtn">
-            <img
-              src="{{ url_for('static', filename='filtericon.png') }}"
-              alt="filter"
-            />
-          </button>
+          <div class="dropdown">
+            <button id="filterBtn">
+              <img
+                src="{{ url_for('static', filename='filtericon.png') }}"
+                alt="filter"
+              />
+            </button>
+            <div class="dropdownMenu">
+              <a href="">Progress</a>
+              <a href="">Morale</a>
+              <a href="">Days</a>
+            </div>
+          </div>
         </div>
       </div>
       <table id="leaderboardTable">
