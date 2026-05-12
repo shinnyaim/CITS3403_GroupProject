@@ -39,8 +39,11 @@ h1 {
 th {
     color: white;
     padding-top: 30px;
-    /* padding-right: 50px; */
     text-align: center;
     width: 100%;
-    border: 2px solid white;
+}
+
+#leaderboardTable {
+    width: 100%;
+    table-layout: fixed;
 }
