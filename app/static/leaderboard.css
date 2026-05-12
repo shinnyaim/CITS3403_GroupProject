@@ -74,4 +74,6 @@ tr {
 td {
     color: white;
     font-size: 10px;
+    text-align: center;
+    margin: auto;
 }
