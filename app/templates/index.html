@@ -5,12 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Group Project Simulator</title>
 
-  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-  <!-- Pixel-style font; updated display=swap so that text shows in a fallback font instantly, then swaps to the pixel font once it loads. Prevents invisible text during load -->
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <!-- Customer CSS-->
-  <link rel="stylesheet" href="/static/auth.css'">
+  <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 </head>
 <body>
 
@@ -19,65 +16,65 @@
 
   <!-- Pixelated Background Image -->
   <div class="background-container">
-    <img src="{{ url_for('static', filename='uwa-background.png') }}" alt="Pixel Art Background" class="bg-image">
+    <img src="{{ url_for('static', filename='uwaBG.png') }}" alt="Pixel Art Background" class="bg-image">
   </div>
 
-  <!-- Main Menu Overlay; makes use of bootstrap classes -->
+  <!-- Main Menu Overlay -->
   <div class="menu-overlay d-flex flex-column align-items-center justify-content-center min-vh-100 text-center">
 
-    <!-- Game Title Box; bootstrap padding, border radius, margin-bottom spacing below the box-->
+    <!-- Game Title Box -->
     <div class="title-box p-4 rounded mb-4">
       <h1 class="game-title">Group Project Simulator</h1>
     </div>
 
     <!-- Start Game Button -->
-    <button class="start-game">START GAME</button>
+    <button class="start-game" onclick="window.location.href='/setup'">START GAME</button>
 
-    <!-- Menu List; uses bootstrap data-toggle to control modals. Only gamelog with click action for now. -->
+    <!-- Menu List  -->
     <div class="menu-list mt-3">
       <div class="menu-item" onclick="window.location.href='/auth'">Sign Up / Log in</div>
       <div class="menu-item" data-toggle="modal" data-target="#gamelogModal">Game Log / Resume</div>
-      <div class="menu-item">Settings</div>
-      <div class="menu-item">Leaderboard</div>
+      <div class="menu-item">Leaderboard </div>
       <!-- Moving selector arrow -->
       <div class="selector"></div>
     </div>
-
+  
     <!-- Instructions Trigger -->
-    <div class="instructions-trigger mt-4" data-toggle="modal" data-target="#instructionsModal">Instructions</div>
+    <div class="instructions-box mt-4" data-toggle="modal" data-target="#instructionsModal">Instructions</div>
 
   </div>
 
-  <!-- Instructions Modal (Bootstrap) -->
-  <div class="modal fade" id="instructionsModal" tabindex="-1" aria-labelledby="instructionsModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content game-modal-content">
-        <div class="modal-header border-0">
-          <h2 class="modal-title" id="instructionsModalLabel">Summarized Game Instructions</h2>
-          <button type="button" class="close text-white ml-auto" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+    <!-- Instructions Modal; Using Bootstrap -->
+    <div class="modal fade" id="instructionsModal" tabindex="-1"
+        aria-labelledby="instructionsModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content game-modal-content">
+          <div class="modal-header border-0">
+            <h2 class="modal-title" id="instructionsModalLabel">Instructions</h2>
+            <button type="button" class="close text-white ml-auto"
+                  data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
         </div>
         <div class="modal-body">
-          <p>A choice-based game that takes on a typical university group project with exaggerated situations.</p>
-          <p>You will be given several choices in each scenario.</p>
-          <p><span class="text-info">Game can end by:</span></p>
-          <ul>
-            <li>Submitting on time with a good grade.</li>
-            <li>Submitted mediocre work.</li>
-            <li><span class="text-danger">Failing to submit</span></li>
-          </ul>
-
-          <!-- Link to full guide; added as a hyperlink to full instructions/how to play-->
-           <hr class="border-secondary">
-           <a href="How_to_play.html" class="how-to-play-link">Detailed Instructions</a>
+            <p>A choice-based game that takes on a typical university group project with exaggerated situations.</p>
+            <p>You will be given several choices in each scenario.</p>
+            <p>Game can end by:</p>
+            <ul>
+              <li><span class="text-success">Submit on time</span> → graded outcome</li>
+              <li><span class="text-danger">Low Morale</span> affects gameplay</li>
+              <li><span class="text-danger">Fail</span> if morale hits zero</li>
+            </ul>            
+            <hr class="border-secondary">
+            <a href="/instructions" class="how-to-play-link">Detailed instructions</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- Game Log Modal (Bootstrap) -->
-  <div class="modal fade" id="gamelogModal" tabindex="-1" aria-labelledby="gamelogModalLabel" aria-hidden="true">
+       
+          
+    <!--Game Log Model- Bootstrap -->
+    <div class="modal fade" id="gamelogModal" tabindex="-1" aria-labelledby="gamelogModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content game-modal-content">
         <div class="modal-header border-0">
@@ -95,10 +92,11 @@
     </div>
   </div>
 
-  <!-- Bootstrap JS Bundle ; jQuery first since Bootstrap depends on it, then Bootstrap JS, and custom script -->
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <!-- Bootstrap JS Bundle; jQuery first, then Bootstrap JS, and custom JS-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='clouds.js') }}"></script>
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
 
 </body>
-</html>
+</html> 

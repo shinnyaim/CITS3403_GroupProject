@@ -1,0 +1,333 @@
+body {
+    background-image: url(uwaBG.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    min-height: 100vh; /* USER CAN SEE FULL CONTENT */
+    font-family: "Press Start 2P", system-ui;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.parent {
+    border-radius: 12px;
+    border: 4px solid yellow;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    width: 78%;
+    height: 800px;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+
+}
+
+.gameInfo {
+    /* border: 4px solid blue; */
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 35px;
+}
+
+.topLeft {
+    /* border: 4px solid pink; */
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+}
+
+.topRight {
+    /* border: 4px solid green;     */
+    width: 50%;
+    height: 100%;  
+    display: flex;
+    gap: 40px;
+    justify-content: flex-end;
+}
+
+.playerName {
+    color: rgb(190,190,190);
+}
+
+.dayCounter {
+    display: flex;
+    align-items: center;
+}
+
+.grpName {
+    color: yellow;
+}
+
+/* REMEMBER TO ADD A BLINKING EFFECT BETWEEN RED AND WHITE */
+.timer {
+    border: 4px solid red;
+    border-radius: 12px;
+    width: 120px;
+    height: 50px;
+    color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+hr {
+    margin-bottom: 8px;
+    border: 2px solid yellow;
+    border-radius: 100px;
+    /* width: 95%; */
+}
+
+/* PROGRESS BAR AS IN FOR BOTH BARS */
+.progressBars {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 95%;
+    height: 100px;
+    margin: 0 auto;
+    margin-top: 18px;
+    flex-direction: column;
+}
+
+.moraleBar {
+    width: 90%;
+    height: 50%;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    display: flex;
+}
+
+/* USER'S ACTUAL WORK PROGRESS IN-GAME */
+.progressBar {
+    width: 90%;
+    height: 50%;
+    flex-direction: row;
+    align-items: center;
+    display: flex;
+}
+
+#morale {
+    color: rgb(180, 33, 33);
+    font-size: 13px;
+    margin: 0;
+    white-space: nowrap;
+    min-width: 100px;
+}
+
+#moraleProgress {
+    background-color: rgba(180, 33, 33, 0.25);
+    width: 70%;
+    height: 8px;
+    border-radius: 50px;
+    flex: 1;
+    overflow: hidden;
+}
+
+#moraleProgress .progress-bar {
+    background-color: rgb(180, 33, 33);
+    height: 100%;
+    border-radius: 50px;
+    transition: width 0.4s ease;
+}
+
+#progressText {
+    color: rgb(28, 201, 28);
+    font-size: 13px;
+    margin: 0;
+    white-space: nowrap;
+    min-width: 100px;
+}
+
+#workProgress {
+    background-color: rgba(28, 201, 28, 0.25);
+    width: 70%;
+    height: 8px;
+    border-radius: 50px;
+    flex: 1;
+    overflow: hidden;
+}
+
+#workProgress .progress-bar {
+    background-color: rgb(28, 201, 28);
+    height: 100%;
+    border-radius: 50px;
+    transition: width 0.4s ease;
+}
+
+#moralePercentage {
+    color: rgb(180, 33, 33);
+}
+
+#progressPercentage {
+    color: rgb(28, 201, 28);
+}
+
+.secParent {
+    /* border: 2px solid blue; */
+    height: 65%;
+    display: flex;
+    flex-direction: row;
+}
+
+#urTeam {
+    color: yellow;
+    font-size: 12px;
+    margin-top: 14px;
+    margin-left: 10px;
+}
+
+.teammates {
+    /* border: 2px solid white; */
+    width: 25%;
+
+}
+
+.teammateProfile {
+    margin: 5px;
+    border-radius: 10px;
+    border: 2px solid yellow;
+    height: 30%;
+    display: flex;
+    flex-direction: row;
+}
+
+/* .teammate2 {
+    border: 2px solid purple;
+    height: 30%;
+}
+
+.teammate3 {
+    border: 2px solid orange;
+    height: 30%;
+} */
+
+.gamePlay {
+    /* border: 2px solid pink; */
+    flex: 1;
+}
+
+.eventLogs {
+    /* border: 2px solid green; */
+    width: 25%;
+    overflow-y: auto;
+    max-height: 400px;
+}
+
+.pfp {
+    width: 40%;
+}
+
+.nameDesc {
+    flex: 1;
+    padding: 9px;
+}
+
+.name {
+    color: yellow;
+}
+
+.desc {
+    color: yellow;
+    font-size: 9px;
+}
+
+#eventLog {
+    color: yellow;
+    margin-left: 10px;
+}
+
+.eventLogDay {
+    border-radius: 5px;
+    padding: 8px;
+    border: 1px solid yellow;
+    color: yellow;
+    font-size: 12px;
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+    text-align: left;
+}
+
+#eventCardTitle {
+    color: yellow;
+    font-size: 13px;
+    /* border: 2px solid yellow; */
+    max-width: fit-content;
+    /* border-radius: 5px;
+    padding: 8px; */
+    margin-top: 8px;
+    margin-left: 12px;
+}
+
+.eventCard {
+    color: yellow;
+    border: 2px solid yellow;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 550px;
+    margin: 0 auto;
+    border-radius: 10px;
+
+}
+
+.eventCardDesc {
+    font-size: 11px;
+}
+
+.options {
+    color: yellow;
+    font-size: 11px;
+    border: 1px solid yellow;
+    border-radius: 10px;
+    padding: 20px;
+    width: 550px;
+    display: flex;
+    align-items: center;
+    margin: 15px auto;
+    background-color: transparent;
+    height: 20px;
+}
+
+.options.selected {
+    background-color: rgba(255, 255, 0, 0.15);
+    border-color: white;
+    color: white;
+}
+
+#confirmChoice {
+    color: black;
+    background-color: yellow;
+    border: 2px solid yellow;
+    padding: 10px 24px;
+    border-radius: 10px;
+    display: none;
+    margin: 0 auto 0 auto;
+    cursor: pointer;
+}
+
+#submitEarly {
+    color: yellow;
+    background-color: transparent;
+    border: 2px solid yellow;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    margin: 10px auto 0 auto;
+    cursor: pointer;
+}
+#cloudCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}

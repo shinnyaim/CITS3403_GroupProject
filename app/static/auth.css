@@ -1,24 +1,41 @@
 /* =====================
    BASE & FONT
 =======================*/
+:root {
+  --accent: #fcff50;
+  --bg-dark: rgba(0, 0, 0, 0.85);
+  --border: rgba(255, 255, 255, 0.2);
+  --radius: 4px;
+  --font: 'Press Start 2P', monospace;
+}
+
 body, html {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: 'Press Start 2P', monospace;
+  min-height: 100vh;
+  font-family:  var(--font);
   overflow: hidden;
   color: rgb(255, 255, 255);
 }
 
+
+button {
+  font-family: var(--font);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
 /* ==========================
-   LAYOUT
+   BACKGROUND & LAYOUT
 ===========================*/
 .background-container {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   z-index: -2;
 }
 
@@ -30,10 +47,7 @@ body, html {
 
 #cloudCanvas {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   z-index: -1;
   pointer-events: none;
 }
@@ -42,136 +56,138 @@ body, html {
   z-index: 10;
 }
 
-/* ================
-   COMPONENTS
-=================*/
-
-/* TITLE */
+/* ==========================
+    TITLE
+===========================*/
 .title-box {
-  background-color: rgba(0, 0, 0, 0.7);
+  background: var(--bg-dark);
+  border-radius: var(--radius);
 }
 
 .game-title {
-  font-size: 2.5rem;
-  text-shadow: 2px 2px 0 #000;
+  font-size: 2.2rem;
   margin: 0;
+  text-shadow: 2px 2px 0 #000;
 }
 
-/* START BUTTON */
-.start-game {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 2rem;
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-  animation: startPulse 1s infinite;
-}
-
-.start-game:hover {
-  transform: scale(1.15);
-  color: #fcff50;
-  text-shadow: 2px 2px 0 #0a0061, 0 0 15px #fff;
-}
-
-/* MENU LIST */
-.menu-list {
-  position: relative;
+/* ==========================
+    AUTH TABS
+===========================*/
+.auth-tabs {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1.2rem;
-  font-size: 1rem;
+  gap: 1rem;
 }
 
-.menu-item {
-  padding-left: 30px;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-/* SELECTOR ARROW */
-.selector {
-  position: absolute;
-  left: 0;
-  width: 0;
-  height: 0;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-left: 15px solid #fcff50;
-  transition: top 0.2s ease;
-}
-
-/* INSTRUCTIONS TRIGGER */
-.instructions-trigger {
-  cursor: pointer;
+.auth-tab {
+  font-size: 0.7rem;
+  background: none;
+  border: 2px solid white;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 2px;
   transition: all 0.2s ease;
 }
 
-.instructions-trigger:hover {
-  color: #fcff50;
-  text-shadow: 2px 2px 0 #000, 0 0 10px #fff;
+.auth-tab:hover {
+  border-color: var(--accent);
+  color: var(--accent);
   transform: scale(1.08);
-}
-
-/* BOOTSTRAP MODAL OVERRIDES */
-.game-modal-content {
-  font-family: 'Press Start 2P', monospace;
-  background: rgba(0, 0, 0, 0.92);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
-  font-size: 0.65rem;
-  line-height: 1.8;
-}
-
-.game-modal-content .modal-title {
-  font-size: 0.9rem;
-}
-
-.game-modal-content .close {
-  font-size: 1.5rem;
-  opacity: 0.8;
-}
-
-.game-modal-content .close:hover {
-  opacity: 1;
-  color: #fcff50 !important;
-}
-
-/* HOW TO PLAY LINK */
-.how-to-play-link {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 0.6rem;
-  color: #fcff50;
-  text-decoration: none;
-}
- 
-.how-to-play-link:hover {
-  color: white;
   text-shadow: 0 0 10px #fff;
 }
+
+.auth-tab.active {
+  background: white;
+  color: black;
+  animation: tabPulse 1s infinite;
+}
+
+/* ==========================
+    FORM
+===========================*/
+.auth-form-box {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 2rem;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  gap: 0.1rem;
+  min-width: 340px;
+  width: 340px;
+  min-height: 200px;
+}
+
+/* ==========================
+    Inputs
+===========================*/
+.auth-input {
+  font-size: 0.6rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: white;
+
+  padding: 10px 10px;
+  width: 100%;
+  border-radius: 2px;
+
+  transition: border-color 0.2s ease;
+  margin-bottom: 0.45rem;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+
+/* ==========================
+    BUTTON
+===========================*/
+.auth-submit {
+  font-size: 0.75rem;
+  background: var(--accent);
+  color: black;
+  border: none;
+  padding: 14px;
+  width: 100%;
+  border-radius: 2px;
+  margin-top: 0.5rem;
+  animation: submitPulse 1s infinite;
+  transition: all 0.2s ease;
+}
+
+.auth-submit:hover {
+  background: white;
+  transform: scale(1.06);
+  animation: none;
+}
+
+/* Back to menu link */
+.back-link {
+  font-size: 0.65rem;
+  color: white;
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.2s ease;
+  margin-top: 1rem;
+}
+
+.back-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  text-shadow: 0 0 8px #fff;
+  transform: scale(1.05);
+}
+
 
 /* ==========================
    ANIMATIONS
 ===========================*/
-
-/* Combined pulse + bounce for start button (no transform conflict) */
-@keyframes startPulse {
-  0%, 100% {
-    transform: translateY(0) scale(1);
-    text-shadow: 2px 2px 0 #000;
-  }
-  50% {
-    transform: translateY(-8px) scale(1.08);
-    text-shadow: 2px 2px 0 #000, 0 0 10px #fff;
-  }
-}
-
-@keyframes menuPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.08); }
-}
 
 /* Auth tab active pulse */
 @keyframes tabPulse {
@@ -190,136 +206,7 @@ body, html {
   0%, 100% { transform: translateY(0) scale(1); }
   50% { transform: translateY(-3px) scale(1.03); }
 }
-/* ==========================
-   ACTIVE / HOVER STATES
-===========================*/
-.menu-item.active {
-  color: #fcff50;
-  text-shadow: 2px 2px 0 #000, 0 0 10px #fff;
-  animation: menuPulse 0.8s infinite;
-}
 
-/* ==========================
-   AUTH PAGE
-   auth.html specific styles
-===========================*/
 
-/* Tab row */
-.auth-tabs {
-  display: flex;
-  gap: 1rem;
-}
 
-.auth-tab {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 0.7rem;
-  background: none;
-  border: 2px solid white;
-  color: white;
-  padding: 8px 20px;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-}
 
-.auth-tab:hover {
-  border-color: #fcff50;
-  color: #fcff50;
-  transform: scale(1.08);
-  text-shadow: 0 0 10px #fff;
-}
-
-/* Active tab flips to white background, black text, and pulses */
-.auth-tab.active {
-  background: white;
-  color: black;
-  animation: tabPulse 1s infinite;
-}
-
-/* Form card */
-.auth-form-box {
-  background: rgba(0, 0, 0, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 2.5rem;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  min-width: 340px;
-}
-
-/* Inputs */
-.auth-input {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 0.6rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: white;
-  padding: 16px 12px;
-  width: 100%;
-  border-radius: 6px;
-  transition: border-color 0.2s ease;
-  margin-bottom: 1rem;
-}
-
-.auth-input:focus {
-  outline: none;
-  border-color: #fcff50;
-  background: rgba(255, 255, 255, 0.12);
-}
-
-.auth-input::placeholder {
-  color: rgba(255, 255, 255, 0.35);
-}
-
-/* Submit button */
-.auth-submit {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 0.75rem;
-  background: #fcff50;
-  color: black;
-  border: none;
-  padding: 14px;
-  width: 100%;
-  cursor: pointer;
-  border-radius: 6px;
-  margin-top: 0.5rem;
-  animation: submitPulse 1s infinite;
-  transition: all 0.2s ease;
-}
-
-/* Stop pulse on hover so scale takes over cleanly */
-.auth-submit:hover {
-  background: white;
-  transform: scale(1.06);
-}
-
-/* Back to menu link */
-.back-link {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 0.65rem;
-  color: white;
-  text-decoration: none;
-  background: rgba(0, 0, 0, 0.6);
-  padding: 10px 20px;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  transition: all 0.2s ease;
-  margin-top: 1rem;
-}
-
-.back-link:hover {
-  color: #fcff50;
-  border-color: #fcff50;
-  text-shadow: 0 0 8px #fff;
-  transform: scale(1.05);
-}
-
-/* Flash error/success messages */
-.flash-alert {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 0.55rem;
-  max-width: 360px;
-  text-align: center;
-  border-radius: 6px;
-}
