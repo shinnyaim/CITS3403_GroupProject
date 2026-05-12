@@ -60,6 +60,10 @@ th {
     width: 100%;
 }
 
+#filterBtn {
+    
+}
+
 #leaderboardTable {
     width: 100%;
     table-layout: fixed;
