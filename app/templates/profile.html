@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Player Profile</title>
+
+  <link rel="stylesheet" href="profile.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <canvas id="cloudCanvas"></canvas>  
+  <div class="background-container">
+    
+    <div class="profile-header">
+      <h1 class="title">PLAYER PROFILE </h1>
+      <p class="subtitle">Your university survival stats!</p>
+    </div>
+
+    # MAIN CARD
+    <div class="profile-card">
+   
+      <div class="avatar-section">
+          <div class="avatar"></div>
+          <p class="username">PLAYER: BOB</p>
+          <p class="group">GROUP: BOBBERS</p>
+      </div>
+    
+    <div class="stats-section">
+      <div class="stat">
+        <p>PROGRESS</p>
+        <div class="bar"><div id="progress-bar"></div></div>
+        <span id="progressText">70%</span>
+      </div>
+
+      <div class="stat">
+        <p>MORALE</p>
+        <div class="bar"><div id="moraleBar"></div></div>
+        <span id="moraleText">55%</span>
+      </div>
+
+      <div class="stat">
+        <p>DAYS SURVIVED</p>
+        <div class="bar"><div id="daysBar"></div></div>
+        <span id="daysText">8 / 14</span>
+      </div>
+    </div>
+  
+  </div>
+
+ <!-- ACTION BUTTONS -->
+    <div class="actions">
+        <button onclick="resetProfile()">RESET RUN</button>
+        <button onclick="goBack()">BACK TO GAME</button>
+    </div>
+
+</div>
+
+<script src="clouds.js"></script>
+<script src="profile.js"></script>
+
+</body>
+</html>

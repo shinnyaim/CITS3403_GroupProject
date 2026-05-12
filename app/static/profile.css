@@ -1,0 +1,96 @@
+body {
+    background: black;
+    color: white;
+    font-family: "Press Start 2P";
+}
+
+.subtitle {
+    font-size: 10px;
+    color: rgb(200,200,200);
+}
+
+.profile-card {
+    background: rgba(0,0,0,0.8);
+    border: 3px solid yellow;
+    border-radius: 12px;
+    display: flex;
+    width: 70%;
+    padding: 20px;
+    gap: 20px;
+}
+
+.avatar-section {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    border: 2px solid yellow;
+    background: gray;
+}
+
+.stats-section {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.stat p {
+    margin: 0;
+    font-size: 10px;
+}
+
+.bar {
+    width: 100%;
+    height: 10px;
+    background: rgba(255,255,0,0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+#progressBar,
+#moraleBar,
+#daysBar {
+    height: 100%;
+    width: 50%;
+    background: yellow;
+    transition: width 0.4s ease;
+}
+
+.actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    font-family: "Press Start 2P";
+    font-size: 10px;
+    padding: 10px;
+    background: transparent;
+    border: 2px solid yellow;
+    color: yellow;
+    cursor: pointer;
+}
+
+button:hover {
+    background: rgba(255,255,0,0.2);
+}
+
+#cloudCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
