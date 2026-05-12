@@ -23,7 +23,9 @@ h1 {
     background-color: rgba(0, 0, 0, 0.73);
     border-radius: 12px;
     width: 75%;
-    padding: 25px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    /* padding: 25px; */
 }
 
 #homeBtn {
@@ -50,5 +52,5 @@ th {
 
 tr {
     border: 2px solid red;
-    height: min-content;
+    height: 50px;
 }
