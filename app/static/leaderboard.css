@@ -16,10 +16,22 @@ h1 {
     color: white;
     margin: auto;
     text-align: center;
-    animation: blink 1s infinite;
+    animation: blink 0.8s infinite;
 }
 
+@keyframes blink {
+    0% {
+        color: white;
+    }
 
+    50% {
+        color: yellow;
+    }
+
+    100% {
+        color: white;
+    }
+}
 
 .parent {
     border: 5px solid yellow;
