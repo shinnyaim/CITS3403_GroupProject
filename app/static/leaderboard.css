@@ -34,3 +34,8 @@ h1 {
     border-radius: 5px;
     height: 40px;
 }
+
+th {
+    color: white;
+    padding-right: 15px;
+}
