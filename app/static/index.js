@@ -75,7 +75,7 @@ User logged in check
 
 async function checkAuthStatus() {
     const res = await fetch('/api/me');
-    const startBtn = document.querySelector('.start-game');
+    const startBtn = document.getElementById('startBtn');
     const authMenuItem = document.getElementById('authMenuItem');
 
     if (res.ok) {
@@ -85,7 +85,7 @@ async function checkAuthStatus() {
     } else {
         authMenuItem.textContent = 'Sign Up / Log in';
         authMenuItem.onclick = () => window.location.href = '/auth';
-        startBtn.onclick = () => window.location.href = '/auth';
+        startBtn.onclick = () => window.location.href = '/auth?next=home';
     }
 }
 

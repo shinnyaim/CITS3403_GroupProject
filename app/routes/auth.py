@@ -36,7 +36,8 @@ def login():
                 return redirect(url_for('auth.login'))
 
             login_user(user)
-            return redirect(url_for('main.index'))
+            next_page = request.form.get('next')
+            return redirect(url_for(f'main.{next_page}') if next_page else url_for('main.index'))
 
     return render_template('auth.html')
 

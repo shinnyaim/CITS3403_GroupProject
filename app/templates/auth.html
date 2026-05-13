@@ -43,6 +43,7 @@
   <div class="auth-form-box" id="loginForm">
     <form method="POST">
       <input type="hidden" name="action" value="login">
+      <input type="hidden" name="next" value="{{ request.args.get('next', '') }}">
 
       <input type="email" name="email" class="auth-input" placeholder="Email" required>
       <input type="password" name="password" class="auth-input" placeholder="Password" required>
