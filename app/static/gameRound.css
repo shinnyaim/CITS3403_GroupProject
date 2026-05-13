@@ -266,6 +266,8 @@ hr {
 .name {
     color: yellow;
     cursor: pointer;
+    width: fit-content;
+    margin: 0 auto;
 }
 
 .desc {
