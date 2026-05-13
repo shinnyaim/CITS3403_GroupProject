@@ -180,6 +180,7 @@ hr {
     font-size: 12px;
     width: fit-content;
     margin: 0 auto;
+    padding: 10px;
     /* margin-top: 14px;
     margin-left: 10px; */
 
@@ -217,6 +218,7 @@ hr {
 
 .eventLogs {
     /* border: 2px solid green; */
+    padding: 10px;
     width: 25%;
     overflow-y: auto;
     max-height: 400px;
@@ -244,6 +246,7 @@ hr {
     color: yellow;
     width: fit-content;
     margin: 0 auto;
+    font-size: 12px;
 }
 
 .eventLogDay {
@@ -262,6 +265,7 @@ hr {
     color: yellow;
     font-size: 13px;
     max-width: fit-content;
+    padding: 10px;
     /* margin-top: 8px;
     margin-left: 12px; */
     margin: 0 auto;
