@@ -53,11 +53,14 @@ body {
 }
 
 .profileHeader h1 {
-    color: yellow;
-    font-size: 2.5rem;
-    text-shadow: 3px 3px 0 rgba(0,0,0,0.8), 0 0 20px rgba(255, 235, 59, 0.4);
-    margin: 0 0 10px 0;
-    letter-spacing: 2px;
+  font-family: 'Press Start 2P', monospace;
+  text-shadow: 2px 2px 0 #000000;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: yellow;
+  cursor: pointer;
+  animation: startPulse 2s infinite;
 }
 
 .profileHeader p {
@@ -554,7 +557,17 @@ button:active {
     transform: translateX(0);
   }
 }
- 
+
+@keyframes startPulse {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    text-shadow: 2px 2px 0 #000;
+  }
+  50% {
+    transform: translateY(-8px) scale(1.08);
+    text-shadow: 4px 4px 0 #000, 0 0 10px #fff;
+  }
+}
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 1200px) {
   .profileWrapper {
