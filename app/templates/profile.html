@@ -14,77 +14,156 @@
 
   <canvas id="cloudCanvas"></canvas>
 
-  <div class="profile-wrapper">
+  <div class="profileWrapper">
 
-    <div class="profile-header">
-      <h1 class="title">PLAYER PROFILE</h1>
-      <p class="subtitle">Your university survival stats!</p>
+    <div class="profileHeader">
+      <h1>PLAYER PROFILE</h1>
+      <p>Your university survival stats!</p>
     </div>
 
-    <div class="profile-card">
+    <div class="topSection">
 
-      <div class="avatar-section">
-        <div class="avatar"></div>
-        <p class="username">PLAYER: BOB</p>
+      <div class="avatarCard">
+        <img
+          src="/static/avatars/sprite3.png"
+          alt="Avatar"
+          class="mainAvatar"
+        />
+       </div>
+        <p class="playerName">PLAYER: BOB</p>
         <p class="group">GROUP: BOBBERS</p>
       </div>
 
-      <div class="stats-section">
-
-        <div class="stat">
-          <p>PROGRESS</p>
-          <div class="bar"><div id="progressBar"></div></div>
-          <span id="progressText">70%</span>
-        </div>
-
-        <div class="stat">
-          <p>MORALE</p>
-          <div class="bar"><div id="moraleBar"></div></div>
-          <span id="moraleText">55%</span>
-        </div>
-
-        <div class="stat">
-          <p>DAYS SURVIVED</p>
-          <div class="bar"><div id="daysBar"></div></div>
-          <span id="daysText">8 / 14</span>
-        </div>
-
+      <div class="rankBox">
+        <p>RANK</p>
+        <h3>DEADLINE DODGER</h3>
       </div>
-    </div>
+    
+      </div>
 
-    <div class="actions">
-      <button onclick="resetProfile()">RESET RUN</button>
-      <button onclick="goBack()">BACK TO GAME</button>
-      <button data-toggle="modal" data-target="#gamelogModal">GAME LOG / RESUME</button>
-    </div>
+      <!-- CURRENT RUN-->
+      <div class="currenRunCard">
 
-  </div>
+        <h2>CURRENT RUN</h2>
 
-  <!-- Game Log Modal - Bootstrap -->
-  <div class="modal fade" id="gamelogModal" tabindex="-1" aria-labelledby="gamelogModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content game-modal-content">
-        <div class="modal-header border-0">
-          <h2 class="modal-title" id="gamelogModalLabel">Game Log / Resume</h2>
-          <button type="button" class="close text-white ml-auto" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div id="gamelogContent">
-            <p>No previous games found.</p>
+        <div class="statBlock">
+          <div class="statHeader">
+            <p>PROJECT PROGRESS</p>
+            <span id="progressText">70%</span>
+          </div>
+
+          <div class="barBackground">
+            <div class="progressFill" id="progressBar"></div>
           </div>
         </div>
+
+        <div class="statBlock">
+          <div class="statHeader">
+            <p>MORALE</p>
+            <span id="moraleText">55%</span>
+          </div>
+
+          <div class="barBackground">
+            <div class="moraleFill" id="moraleBar"></div>
+          </div>
+        </div>
+
+        <div class="statBlock">
+          <div class="statHeader">
+            <p>DAYS LEFT</p>
+            <span id="daysText">8 / 14</span>
+          </div>
+
+          <div class="barBackground">
+            <div class="daysFill" id="daysBar"></div>
+          </div>
+        </div>
+
+        <div class="runButtons">
+          <button onclick="resumeRun()">RESUME RUN</button>
+          <button onclick="newRun()">NEW RUN</button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!--PLAYER STATS-->
+    <div class="statsCard">
+      <h2>PLAYER STATS</h2>
+      <div class="statsGrid">
+        <div class="miniStat">
+          <h3>24</h3>
+          <p>GAMES PLAYED</p>
+        </div>
+
+        <div class="miniStat">
+          <h3>HD</h3>
+          <p>BEST GRADE</p>
+      </div>
+
+        <div class="miniStat">
+          <h3>82%</h3>
+          <p>AVG MORALE</p>
+        </div>
+
+        <div class="miniStat">
+          <h3>DAY 9</h3>
+          <p>FASTEST DAYS TAKEN TO SUBMIT</p>
+        </div>
       </div>
     </div>
-  </div>
 
-  <script src="/static/clouds.js"></script>
-  <script src="/static/profile.js"></script>
+    <div class="avatarSelectionCard">
 
-  <!-- Bootstrap JS Bundle -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+      <h2>SELECT AVATAR</h2>
+
+      <div class="avatarGrid">
+        <img src="/static/avatars/sprite3.png" class="avatarOption selectedAvatar">
+        <img src="/static/avatars/sprite4.png" class="avatarOption">
+        <img src="/static/avatars/sprite5.png" class="avatarOption">
+        <img src="/static/avatars/sprite6.png" class="avatarOption">
+        <img src="/static/avatars/sprite7.png" class="avatarOption">
+        <img src="/static/avatars/sprite8.png" class="avatarOption">
+        <img src="/static/avatars/sprite9.png" class="avatarOption">
+        <img src="/static/avatars/sprite10.png" class="avatarOption">
+      
+      </div>
+    </div>
+
+    <div class="historyCard">
+          <h2>MATCH HISTORY</h2>
+          <div class="historyList">
+            <div class="historyEntry">
+              <span>HD</span>
+              <span>DAY 11</span>
+              <span>EARLY SUBMIT</span>
+            </div>
+
+            <div class="historyEntry">
+              <span>D</span>
+              <span>DAY 14</span>
+              <span>ON TIME</span>
+            </div>
+
+            <div class="historyEntry">
+              <span>CR</span>
+              <span>DAY 9</span>
+              <span>EARLY SUBMIT</span>
+            </div>
+
+          </div>
+
+        </div>
+      
+      <div class="footerButtons">
+        <button onclick="viewLeaderboard()">LEADERBOARD</button>
+        <button onclick="logout()">LOGOUT</button>
+      </div>
+    </div>
+    
+    <script src="/static/clouds.js"></script>
+    <script src="/static/profile.js"></script>
 
 </body>
 </html>
