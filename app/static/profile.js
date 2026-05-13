@@ -1,24 +1,64 @@
-let morale = parseInt(sessionStorage.getItem("finalMorale")) || 50;
-let progress = parseInt(sessionStorage.getItem("finalProgress")) || 50;
-let daysLeft = parseInt(sessionStorage.getItem("daysLeft")) || 7;
+// TEMPORARY FRONTEND DATA
 
-function updateUI() {
-  document.getElementById("moraleBar").style.width = morale + "%";
-  document.getElementById("progressBar").style.width = progress + "%";
-  document.getElementById("daysBar").style.width = (daysLeft / 14) * 100 + "%";
+let morale = 58;
+let progress = 72;
+let daysLeft = 8;
 
-  document.getElementById("moraleText").textContent = morale + "%";
-  document.getElementById("progressText").textContent = progress + "%";
-  document.getElementById("daysText").textContent = `${daysLeft} / 14`;
+// UPDATE BARS
+
+function updateBars() {
+
+    document.getElementById("moraleBar").style.width = morale + "%";
+    document.getElementById("progressBar").style.width = progress + "%";
+    document.getElementById("daysBar").style.width =
+        (daysLeft / 14) * 100 + "%";
+
+    document.getElementById("moraleText").textContent =
+        morale + "%";
+
+    document.getElementById("progressText").textContent =
+        progress + "%";
+
+    document.getElementById("daysText").textContent =
+        `${daysLeft} / 14`;
 }
 
-function resetProfile() {
-  sessionStorage.clear();
-  window.location.href = "/";
+// AVATAR SELECTION
+
+const avatarOptions = document.querySelectorAll(".avatarOption");
+const mainAvatar = document.querySelector(".mainAvatar");
+
+avatarOptions.forEach(avatar => {
+
+    avatar.addEventListener("click", () => {
+
+        document
+            .querySelector(".selectedAvatar")
+            ?.classList.remove("selectedAvatar");
+
+        avatar.classList.add("selectedAvatar");
+
+        mainAvatar.src = avatar.src;
+    });
+
+});
+
+// BUTTONS
+
+function resumeRun() {
+    window.location.href = "/gameround";
 }
 
-function goBack() {
-  window.location.href = "/gameround";
+function newRun() {
+    window.location.href = "/teamselection";
 }
 
-updateUI();
+function viewLeaderboard() {
+    window.location.href = "/leaderboard";
+}
+
+function logout() {
+    window.location.href = "/";
+}
+
+updateBars();
