@@ -93,7 +93,7 @@ let characterRow = 0;
 let lastCharacterFrameTime = 0;
 const CHARACTER_ANIMATION_SPEED = 150;
 
-const charX = 700;
+const charX = 550;
 const charY = window.innerHeight - 680;
 
 function animateCharacter() {
