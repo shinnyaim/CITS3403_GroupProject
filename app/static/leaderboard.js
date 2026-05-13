@@ -15,6 +15,7 @@ function updateLeaderboard() {
                         <td>${result.progress}</td>
                         <td>${result.morale}</td>
                         <td>${result.days_taken}</td>
+                        <td>${result.overall_score}</td>
                     </tr>
                 `;
                 $('#leaderboardBody').append(row);
