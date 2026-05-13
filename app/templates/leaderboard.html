@@ -53,7 +53,6 @@
             <th>RANK</th>
             <th>PLAYER</th>
             <th>GROUP</th>
-            <th>OUTCOME</th>
             <th>PROGRESS</th>
             <th>MORALE</th>
             <th>DAYS</th>
@@ -61,24 +60,12 @@
           </tr>
         </thead>
         <tbody id="leaderboardBody">
-          {% for result in results %}
-          <tr>
-            <td>{{ loop.index }}</td>
-            <td>{{ result.username }}</td>
-            <td>{{ result.group_name }}</td>
-            <td>{{ result.outcome }}</td>
-            <td>{{ result.progress }}%</td>
-            <td>{{ result.morale }}%</td>
-            <td>{{ result.days_taken }}</td>
-            <td>{{ result.overall_score}}</td>
-          </tr>
-          {% endfor %}
         </tbody>
       </table>
     </div>
-    <button id="homeBtn">HOME</button>
+    <button id="homeBtn" onclick="window.location.href='/'">HOME</button>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="{{ url_for('static', filename='js/leaderboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='leaderboard.js') }}"></script>
     <script src="{{ url_for('static', filename='clouds.js') }}" defer></script>
   </body>
 </html>

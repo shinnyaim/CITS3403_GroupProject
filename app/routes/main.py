@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, jsonify, request
 from flask_login import current_user, login_required
 from app import db
-from app.models import EventCard, GameSession, Teammate
+from app.models import EventCard, GameSession, Teammate, User
 from datetime import datetime, timezone
 import random
 
@@ -124,6 +124,7 @@ def end_session():
         return jsonify({'error': 'Session not found'}), 404
 
     session.status = 'ended'
+    session.overall_score = data.get('overall_score')
     db.session.commit()
     return jsonify({'ok': True})
 
@@ -131,17 +132,18 @@ def end_session():
 def get_sessions():
     if not current_user.is_authenticated:
         return jsonify({'error': 'Login required'}), 401
-    sessions = GameSession.query.filter_by(user_id=current_user.id).all()
+    all_sessions = GameSession.query.filter_by(user_id=current_user.id).all()
 
     return jsonify([{
-        'id': s.id,
-        'group_name': s.group_name,
-        'morale': s.morale,
-        'progress': s.progress,
-        'days': s.day,
-        'status': s.status,
-        'started_at': s.started_at.isoformat()
-    } for s in sessions])
+        'id': session.id,
+        'group_name': session.group_name,
+        'morale': session.morale,
+        'progress': session.progress,
+        'days': session.day,
+        'status': session.status,
+        'started_at': session.started_at.isoformat(),
+        'overall_score': session.overall_score
+    } for session in all_sessions])
 
 
 @main.route('/api/session/resume/<int:session_id>', methods=['GET'])
@@ -164,41 +166,20 @@ def resume_session(session_id):
         'seen_event_ids': session.seen_event_ids or '',
         'teammates': [{'id': t.id, 'name': t.name, 'role': t.role, 'description': t.description, 'emoji': t.emoji} for t in teammates]
     })
-# Serves the leaderboard page
-# @main.route('/leaderboard')
-## TO DO : USING GAME SESSION DATABASE FROM GAMESESSION/GAMESCORE BRACNH
-# def leaderboard():
-#     results = GameResult.query.order_by(
-#         GameResult.progress.desc(),
-#         GameResult.morale.desc()
-#     ).all()
 
-#     # FAKE DATA FOR TESTING
-#     if not results:
-#         from collections import namedtuple
-#         FakeResult = namedtuple('FakeResult', ['username', 'group_name', 'outcome', 'progress', 'morale', 'days_taken'])
-#         results = [
-#             FakeResult('Jozelle', 'Team Ctrl+Alt+Defeat', 'HD', 95, 80, 12),
-#             FakeResult('Bob', 'Bobbers', 'Pass', 62, 25, 14),
-#             FakeResult('Alice', '404 Not Found', 'Fail', 38, 10, 14),
-#         ]
-        
-#     return render_template('leaderboard.html', results=results)
 
-# AJAX endpoint — returns fresh leaderboard data as JSON
-# @main.route('/api/leaderboard')
-# TO DO : USING GAME SESSION DATABASE FROM GAMESESSION/GAMESCORE BRACNH 
-# def leaderboard_data():
-#     results = GameResult.query.order_by(
-#         GameResult.progress.desc(),
-#         GameResult.morale.desc()
-#     ).all()
-#     data = [{
-#         'username': r.username,
-#         'group_name': r.group_name,
-#         'progress': r.progress,
-#         'morale': r.morale,
-#         'days_taken': r.days_taken,
-#         'outcome': r.outcome
-#     } for r in results]
-#     return jsonify(data)
+@main.route('/leaderboard')
+def leaderboard():
+    return render_template('leaderboard.html')
+
+@main.route('/api/sessions/get_all')
+def leaderboard_data():
+    all_sessions = GameSession.query.filter_by(status='ended').order_by(GameSession.overall_score.desc()).all()
+    return jsonify([{
+        'username': session.user.username if session.user else 'Unknown',
+        'group_name': session.group_name or 'Unknown',
+        'progress': session.progress,
+        'morale': session.morale,
+        'days_taken': session.day,
+        'overall_score': session.overall_score or 0
+    } for session in all_sessions])
