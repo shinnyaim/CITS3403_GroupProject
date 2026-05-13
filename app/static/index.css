@@ -191,19 +191,3 @@ body, html {
   animation: menuPulse 0.8s infinite;
 }
 
-/*================
- CHARACTER ANIMATION 
- =================*/
-.character-canvas {
-  position: fixed;
-  bottom: 450px;
-  left: 550px;
-
-  width: 200px;
-  height: 200px;
-
-  z-index: 20;
-
-  image-rendering: sharp-edges;
-}
-
