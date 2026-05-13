@@ -1,43 +1,51 @@
-from app import db
+from app import db, login_manager
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
+
+class User(UserMixin, db.Model):
+    id            = db.Column(db.Integer, primary_key=True)
+    username      = db.Column(db.String(64), unique=True, nullable=False)
+    email         = db.Column(db.String(120), unique=True, nullable=False)
+    password_hash = db.Column(db.String(256), nullable=False)
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+    
+    def __repr__(self):
+        return f'<User {self.username}>'
+    
+@login_manager.user_loader
+def load_user(user_id):
+    return db.session.get(User, int(user_id))
 
 class Teammate(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
-    role = db.Column(db.String(100))                        
-    description = db.Column(db.Text)                     
-    image = db.Column(db.String(200))                    
-    emoji = db.Column(db.String(10))
-    events = db.relationship('EventCard', back_populates='teammate')
-
+    id          = db.Column(db.Integer, primary_key=True)
+    name        = db.Column(db.String(50), nullable=False)
+    role        = db.Column(db.String(100))
+    description = db.Column(db.Text)
+    image       = db.Column(db.String(200))
+    emoji       = db.Column(db.String(10))
+    events      = db.relationship('EventCard', back_populates='teammate')
 
 class EventCard(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(120), nullable=False)
+    id          = db.Column(db.Integer, primary_key=True)
+    title       = db.Column(db.String(120), nullable=False)
     description = db.Column(db.Text, nullable=False)
-
-    # foreign key — same pattern as student.group_id in slides
     teammate_id = db.Column(db.Integer, db.ForeignKey('teammate.id'))
-    teammate = db.relationship('Teammate', back_populates='events')
+    teammate    = db.relationship('Teammate', back_populates='events')
 
-    # options for the event card and its effects on morale and progress
-    option_a = db.Column(db.String(200))
-    option_a_morale = db.Column(db.Integer, default=0)
+    option_a          = db.Column(db.String(200))
+    option_a_morale   = db.Column(db.Integer, default=0)
     option_a_progress = db.Column(db.Integer, default=0)
 
-    option_b = db.Column(db.String(200))
-    option_b_morale = db.Column(db.Integer, default=0)
+    option_b          = db.Column(db.String(200))
+    option_b_morale   = db.Column(db.Integer, default=0)
     option_b_progress = db.Column(db.Integer, default=0)
 
-    option_c = db.Column(db.String(200))
-    option_c_morale = db.Column(db.Integer, default=0)
+    option_c          = db.Column(db.String(200))
+    option_c_morale   = db.Column(db.Integer, default=0)
     option_c_progress = db.Column(db.Integer, default=0)
 
-class GameResult(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), nullable=False)
-    group_name = db.Column(db.String(50), nullable=False)
-    progress = db.Column(db.Integer, nullable=False)
-    morale = db.Column(db.Integer, nullable=False)
-    days_taken = db.Column(db.Integer, nullable=False)
-    outcome = db.Column(db.String(50), nullable=False)
-                

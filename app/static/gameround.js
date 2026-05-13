@@ -4,15 +4,36 @@ let progress = 0;       // starts at 0 as per project spec
 let daysLeft = 14;
 let currentEvent = null;
 let seenCardIds = [];   // tracks seen cards to avoid repeats
-const teammateIds = [1, 2, 3]; // hardcoded for now, will come from session later
+const teammates = JSON.parse(sessionStorage.getItem('teammates') || '[]');
+const teammateIds = teammates.map(t => t.id);
 let selectedOptionIndex = null;
+
+// --- Timer State ---
+const TIMER_SECONDS = 30;
+let timerInterval = null;
+let timeRemaining = TIMER_SECONDS;
 
 // --- On page load ---
 document.addEventListener('DOMContentLoaded', () => {
+    updateGroupName();
+    loadTeammates();
     updateBars();
     updateDayCounter();
     fetchEventCard();
 });
+
+function updateGroupName() {
+    const groupName = sessionStorage.getItem('groupName') || 'BOBBERS';
+    document.querySelector('.grpName').textContent = `GROUP: ${groupName.toUpperCase()}`;
+}
+
+function loadTeammates() {
+    teammates.forEach((t, i) => {
+        const card = document.getElementById(`teammate${i + 1}`);
+        card.querySelector('.name').textContent = t.name;
+        card.querySelector('.desc').textContent = t.description;
+    });
+}
 
 // --- Fetch a random event card from the API ---
 async function fetchEventCard() {
@@ -27,6 +48,57 @@ async function fetchEventCard() {
     currentEvent = event;
     seenCardIds.push(event.id);   // mark this card as seen
     displayEventCard(event);
+}
+
+// --- Timer: start a 30-second countdown for the current card ---
+function startTimer() {
+    stopTimer();
+    timeRemaining = TIMER_SECONDS;
+    document.querySelector('.timer').textContent = timeRemaining + 's';
+
+    timerInterval = setInterval(() => {
+        timeRemaining--;
+        document.querySelector('.timer').textContent = timeRemaining + 's';
+
+        if (timeRemaining <= 0) {
+            stopTimer();
+            onTimerExpired();
+        }
+    }, 1000);
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+}
+
+
+// --- Called when the timer hits 0 without a player choice ---
+function onTimerExpired() {
+    document.getElementById('confirmChoice').style.display = 'none';
+
+    morale -= 5;
+    progress -= 5;
+    if (morale < 0) morale = 0;
+    if (progress < 0) progress = 0;
+    updateBars();
+
+    addToEventLog('Timeout', 'Time ran out! (-5 morale, -5 progress)');
+
+    if (morale <= 0) {
+        endGame('morale');
+        return;
+    }
+
+    daysLeft--;
+    updateDayCounter();
+
+    if (daysLeft <= 0) {
+        endGame('days');
+        return;
+    }
+
+    fetchEventCard();
 }
 
 // --- Update the event card UI with the fetched event ---
@@ -45,6 +117,7 @@ function displayEventCard(event) {
     buttons[2].onclick = () => selectOption(2);
 
     enableOptions();
+    startTimer();
 }
 
 // --- Player highlights an option (before confirming) ---
@@ -62,6 +135,7 @@ function selectOption(index) {
 // --- Player confirms their selected option ---
 function chooseOption() {
     if (selectedOptionIndex === null) return;
+    stopTimer();
 
     const option = currentEvent.options[selectedOptionIndex];
 
@@ -118,7 +192,7 @@ function addToEventLog(title, choiceText) {
     const log = document.querySelector('.eventLogs');
     const entry = document.createElement('div');
     entry.className = 'eventLogDay';
-    entry.textContent = `DAY ${14 - daysLeft}: ${title}`;
+    entry.textContent = `DAY ${14 - daysLeft + 1}: ${title}`;
     log.appendChild(entry);
 }
 

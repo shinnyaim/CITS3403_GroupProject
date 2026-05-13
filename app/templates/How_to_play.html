@@ -8,14 +8,19 @@
 </head>
 
 <body>
+    <canvas id="cloudCanvas"></canvas>
 
-    <!-- Backround image -->
     <div class="background-container">
         <img src="../static/uwaBG.png" alt="Pixel Art Background" class="bg-image">
+        
     </div>
 
     <h1>How To Play</h1>
 
+    <a href="{{ url_for('main.index') }}" class="back-link">
+    Back to Menu
+    </a>
+    
     <!-- Goals -->
     <div class="mt-4">
         <h2>Goal</h2>
@@ -45,7 +50,7 @@
                 <div class="card h-100">
                     <div class="card-body">
                         <h3 class="card-title">2. Meet Your Teammates</h3>
-                        <p class="card-text">At the start of each run, 2 teammates are randomly picked from the personality pool and assigned to your group.</p>
+                        <p class="card-text">At the start of each run, 3 teammates are randomly picked from the personality pool and assigned to your group.</p>
                     </div>
                 </div>
             </div>
@@ -71,7 +76,7 @@
     </div>
 
     <!-- STATS -->
-    <div class="mt-4">
+    <div class="mt-4">`
         <h2>Your Stats</h2>
         <p>Three bars to watch throughout your run</p>
 
@@ -107,7 +112,7 @@
     <!-- TEAMATES -->
     <div class="mt-4">
         <h2>Your Teammates</h2>
-        <p>2 are randomly assigned at the start of every run</p>
+        <p>3 are randomly assigned at the start of every run</p>
 
         <div class="row">
             <div class="col">
@@ -226,5 +231,6 @@
             </div>
         </div>
     </div>
+    <script src="{{ url_for('static', filename='clouds.js') }}"></script>
 
 </body>

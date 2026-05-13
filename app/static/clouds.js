@@ -1,3 +1,7 @@
+/*=================
+GLOBAL CLOUD ANIMATION
+=================*/
+
 const canvas = document.getElementById("cloudCanvas");
 
 if (canvas) {
@@ -12,7 +16,7 @@ if (canvas) {
   });
 
   const cloudImage = new Image();
-  cloudImage.src = "static/clouds.png";
+  cloudImage.src = "/static/clouds.png";
 
   class Cloud {
     constructor() {
