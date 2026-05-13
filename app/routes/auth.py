@@ -24,7 +24,7 @@ def login():
             db.session.add(user)
             db.session.commit()
             login_user(user)
-            return redirect(url_for('main.index'))
+            return redirect(url_for('main.profile'))
 
         elif action == 'login':
             email    = request.form.get('email')
@@ -36,7 +36,7 @@ def login():
                 return redirect(url_for('auth.login'))
 
             login_user(user)
-            return redirect(url_for('main.index'))
+            return redirect(url_for('main.profile'))
 
     return render_template('auth.html')
 

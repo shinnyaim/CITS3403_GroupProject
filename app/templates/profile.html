@@ -14,31 +14,34 @@
 
   <canvas id="cloudCanvas"></canvas>
 
+  <div class="background-container">
+    <img src="/static/uwaBG.png" alt="Pixel Art Background" class="bg-image">
+  </div>
+
   <div class="profileWrapper">
 
     <div class="profileHeader">
       <h1>PLAYER PROFILE</h1>
-      <p>Your university survival stats!</p>
+      <p>...</p>
     </div>
 
     <div class="topSection">
 
       <div class="avatarCard">
+        <div class="avatarContainer" id="avatarContainer">
         <img
-          src="/static/avatars/sprite3.png"
+          src="../static/avatars/sprite1.png"
           alt="Avatar"
           class="mainAvatar"
         />
-       </div>
-        <p class="playerName">PLAYER: BOB</p>
-        <p class="group">GROUP: BOBBERS</p>
-      </div>
-
-      <div class="rankBox">
-        <p>RANK</p>
-        <h3>DEADLINE DODGER</h3>
-      </div>
-    
+        </div>
+        <p class="playerName" id="playerNameDisplay">PLAYER: BOB</p>
+        <p class="groupName" id="groupDisplay">GROUP: BOBBERS</p>
+      
+        <div class="rankBox">
+          <p>RANK</p>
+          <h3 id="rankDisplay">DEADLINE DODGER</h3>
+        </div>
       </div>
 
       <!-- CURRENT RUN-->
@@ -51,7 +54,6 @@
             <p>PROJECT PROGRESS</p>
             <span id="progressText">70%</span>
           </div>
-
           <div class="barBackground">
             <div class="progressFill" id="progressBar"></div>
           </div>
@@ -73,15 +75,14 @@
             <p>DAYS LEFT</p>
             <span id="daysText">8 / 14</span>
           </div>
-
           <div class="barBackground">
             <div class="daysFill" id="daysBar"></div>
           </div>
         </div>
 
         <div class="runButtons">
-          <button onclick="resumeRun()">RESUME RUN</button>
-          <button onclick="newRun()">NEW RUN</button>
+          <button class="btn-primary" onclick="resumeRun()">RESUME RUN</button>
+          <button class="btn-secondary" onclick="newRun()">NEW RUN</button>
         </div>
 
       </div>
@@ -93,63 +94,63 @@
       <h2>PLAYER STATS</h2>
       <div class="statsGrid">
         <div class="miniStat">
-          <h3>24</h3>
+          <h3 id="gamesPlayedCount">24</h3>
           <p>GAMES PLAYED</p>
         </div>
 
         <div class="miniStat">
-          <h3>HD</h3>
+          <h3 id="bestGradeDisplay">HD</h3>
           <p>BEST GRADE</p>
       </div>
 
         <div class="miniStat">
-          <h3>82%</h3>
+          <h3 id="avgMoraleDisplay">82%</h3>
           <p>AVG MORALE</p>
         </div>
 
         <div class="miniStat">
-          <h3>DAY 9</h3>
-          <p>FASTEST DAYS TAKEN TO SUBMIT</p>
+          <h3 id="fastestDaysDisplay">DAY 9</h3>
+          <p>FASTEST SUBMIT</p>
         </div>
       </div>
     </div>
 
     <div class="avatarSelectionCard">
-
       <h2>SELECT AVATAR</h2>
+      <p class="avatarSubtitle">Click to change your avatar</p>
 
       <div class="avatarGrid">
-        <img src="/static/avatars/sprite3.png" class="avatarOption selectedAvatar">
-        <img src="/static/avatars/sprite4.png" class="avatarOption">
-        <img src="/static/avatars/sprite5.png" class="avatarOption">
-        <img src="/static/avatars/sprite6.png" class="avatarOption">
-        <img src="/static/avatars/sprite7.png" class="avatarOption">
-        <img src="/static/avatars/sprite8.png" class="avatarOption">
-        <img src="/static/avatars/sprite9.png" class="avatarOption">
-        <img src="/static/avatars/sprite10.png" class="avatarOption">
-      
+        <img src="/static/avatars/sprite1.png" class="avatarOption selectedAvatar" data-avatar="sprite1" alt="Avatar 1">
+        <img src="/static/avatars/sprite2.png" class="avatarOption" data-avatar="sprite2" alt="Avatar 2">
+        <img src="/static/avatars/sprite3.png" class="avatarOption" data-avatar="sprite3" alt="Avatar 3">
+        <img src="/static/avatars/sprite4.png" class="avatarOption" data-avatar="sprite4" alt="Avatar 4">
+        <img src="/static/avatars/sprite5.png" class="avatarOption" data-avatar="sprite5" alt="Avatar 5">
+        <img src="/static/avatars/sprite6.png" class="avatarOption" data-avatar="sprite6" alt="Avatar 6">
+        <img src="/static/avatars/sprite7.png" class="avatarOption" data-avatar="sprite7" alt="Avatar 7">
+        <img src="/static/avatars/sprite8.png" class="avatarOption" data-avatar="sprite8" alt="Avatar 8">
       </div>
+      <p class="avatarSavedMsg" id="avatarSavedMsg"style="display:none;">Avatar updated!</p>
     </div>
 
     <div class="historyCard">
           <h2>MATCH HISTORY</h2>
-          <div class="historyList">
+          <div class="historyList" id="historyList">
             <div class="historyEntry">
-              <span>HD</span>
-              <span>DAY 11</span>
-              <span>EARLY SUBMIT</span>
+              <span class="gradeBadge">HD</span>
+              <span class="daysBadge">DAY 11</span>
+              <span class="submitBadge">ON TIME</span>
             </div>
 
             <div class="historyEntry">
-              <span>D</span>
-              <span>DAY 14</span>
-              <span>ON TIME</span>
+              <span class="gradeBadge">D</span>
+              <span class="daysBadge">DAY 14</span>
+              <span class="submitBadge">ON TIME</span>
             </div>
 
             <div class="historyEntry">
-              <span>CR</span>
-              <span>DAY 9</span>
-              <span>EARLY SUBMIT</span>
+              <span class="gradeBadge">CR</span>
+              <span class="daysBadge">DAY 9</span>
+              <span class="submitBadge">EARLY SUBMIT</span>
             </div>
 
           </div>
@@ -157,8 +158,8 @@
         </div>
       
       <div class="footerButtons">
-        <button onclick="viewLeaderboard()">LEADERBOARD</button>
-        <button onclick="logout()">LOGOUT</button>
+        <button class="btn-primary" onclick="viewLeaderboard()">LEADERBOARD</button>
+        <button class="btn-danger" onclick="logout()">LOGOUT</button>
       </div>
     </div>
     
