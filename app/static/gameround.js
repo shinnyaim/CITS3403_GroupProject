@@ -114,14 +114,13 @@ function onTimerExpired() {
         return;
     }
 
-    currentDay++;
-    updateDayCounter();
-
-    if (currentDay > 14) {
+    if (currentDay === 14) {
         endGame('days');
         return;
     }
 
+    currentDay++;
+    updateDayCounter();
     fetchEventCard();
 }
 
@@ -196,14 +195,13 @@ async function chooseOption() {
         return;
     }
 
-    currentDay++;
-    updateDayCounter();
-
-    if (currentDay > 14) {
+    if (currentDay === 14) {
         endGame('days');
         return;
     }
 
+    currentDay++;
+    updateDayCounter();
     fetchEventCard();
 }
 
