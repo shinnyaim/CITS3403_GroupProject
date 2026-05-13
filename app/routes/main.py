@@ -1,45 +1,48 @@
-from flask import jsonify, request, render_template
-from app import app, db
+from flask import Blueprint, render_template, jsonify, request
+from app import db
 from app.models import EventCard, Teammate
 import random
 
-# --- Page routes --- serve each HTML page when the browser navigates to that URL
+main = Blueprint('main', __name__)
 
-@app.route('/instructions')
+@main.route('/')
+def index():
+    return render_template('index.html')
+
+@main.route('/setup')
+def home():
+    return render_template('grp-project-name.html')
+
+# --- Page routes --- serve each HTML page when the browser navigates to that URL
+@main.route('/instructions')
 def instructions():
     return render_template('How_to_play.html')
 
-@app.route('/')
-def index():
-    return render_template('grp-project-name.html')
-
-@app.route('/home')
-def home():
-    return render_template('index.html')
-
-@app.route('/loading')
+@main.route('/loading')
 def loading():
     return render_template('loading.html')
 
-@app.route('/game')
+@main.route('/game')
 def game():
     return render_template('gameRound.html')
 
-@app.route('/outcome')
+@main.route('/outcome')
 def outcome():
     return render_template('outcome.html')
 
-@app.route('/api/random-teammates')
+@main.route('/api/random-teammates')
 def random_teammates():
     all_teammates = Teammate.query.all()
+    if len(all_teammates) < 3:
+        return jsonify({'error': 'Not enough teammates'}), 400
+
     chosen = random.sample(all_teammates, 3)
     return jsonify([
         {'id': t.id, 'name': t.name, 'role': t.role, 'description': t.description, 'emoji': t.emoji}
         for t in chosen
     ])
 
-
-@app.route('/api/random-event')
+@main.route('/api/random-event')
 def random_event():
     """Returns a random event card filtered to the player's current teammates."""
     ids_param = request.args.get('teammate_ids', '')
