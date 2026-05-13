@@ -68,3 +68,84 @@ items.forEach((item, index) => {
     updateSelector();
   });
 });
+
+/*=================
+GAME LOG MODAL
+=================*/
+
+$('#gamelogModal').on('show.bs.modal', async () => {
+    const res = await fetch('/api/sessions/get');
+    if (!res.ok) {
+        document.getElementById('gamelogContent').innerHTML = '<p>Log in to see your game history.</p>';
+        return;
+    }
+    const sessions = await res.json();
+    const content = document.getElementById('gamelogContent');
+    if (sessions.length === 0) {
+        content.innerHTML = '<p>No previous games found.</p>';
+    } else {
+        content.innerHTML = `
+            <table class="table table-sm table-dark">
+                <thead>
+                    <tr>
+                        <th>Group</th>
+                        <th>Date</th>
+                        <th>Day</th>
+                        <th>Morale</th>
+                        <th>Progress</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${sessions.map(s => `
+                        <tr>
+                            <td>${s.group_name}</td>
+                            <td>${new Date(s.started_at).toLocaleDateString('en-AU')}</td>
+                            <td>${s.days}</td>
+                            <td>${s.morale}%</td>
+                            <td>${s.progress}%</td>
+                            <td>${s.status === 'in_progress' ? `<button onclick="resumeSession(${s.id})">Resume</button>` : s.status}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>`;
+    }
+});
+
+
+async function resumeSession(sessionId) {
+    const res = await fetch(`/api/session/resume/${sessionId}`);
+    const data = await res.json();
+
+    sessionStorage.setItem('session_id', data.session_id);
+    sessionStorage.setItem('groupName', data.group_name);
+    sessionStorage.setItem('teammates', JSON.stringify(data.teammates));
+    sessionStorage.setItem('seenCardIds', data.seen_event_ids);
+    sessionStorage.setItem('Morale', data.morale);
+    sessionStorage.setItem('Progress', data.progress);
+    sessionStorage.setItem('Day', data.day);
+
+    window.location.href = '/game';
+}
+
+/*=================
+User logged in check
+=================*/
+
+async function checkAuthStatus() {
+    const res = await fetch('/api/me');
+    const startBtn = document.getElementById('startBtn');
+    const authMenuItem = document.getElementById('authMenuItem');
+
+    if (res.ok) {
+        authMenuItem.textContent = 'Log out';
+        authMenuItem.onclick = () => window.location.href = '/logout';
+        startBtn.onclick = () => window.location.href = '/setup';
+    } else {
+        authMenuItem.textContent = 'Sign Up / Log in';
+        authMenuItem.onclick = () => window.location.href = '/auth';
+        startBtn.onclick = () => window.location.href = '/auth?next=home';
+    }
+}
+
+checkAuthStatus();

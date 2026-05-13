@@ -5,7 +5,7 @@ if (groupNameForm) {
     event.preventDefault();
 
     const input = document.getElementById("grpName");
-    const groupName = input?.value.trim() || "BOBBERS";
+    const groupName = input?.value.trim();
 
     sessionStorage.setItem("groupName", groupName);
     window.location.href = "/loading";
