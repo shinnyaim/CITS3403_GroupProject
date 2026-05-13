@@ -74,42 +74,33 @@ GAME LOG MODAL
 =================*/
 
 $('#gamelogModal').on('show.bs.modal', async () => {
+    const tbody = document.getElementById('gamelogBody');
+    tbody.innerHTML = '';
+
     const res = await fetch('/api/sessions/get');
     if (!res.ok) {
-        document.getElementById('gamelogContent').innerHTML = '<p>Log in to see your game history.</p>';
+        tbody.innerHTML = '<tr><td colspan="6">Log in to see your game history.</td></tr>';
         return;
     }
+
     const sessions = await res.json();
-    const content = document.getElementById('gamelogContent');
     if (sessions.length === 0) {
-        content.innerHTML = '<p>No previous games found.</p>';
-    } else {
-        content.innerHTML = `
-            <table class="table table-sm table-dark">
-                <thead>
-                    <tr>
-                        <th>Group</th>
-                        <th>Date</th>
-                        <th>Day</th>
-                        <th>Morale</th>
-                        <th>Progress</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${sessions.map(s => `
-                        <tr>
-                            <td>${s.group_name}</td>
-                            <td>${new Date(s.started_at).toLocaleDateString('en-AU')}</td>
-                            <td>${s.days}</td>
-                            <td>${s.morale}%</td>
-                            <td>${s.progress}%</td>
-                            <td>${s.status === 'in_progress' ? `<button onclick="resumeSession(${s.id})">Resume</button>` : s.status}</td>
-                        </tr>
-                    `).join('')}
-                </tbody>
-            </table>`;
+        tbody.innerHTML = '<tr><td colspan="6">No previous games found.</td></tr>';
+        return;
     }
+
+    sessions.forEach(session => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${session.group_name}</td>
+            <td>${new Date(session.started_at).toLocaleDateString('en-AU')}</td>
+            <td>${session.days}</td>
+            <td>${session.morale}%</td>
+            <td>${session.progress}%</td>
+            <td>${session.status === 'in_progress' ? `<button onclick="resumeSession(${session.id})">Resume</button>` : session.overall_score + '%'}</td>
+        `;
+        tbody.appendChild(row);
+    });
 });
 
 
