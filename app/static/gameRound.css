@@ -178,8 +178,11 @@ hr {
 #urTeam {
     color: yellow;
     font-size: 12px;
-    margin-top: 14px;
-    margin-left: 10px;
+    width: fit-content;
+    margin: 0 auto;
+    /* margin-top: 14px;
+    margin-left: 10px; */
+
 }
 
 .teammates {
@@ -239,7 +242,8 @@ hr {
 
 #eventLog {
     color: yellow;
-    margin-left: 10px;
+    width: fit-content;
+    margin: 0 auto;
 }
 
 .eventLogDay {
@@ -257,12 +261,10 @@ hr {
 #eventCardTitle {
     color: yellow;
     font-size: 13px;
-    /* border: 2px solid yellow; */
     max-width: fit-content;
-    /* border-radius: 5px;
-    padding: 8px; */
-    margin-top: 8px;
-    margin-left: 12px;
+    /* margin-top: 8px;
+    margin-left: 12px; */
+    margin: 0 auto;
 }
 
 .eventCard {
