@@ -64,6 +64,7 @@ def leaderboard():
         GameResult.morale.desc()
     ).all()
 
+    # FAKE DATA FOR TESTING
     if not results:
         from collections import namedtuple
         FakeResult = namedtuple('FakeResult', ['username', 'group_name', 'outcome', 'progress', 'morale', 'days_taken'])
