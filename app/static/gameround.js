@@ -1,9 +1,10 @@
 // --- Game State ---
-let morale = 100;
-let progress = 0;       // starts at 0 as per project spec
-let currentDay = 1;
+let morale = parseInt(sessionStorage.getItem('Morale')) || 100;
+let progress = parseInt(sessionStorage.getItem('Progress')) || 0;
+let currentDay = parseInt(sessionStorage.getItem('currentDay')) || 1;
 let currentEvent = null;
-let seenCardIds = [];   // tracks seen cards to avoid repeats
+let seenCardIds = sessionStorage.getItem('seenCardIds') ? sessionStorage.getItem('seenCardIds').split(',').map(Number) : [];
+
 const teammates = JSON.parse(sessionStorage.getItem('teammates') || '[]');
 const teammateIds = teammates.map(t => t.id);
 let selectedOptionIndex = null;
@@ -37,6 +38,24 @@ function loadTeammates() {
         card.querySelector('.name').textContent = t.name;
         card.querySelector('.desc').textContent = t.description;
     });
+}
+
+// --- Update progress bar and percentage displays ---
+function updateBars() {
+    const moraleBar = document.querySelector('#moraleProgress .progress-bar');
+    moraleBar.style.width = morale + '%';
+    moraleBar.setAttribute('aria-valuenow', morale);
+    document.getElementById('moralePercentage').textContent = morale + '%';
+
+    const progressBar = document.querySelector('#workProgress .progress-bar');
+    progressBar.style.width = progress + '%';
+    progressBar.setAttribute('aria-valuenow', progress);
+    document.getElementById('progressPercentage').textContent = progress + '%';
+}
+
+// --- Update day counter display ---
+function updateDayCounter() {
+    document.querySelector('.dayCounter').textContent = 'DAY ' + currentDay + ' / 14';
 }
 
 // --- Fetch a random event card from the API ---
@@ -163,10 +182,11 @@ async function chooseOption() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            seen_event_ids: seenCardIds,
+            session_id: sessionStorage.getItem('session_id'),
+            seen_event_ids: seenCardIds.join(','),
             morale: morale,
             progress: progress,
-            current_day: currentDay
+            day: currentDay
         })
     });
 
@@ -185,24 +205,6 @@ async function chooseOption() {
     }
 
     fetchEventCard();
-}
-
-// --- Update progress bar and percentage displays ---
-function updateBars() {
-    const moraleBar = document.querySelector('#moraleProgress .progress-bar');
-    moraleBar.style.width = morale + '%';
-    moraleBar.setAttribute('aria-valuenow', morale);
-    document.getElementById('moralePercentage').textContent = morale + '%';
-
-    const progressBar = document.querySelector('#workProgress .progress-bar');
-    progressBar.style.width = progress + '%';
-    progressBar.setAttribute('aria-valuenow', progress);
-    document.getElementById('progressPercentage').textContent = progress + '%';
-}
-
-// --- Update day counter display ---
-function updateDayCounter() {
-    document.querySelector('.dayCounter').textContent = 'DAY ' + currentDay + ' / 14';
 }
 
 // --- Add an entry to the event log ---
@@ -235,12 +237,20 @@ document.getElementById('submitEarly').addEventListener('click', () => {
 });
 
 // --- End the game and redirect to outcome page ---
-function endGame(reason) {
+async function endGame(reason) {
     // store final stats in sessionStorage so outcome.html can read them
     sessionStorage.setItem('finalMorale', morale);
     sessionStorage.setItem('finalProgress', progress);
     sessionStorage.setItem('currentDay', currentDay);
     sessionStorage.setItem('endReason', reason);
+
+    await fetch('/api/session/end', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body : JSON.stringify({
+        session_id: sessionStorage.getItem('session_id'),
+        })
+    });
 
     window.location.href = '/outcome';
 }

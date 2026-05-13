@@ -8,6 +8,9 @@ async function init() {
 
     sessionStorage.setItem('teammates', JSON.stringify(selectedTeammates));
 
+    const groupName = sessionStorage.getItem('groupName') || 'My Group';
+    const teammateIds = selectedTeammates.map(t => t.id);
+
     const interval = setInterval(() => {
         percent += 2;
         bar.style.width = percent + '%';
@@ -29,6 +32,22 @@ function revealCard(cardId, teammate) {
     card.querySelector('.cardRole').textContent = teammate.role;
     card.querySelector('.cardDesc').textContent = teammate.description;
     card.classList.add('revealed');
+}
+
+async function startSession() {
+    const groupName = sessionStorage.getItem('groupName') || 'My Group';
+    const teammateIds = selectedTeammates.map(t => t.id);
+
+    const sessionRes = await fetch('/api/session/start', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ group_name: groupName, teammate_ids: teammateIds })
+    });
+    const sessionData = await sessionRes.json();
+    sessionStorage.setItem('session_id', sessionData.session_id);
+    sessionStorage.setItem('currentDay', '1');
+
+    window.location.href = '/game';
 }
 
 init();
