@@ -1,7 +1,7 @@
 // --- Game State ---
 let morale = 100;
 let progress = 0;       // starts at 0 as per project spec
-let daysLeft = 14;
+let currentDay = 1;
 let currentEvent = null;
 let seenCardIds = [];   // tracks seen cards to avoid repeats
 const teammates = JSON.parse(sessionStorage.getItem('teammates') || '[]');
@@ -15,16 +15,20 @@ let timeRemaining = TIMER_SECONDS;
 
 // --- On page load ---
 document.addEventListener('DOMContentLoaded', () => {
-    updateGroupName();
+    updateNames();
     loadTeammates();
     updateBars();
     updateDayCounter();
     fetchEventCard();
 });
 
-function updateGroupName() {
-    const groupName = sessionStorage.getItem('groupName') || 'BOBBERS';
-    document.querySelector('.grpName').textContent = `GROUP: ${groupName.toUpperCase()}`;
+async function updateNames() {
+    const groupName = sessionStorage.getItem('groupName');
+    const userResponse = await fetch('/api/me');
+    const user = await userResponse.json();
+
+    document.querySelector('.playerName').textContent = `PLAYER: ${user.username}`;
+    document.querySelector('.grpName').textContent = `GROUP: ${groupName}`; 
 }
 
 function loadTeammates() {
@@ -47,6 +51,7 @@ async function fetchEventCard() {
 
     currentEvent = event;
     seenCardIds.push(event.id);   // mark this card as seen
+
     displayEventCard(event);
 }
 
@@ -90,10 +95,10 @@ function onTimerExpired() {
         return;
     }
 
-    daysLeft--;
+    currentDay++;
     updateDayCounter();
 
-    if (daysLeft <= 0) {
+    if (currentDay > 14) {
         endGame('days');
         return;
     }
@@ -133,7 +138,7 @@ function selectOption(index) {
 }
 
 // --- Player confirms their selected option ---
-function chooseOption() {
+async function chooseOption() {
     if (selectedOptionIndex === null) return;
     stopTimer();
 
@@ -152,16 +157,29 @@ function chooseOption() {
     addToEventLog(currentEvent.title, option.text);
     disableOptions();   // prevent picking multiple options per day
 
+    const sessionUpdate = await fetch('/api/session/update', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            seen_event_ids: seenCardIds,
+            morale: morale,
+            progress: progress,
+            current_day: currentDay
+        })
+    });
+
     // check end conditions
     if (morale <= 0) {
         endGame('morale');
         return;
     }
 
-    daysLeft--;
+    currentDay++;
     updateDayCounter();
 
-    if (daysLeft <= 0) {
+    if (currentDay > 14) {
         endGame('days');
         return;
     }
@@ -184,7 +202,7 @@ function updateBars() {
 
 // --- Update day counter display ---
 function updateDayCounter() {
-    document.querySelector('.dayCounter').textContent = daysLeft + ' DAYS LEFT';
+    document.querySelector('.dayCounter').textContent = 'DAY ' + currentDay + ' / 14';
 }
 
 // --- Add an entry to the event log ---
@@ -192,7 +210,7 @@ function addToEventLog(title, choiceText) {
     const log = document.querySelector('.eventLogs');
     const entry = document.createElement('div');
     entry.className = 'eventLogDay';
-    entry.textContent = `DAY ${14 - daysLeft + 1}: ${title}`;
+    entry.textContent = `DAY ${currentDay}: ${title}`;
     log.appendChild(entry);
 }
 
@@ -221,7 +239,7 @@ function endGame(reason) {
     // store final stats in sessionStorage so outcome.html can read them
     sessionStorage.setItem('finalMorale', morale);
     sessionStorage.setItem('finalProgress', progress);
-    sessionStorage.setItem('daysLeft', daysLeft);
+    sessionStorage.setItem('currentDay', currentDay);
     sessionStorage.setItem('endReason', reason);
 
     window.location.href = '/outcome';
