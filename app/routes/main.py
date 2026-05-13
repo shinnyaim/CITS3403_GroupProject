@@ -30,6 +30,10 @@ def game():
 def outcome():
     return render_template('outcome.html')
 
+@main.route('/profile')
+def profile():
+    return render_template('profile.html')
+
 @main.route('/api/random-teammates')
 def random_teammates():
     all_teammates = Teammate.query.all()

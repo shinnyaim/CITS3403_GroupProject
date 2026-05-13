@@ -2,7 +2,7 @@ body {
   margin: 0;
   font-family: "Press Start 2P", system-ui;
 
-  background-image: url("/static/uwaBG.png");
+  background-image: url("../static/uwaBG.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
