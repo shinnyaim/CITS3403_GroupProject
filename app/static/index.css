@@ -196,10 +196,14 @@ body, html {
  =================*/
 .character-canvas {
   position: fixed;
-  bottom: 40px;
-  left: 40px;
-  z-index: 15;
-  image-rendering: pixelated;
-  image-rendering: crisp-edges;
+  bottom: 450px;
+  left: 550px;
+
+  width: 200px;
+  height: 200px;
+
+  z-index: 20;
+
+  image-rendering: sharp-edges;
 }
 

@@ -77,32 +77,25 @@ CHARACTER ANIMATION (WALKING IN PLACE)
 const characterCanvas = document.getElementById('characterCanvas');
 const characterCtx = characterCanvas.getContext('2d');
 
-characterCanvas.width = 140;
-characterCanvas.height = 160;
+characterCanvas.width = 400;
+characterCanvas.height = 400;
 
 const spritesheet = new Image();
-spritesheet.src = "/static/sprite1.png";
+spritesheet.src = "/static/sprite.png";
 
 const FRAME_WIDTH = 64;
 const FRAME_HEIGHT = 64;
 const FRAMES_PER_ROW = 4;
-const DISPLAY_SIZE = 140;
+const DISPLAY_SIZE = 250;
 
 let characterFrame = 0;
 let characterRow = 0;
 let lastCharacterFrameTime = 0;
 const CHARACTER_ANIMATION_SPEED = 150;
 
-const charX = 550;
-const charY = window.innerHeight - 680;
 
 function animateCharacter() {
   const now = Date.now();
-  
-  characterCanvas.style.position = 'fixed';
-  characterCanvas.style.left = charX + 'px';
-  characterCanvas.style.top = charY + 'px';
-  
   if (now - lastCharacterFrameTime > CHARACTER_ANIMATION_SPEED) {
     lastCharacterFrameTime = now;
     
@@ -115,8 +108,8 @@ function animateCharacter() {
         characterRow * FRAME_HEIGHT,
         FRAME_WIDTH,
         FRAME_HEIGHT,
-        14,
-        14,
+        0,
+        0,
         DISPLAY_SIZE,
         DISPLAY_SIZE
       );
