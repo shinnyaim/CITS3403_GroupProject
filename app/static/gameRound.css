@@ -187,19 +187,34 @@ hr {
 }
 
 .teammates {
-    /* border: 2px solid white; */
     width: 25%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 
 }
 
+/* ORIGINAL:
 .teammateProfile {
     margin: 5px;
     border-radius: 10px;
     border: 2px solid yellow;
     height: 30%;
     display: flex;
-    flex-direction: row;
-    width: 270px;
+    flex-direction: column;
+    width: 200px;
+} */
+
+.teammateProfile {
+    margin: 5px;
+    border-radius: 10px;
+    border: 2px solid yellow;
+    height: 30%;
+    width: 200px;
+
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 /* .teammate2 {
@@ -225,22 +240,48 @@ hr {
     max-height: 400px;
 }
 
+/* ORIGINAL:
 .pfp {
     width: 40%;
-}
+    height: 40%;
+    border: 2px solid pink;
+} */
+.pfp {
+    flex: 1;
+    border: 2px solid pink;
+    transition: opacity 0.3s ease;
+} 
 
+/* ORIGINAL
 .nameDesc {
     flex: 1;
     padding: 9px;
-}
+    border: 2px solid blue;
+} */
+.nameDesc {
+    padding: 9px;
+    border-top: 2px solid blue;
+} 
 
 .name {
     color: yellow;
+    cursor: pointer;
 }
 
 .desc {
-    color: yellow;
-    font-size: 9px;
+    /* color: yellow;
+    font-size: 9px; */
+    display: none;
+    font-size: 10px;
+    color: white;
+}
+
+.teammateProfile:hover .pfp {
+    opacity: 0;
+}
+
+.teammateProfile:hover .desc {
+    display: block;
 }
 
 #eventLog {
