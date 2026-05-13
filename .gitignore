@@ -10,6 +10,9 @@ env/
 # Flask instance folder (contains SQLite db)
 instance/
 
+# Flask migrations
+migrations/
+
 # Environment variables / secrets
 .env
 
