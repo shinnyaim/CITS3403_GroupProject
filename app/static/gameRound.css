@@ -267,7 +267,6 @@ hr {
 } */
 .pfp {
     flex: 1;
-    border: 2px solid pink;
     transition: opacity 0.3s ease;
 } 
 
@@ -279,7 +278,6 @@ hr {
 } */
 .nameDesc {
     padding: 9px;
-    border-top: 2px solid blue;
 } 
 
 .name {
