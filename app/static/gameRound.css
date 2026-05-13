@@ -69,10 +69,27 @@ body {
     border-radius: 12px;
     width: 120px;
     height: 50px;
-    color: red;
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: blinkTimer 0.8s infinite;
+}
+
+@keyframes blinkTimer {
+    0% {
+        border-color: red;
+        color: red;
+    }
+
+    50% {
+        border-color: white;
+        color: white;
+    }
+
+    100% {
+        border-color: red;
+        color: red;
+    }
 }
 
 hr {
