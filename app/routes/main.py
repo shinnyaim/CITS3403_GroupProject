@@ -164,3 +164,41 @@ def resume_session(session_id):
         'seen_event_ids': session.seen_event_ids or '',
         'teammates': [{'id': t.id, 'name': t.name, 'role': t.role, 'description': t.description, 'emoji': t.emoji} for t in teammates]
     })
+# Serves the leaderboard page
+# @main.route('/leaderboard')
+## TO DO : USING GAME SESSION DATABASE FROM GAMESESSION/GAMESCORE BRACNH
+# def leaderboard():
+#     results = GameResult.query.order_by(
+#         GameResult.progress.desc(),
+#         GameResult.morale.desc()
+#     ).all()
+
+#     # FAKE DATA FOR TESTING
+#     if not results:
+#         from collections import namedtuple
+#         FakeResult = namedtuple('FakeResult', ['username', 'group_name', 'outcome', 'progress', 'morale', 'days_taken'])
+#         results = [
+#             FakeResult('Jozelle', 'Team Ctrl+Alt+Defeat', 'HD', 95, 80, 12),
+#             FakeResult('Bob', 'Bobbers', 'Pass', 62, 25, 14),
+#             FakeResult('Alice', '404 Not Found', 'Fail', 38, 10, 14),
+#         ]
+        
+#     return render_template('leaderboard.html', results=results)
+
+# AJAX endpoint — returns fresh leaderboard data as JSON
+# @main.route('/api/leaderboard')
+# TO DO : USING GAME SESSION DATABASE FROM GAMESESSION/GAMESCORE BRACNH 
+# def leaderboard_data():
+#     results = GameResult.query.order_by(
+#         GameResult.progress.desc(),
+#         GameResult.morale.desc()
+#     ).all()
+#     data = [{
+#         'username': r.username,
+#         'group_name': r.group_name,
+#         'progress': r.progress,
+#         'morale': r.morale,
+#         'days_taken': r.days_taken,
+#         'outcome': r.outcome
+#     } for r in results]
+#     return jsonify(data)

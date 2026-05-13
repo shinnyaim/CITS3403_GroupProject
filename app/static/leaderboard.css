@@ -1,0 +1,151 @@
+body {
+    background-image: url(uwaBG.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    min-height: 100vh; /* USER CAN SEE FULL CONTENT */
+    font-family: "Press Start 2P", system-ui;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#cloudCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.titleRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-bottom: 10px;
+}
+
+.titleSpacer {
+    width: 50px; 
+}
+
+.titleRight {
+    width: 50px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+h1 {
+    color: white;
+    margin: auto;
+    text-align: center;
+    animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+    0% {
+        color: white;
+    }
+
+    50% {
+        color: yellow;
+    }
+
+    100% {
+        color: white;
+    }
+}
+
+.parent {
+    border: 5px solid yellow;
+    background-color: rgba(0, 0, 0, 0.73);
+    border-radius: 12px;
+    width: 75%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    /* padding: 25px; */
+}
+
+#homeBtn {
+    background-color: yellow;
+    margin-top: 20px;
+    width: 150px;
+    font-size: 18px;
+    border: 3px solid black;
+    border-radius: 5px;
+    height: 40px;
+}
+
+th {
+    color: white;
+    /* padding-top: 30px; */
+    text-align: center;
+    width: 100%;
+    font-size: 13px;
+}
+
+img {
+    width: 22px;
+    height: 22px;
+}
+
+#filterBtn {
+    background-color: yellow;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdownMenu {
+    display: none;
+    position: absolute;
+    background-color: black;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); 
+}
+
+.dropdownMenu a {
+    color: white;
+    font-size: 12px;
+    padding: 15px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown:hover .dropdownMenu {
+    display: block;
+}
+
+.dropdown:hover .filterBtn {
+    background-color: blue;
+}
+
+#leaderboardTable {
+    width: 100%;
+    table-layout: fixed;
+}
+
+tr {
+    border-top: 2px solid yellow;
+    border-bottom: 2px solid yellow;
+    height: 50px;
+}
+
+td {
+    color: white;
+    font-size: 10px;
+    text-align: center;
+    margin: auto;
+}
