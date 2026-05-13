@@ -22,10 +22,12 @@
 
     <title>Game Round</title>
   </head>
+  
+  <canvas id="cloudCanvas"></canvas>
 
   <body>
+    <canvas id="cloudCanvas"></canvas>
     <div class="parent">
-
       <!-- Top bar: player info + timer -->
       <div class="gameInfo">
         <div class="topLeft">
@@ -140,7 +142,7 @@
 
       </div>
     </div>
-
+    <script src="{{ url_for('static', filename='clouds.js') }}"></script>
     <script src="/static/gameround.js"></script>
   </body>
 </html>

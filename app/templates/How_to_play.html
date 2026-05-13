@@ -8,14 +8,19 @@
 </head>
 
 <body>
+    <canvas id="cloudCanvas"></canvas>
 
-    <!-- Backround image -->
     <div class="background-container">
         <img src="../static/uwaBG.png" alt="Pixel Art Background" class="bg-image">
+        
     </div>
 
     <h1>How To Play</h1>
 
+    <a href="{{ url_for('main.index') }}" class="back-link">
+    Back to Menu
+    </a>
+    
     <!-- Goals -->
     <div class="mt-4">
         <h2>Goal</h2>
@@ -226,5 +231,6 @@
             </div>
         </div>
     </div>
+    <script src="{{ url_for('static', filename='clouds.js') }}"></script>
 
 </body>
