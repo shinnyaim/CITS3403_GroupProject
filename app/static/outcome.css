@@ -51,6 +51,15 @@ h1 {
     margin: 0 auto;
 }
 
+#finalScore {
+    color: gold;
+    font-size: 22px;
+    text-align: center;
+    margin: 8px auto 0;
+    text-shadow: 0 0 10px gold, 0 0 20px rgba(255, 215, 0, 0.6);
+    letter-spacing: 2px;
+}
+
 hr {
     border: 1px solid yellow;
     width: 80%;

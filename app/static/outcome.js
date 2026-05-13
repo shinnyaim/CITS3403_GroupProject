@@ -28,3 +28,7 @@ document.querySelector('.outcomeDesc').textContent = grade.desc;
 if (endReason === 'morale') {
     document.querySelector('.outcomeDesc').textContent = 'Your team completely fell apart. The project never stood a chance.';
 }
+
+// --- Display overall score from session storage ---
+const overallScore = sessionStorage.getItem('overallScore');
+document.getElementById('finalScore').textContent = 'SCORE: ' + overallScore + '%';
