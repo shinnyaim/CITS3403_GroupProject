@@ -107,8 +107,9 @@ def update_session():
 
     session.morale = data.get('morale', session.morale)
     session.progress = data.get('progress', session.progress)
-    session.day = data.get('day', session.day)
+    session.day = data.get('currentDay', session.day)
     session.seen_event_ids = data.get('seen_event_ids', session.seen_event_ids)
+    session.event_log = data.get('event_log', session.event_log)
 
     db.session.commit()
     return jsonify({'ok': True})
@@ -164,6 +165,7 @@ def resume_session(session_id):
         'progress': session.progress,
         'currentDay': session.day,
         'seen_event_ids': session.seen_event_ids or '',
+        'event_log': session.event_log or '[]',
         'teammates': [{'id': t.id, 'name': t.name, 'role': t.role, 'description': t.description, 'emoji': t.emoji} for t in teammates]
     })
 
