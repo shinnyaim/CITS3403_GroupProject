@@ -16,11 +16,11 @@ let timeRemaining = TIMER_SECONDS;
 
 // --- On page load ---
 document.addEventListener('DOMContentLoaded', () => {
-    
     updateNames();
     loadTeammates();
     updateBars();
     updateDayCounter();
+    restoreEventLog();
     fetchEventCard();
 });
 
@@ -221,6 +221,21 @@ function addToEventLog(title, choiceText) {
     entry.className = 'eventLogDay';
     entry.textContent = `DAY ${currentDay}: ${title}`;
     log.appendChild(entry);
+
+    const stored = JSON.parse(sessionStorage.getItem('eventLog') || '[]');
+    stored.push({ day: currentDay, title });
+    sessionStorage.setItem('eventLog', JSON.stringify(stored));
+}
+
+function restoreEventLog() {
+    const stored = JSON.parse(sessionStorage.getItem('eventLog') || '[]');
+    const log = document.querySelector('.eventLogs');
+    stored.forEach(({ day, title }) => {
+        const entry = document.createElement('div');
+        entry.className = 'eventLogDay';
+        entry.textContent = `DAY ${day}: ${title}`;
+        log.appendChild(entry);
+    });
 }
 
 // --- Disable option buttons after a choice is made ---
@@ -254,6 +269,7 @@ async function endGame(reason) {
     sessionStorage.setItem('currentDay', currentDay);
     sessionStorage.setItem('endReason', reason);
     sessionStorage.setItem('overallScore', overallScore);
+    sessionStorage.removeItem('eventLog');
 
     await fetch('/api/session/end', {
         method: 'POST',
