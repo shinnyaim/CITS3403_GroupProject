@@ -294,6 +294,11 @@ hr {
     margin: 15px auto;
     background-color: transparent;
     height: 20px;
+    cursor: pointer;
+}
+
+.options:hover {
+    box-shadow: 0 0 10px yellow;
 }
 
 .options.selected {

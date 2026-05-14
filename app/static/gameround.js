@@ -165,7 +165,6 @@ function displayEventCard(event) {
     buttons[1].onclick = () => selectOption(1);
     buttons[2].onclick = () => selectOption(2);
 
-    enableOptions();
     startTimer();
 }
 
@@ -201,7 +200,6 @@ async function chooseOption() {
 
     updateBars();
     addToEventLog(currentEvent.title, option.text);
-    disableOptions();   // prevent picking multiple options per day
 
     const sessionUpdate = await fetch('/api/session/update', {
         method: 'POST',
@@ -259,15 +257,6 @@ function restoreEventLog() {
     });
 }
 
-// --- Disable option buttons after a choice is made ---
-function disableOptions() {
-    document.querySelectorAll('.options').forEach(btn => btn.disabled = true);
-}
-
-// --- Enable option buttons for a new card ---
-function enableOptions() {
-    document.querySelectorAll('.options').forEach(btn => btn.disabled = false);
-}
 
 // --- Confirm button ---
 document.getElementById('confirmChoice').addEventListener('click', () => {
