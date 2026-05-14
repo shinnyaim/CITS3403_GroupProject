@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Player Profile</title>
 
-  <link rel="stylesheet" href="/static/profile.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/profile.css">
 </head>
 
 <body>
@@ -20,160 +20,221 @@
 
   <div class="profileWrapper">
 
-    <div class="profileHeader">
-      <h1>PLAYER PROFILE</h1>
-      <p>...</p>
+    <div class="profileHeader text-center">
+      <h1 class="profileTitle">PLAYER PROFILE</h1>
+      <p class="profileSubtitle">Your university survival stats!</p>
     </div>
 
-    <div class="topSection">
+    <div class="profileContent">
 
-      <div class="avatarCard">
-        <div class="avatarContainer" id="avatarContainer">
-        <img
-          src="../static/avatars/sprite1.png"
-          alt="Avatar"
-          class="mainAvatar"
-        />
+      <!-- TOP SECTION: Avatar Card + Current Run -->
+      <div class="row g-4">
+
+        <!-- LEFT: Avatar Card -->
+        <div class="col-lg-3">
+          <div class="card-profile avatarCard">
+            <div class="avatarContainer" id="avatarContainer" role="button" tabindex="0" aria-label="Click to change avatar">
+              <img src="/static/avatars/sprite3.png" alt="Player Avatar" class="mainAvatar" />
+              <div class="avatarOverlay">CLICK TO CHANGE</div>
+            </div>
+            
+            <p class="playerName" id="playerNameDisplay">PLAYER: BOB</p>
+            <p class="groupName" id="groupDisplay">GROUP: BOBBERS</p>
+
+            <!-- Rank Box -->
+            <div class="rankBox">
+              <p class="rankLabel">RANK</p>
+              <h3 class="rankTitle" id="rankDisplay">DEADLINE DODGER</h3>
+            </div>
+          </div>
         </div>
-        <p class="playerName" id="playerNameDisplay">PLAYER: BOB</p>
-        <p class="groupName" id="groupDisplay">GROUP: BOBBERS</p>
-      
-        <div class="rankBox">
-          <p>RANK</p>
-          <h3 id="rankDisplay">DEADLINE DODGER</h3>
+
+        <!-- RIGHT: Current Run Card -->
+        <div class="col-lg-9">
+          <div class="card-profile currentRunCard">
+            <h2 class="cardTitle">CURRENT RUN</h2>
+
+            <!-- Progress Stat Block -->
+            <div class="statBlock">
+              <div class="statHeader">
+                <p class="statLabel">PROJECT PROGRESS</p>
+                <span class="statValue" id="progressText">70%</span>
+              </div>
+              <div class="barBackground">
+                <div class="progressFill" id="progressBar" style="width: 70%"></div>
+              </div>
+            </div>
+
+            <!-- Morale Stat Block -->
+            <div class="statBlock">
+              <div class="statHeader">
+                <p class="statLabel">MORALE</p>
+                <span class="statValue" id="moraleText">55%</span>
+              </div>
+              <div class="barBackground">
+                <div class="moraleFill" id="moraleBar" style="width: 55%"></div>
+              </div>
+            </div>
+
+            <!-- Days Stat Block -->
+            <div class="statBlock">
+              <div class="statHeader">
+                <p class="statLabel">DAYS LEFT</p>
+                <span class="statValue" id="daysText">8 / 14</span>
+              </div>
+              <div class="barBackground">
+                <div class="daysFill" id="daysBar" style="width: 57%"></div>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="buttonGroup mt-4">
+              <button class="gameBtn btn-primary" data-toggle="modal" data-target="#gameLogModal">
+                GAME LOG / RESUME
+              </button>
+              <button class="gameBtn btn-secondary" onclick="newRun()">
+                NEW RUN
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- PLAYER STATS SECTION -->
+      <div class="row g-4 mt-2">
+        <div class="col-12">
+          <div class="card-profile statsCard">
+            <h2 class="cardTitle">PLAYER STATS</h2>
+            <div class="row g-3">
+              <div class="col-6 col-sm-6 col-md-3">
+                <div class="miniStat">
+                  <h3 id="gamesPlayedCount">24</h3>
+                  <p>GAMES PLAYED</p>
+                </div>
+              </div>
+              <div class="col-6 col-sm-6 col-md-3">
+                <div class="miniStat">
+                  <h3 id="bestGradeDisplay">HD</h3>
+                  <p>BEST GRADE</p>
+                </div>
+              </div>
+              <div class="col-6 col-sm-6 col-md-3">
+                <div class="miniStat">
+                  <h3 id="avgMoraleDisplay">82%</h3>
+                  <p>AVG MORALE</p>
+                </div>
+              </div>
+              <div class="col-6 col-sm-6 col-md-3">
+                <div class="miniStat">
+                  <h3 id="fastestDaysDisplay">DAY 9</h3>
+                  <p>FASTEST SUBMIT</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- CURRENT RUN-->
-      <div class="currentRunCard">
-
-        <h2>CURRENT RUN</h2>
-
-        <div class="statBlock">
-          <div class="statHeader">
-            <p>PROJECT PROGRESS</p>
-            <span id="progressText">70%</span>
-          </div>
-          <div class="barBackground">
-            <div class="progressFill" id="progressBar"></div>
+      <!-- MATCH HISTORY SECTION -->
+      <div class="row g-4 mt-2">
+        <div class="col-12">
+          <div class="card-profile historyCard">
+            <h2 class="cardTitle">MATCH HISTORY</h2>
+            <div class="historyList" id="historyList">
+              <!-- Populated by JavaScript -->
+              <p class="loadingText">Loading history...</p>
+            </div>
           </div>
         </div>
+      </div>
 
-        <div class="statBlock">
-          <div class="statHeader">
-            <p>MORALE</p>
-            <span id="moraleText">55%</span>
-          </div>
-
-          <div class="barBackground">
-            <div class="moraleFill" id="moraleBar"></div>
-          </div>
-        </div>
-
-        <div class="statBlock">
-          <div class="statHeader">
-            <p>DAYS LEFT</p>
-            <span id="daysText">8 / 14</span>
-          </div>
-          <div class="barBackground">
-            <div class="daysFill" id="daysBar"></div>
+      <!-- FOOTER BUTTONS -->
+      <div class="row g-4 mt-3 mb-5">
+        <div class="col-12">
+          <div class="footerButtonGroup">
+            <button class="gameBtn btn-primary" onclick="viewLeaderboard()">
+              LEADERBOARD
+            </button>
+            <button class="gameBtn btn-danger" onclick="logout()">
+              LOGOUT
+            </button>
           </div>
         </div>
+      </div>
 
-        <div class="runButtons">
-          <button class="gameBtn gameBtn-primary" onclick="resumeRun()">
-          RESUME RUN
+    </div>
+
+  </div>
+
+  <!-- GAME LOG / RESUME MODAL-->
+  <div class="modal fade gameModal" id="gameLogModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content gameModalContent">
+        
+        <div class="modal-header borderGame">
+          <h2 class="modal-title modalTitle">GAME LOG / RESUME</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
           </button>
+        </div>
 
-          <button class="gameBtn gameBtn-secondary" onclick="newRun()">
-          NEW RUN
+        <div class="modal-body">
+          <div id="gameLogContent">
+            <p class="loadingText">Loading games...</p>
+          </div>
+        </div>
+
+        <div class="modal-footer borderGame">
+          <button type="button" class="gameBtn btn-secondary" data-dismiss="modal">CLOSE</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- AVATAR SELECTION MODAL-->
+  <div class="modal fade gameModal" id="avatarModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content gameModalContent">
+        
+        <div class="modal-header borderGame">
+          <h2 class="modal-title modalTitle">SELECT AVATAR</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
           </button>
         </div>
 
-      </div>
-
-    </div>
-
-    <!--PLAYER STATS-->
-    <div class="statsCard">
-      <h2>PLAYER STATS</h2>
-      <div class="statsGrid">
-        <div class="miniStat">
-          <h3 id="gamesPlayedCount">24</h3>
-          <p>GAMES PLAYED</p>
-        </div>
-
-        <div class="miniStat">
-          <h3 id="bestGradeDisplay">HD</h3>
-          <p>BEST GRADE</p>
-      </div>
-
-        <div class="miniStat">
-          <h3 id="avgMoraleDisplay">82%</h3>
-          <p>AVG MORALE</p>
-        </div>
-
-        <div class="miniStat">
-          <h3 id="fastestDaysDisplay">DAY 9</h3>
-          <p>FASTEST SUBMIT</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="avatarSelectionCard">
-      <h2>SELECT AVATAR</h2>
-      <p class="avatarSubtitle">Click to change your avatar</p>
-
-      <div class="avatarGrid">
-        <img src="/static/avatars/sprite1.png" class="avatarOption selectedAvatar" data-avatar="sprite1" alt="Avatar 1">
-        <img src="/static/avatars/sprite2.png" class="avatarOption" data-avatar="sprite2" alt="Avatar 2">
-        <img src="/static/avatars/sprite3.png" class="avatarOption" data-avatar="sprite3" alt="Avatar 3">
-        <img src="/static/avatars/sprite4.png" class="avatarOption" data-avatar="sprite4" alt="Avatar 4">
-        <img src="/static/avatars/sprite5.png" class="avatarOption" data-avatar="sprite5" alt="Avatar 5">
-        <img src="/static/avatars/sprite6.png" class="avatarOption" data-avatar="sprite6" alt="Avatar 6">
-        <img src="/static/avatars/sprite7.png" class="avatarOption" data-avatar="sprite7" alt="Avatar 7">
-        <img src="/static/avatars/sprite8.png" class="avatarOption" data-avatar="sprite8" alt="Avatar 8">
-      </div>
-      <p class="avatarSavedMsg" id="avatarSavedMsg"style="display:none;">Avatar updated!</p>
-    </div>
-
-    <div class="historyCard">
-          <h2>MATCH HISTORY</h2>
-          <div class="historyList" id="historyList">
-            <div class="historyEntry">
-              <span class="gradeBadge">HD</span>
-              <span class="daysBadge">DAY 11</span>
-              <span class="submitBadge">ON TIME</span>
-            </div>
-
-            <div class="historyEntry">
-              <span class="gradeBadge">D</span>
-              <span class="daysBadge">DAY 14</span>
-              <span class="submitBadge">ON TIME</span>
-            </div>
-
-            <div class="historyEntry">
-              <span class="gradeBadge">CR</span>
-              <span class="daysBadge">DAY 9</span>
-              <span class="submitBadge">EARLY SUBMIT</span>
-            </div>
-
+        <div class="modal-body">
+          <p class="avatarSubtitle">Choose your character!</p>
+          
+          <div class="avatarSelectionGrid">
+            <img src="/static/avatars/sprite1.png" class="avatarOptionModal selectedAvatar" data-avatar="sprite1" alt="Avatar 1" tabindex="0">
+            <img src="/static/avatars/sprite2.png" class="avatarOptionModal" data-avatar="sprite2" alt="Avatar 2" tabindex="0">
+            <img src="/static/avatars/sprite3.png" class="avatarOptionModal" data-avatar="sprite3" alt="Avatar 3" tabindex="0">
+            <img src="/static/avatars/sprite4.png" class="avatarOptionModal" data-avatar="sprite4" alt="Avatar 4" tabindex="0">
+            <img src="/static/avatars/sprite5.png" class="avatarOptionModal" data-avatar="sprite5" alt="Avatar 5" tabindex="0">
+            <img src="/static/avatars/sprite6.png" class="avatarOptionModal" data-avatar="sprite6" alt="Avatar 6" tabindex="0">
+            <img src="/static/avatars/sprite7.png" class="avatarOptionModal" data-avatar="sprite7" alt="Avatar 7" tabindex="0">
+            <img src="/static/avatars/sprite8.png" class="avatarOptionModal" data-avatar="sprite8" alt="Avatar 8" tabindex="0">
           </div>
 
+          <p class="avatarSavedMsg" id="avatarSavedMsg">✓ Avatar updated!</p>
         </div>
-      
-      <div class="footerButtons">
-        <button class="gameBtn gameBtn-primary" onclick="viewLeaderboard()">
-          LEADERBOARD
-        </button>
-        <button class="gameBtn gameBtn-danger" onclick="logout()">
-          LOGOUT
-        </button>
+
+        <div class="modal-footer borderGame">
+          <button type="button" class="gameBtn btn-secondary" data-dismiss="modal">CLOSE</button>
+        </div>
+
       </div>
     </div>
-    
-    <script src="/static/clouds.js"></script>
-    <script src="/static/profile.js"></script>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script src="/static/clouds.js"></script>
+  <script src="/static/profile.js"></script>
 
 </body>
 </html>
