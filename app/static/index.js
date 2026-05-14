@@ -4,6 +4,7 @@ DOM ELEMENTS
 const items = document.querySelectorAll('.menu-item');
 const selector = document.querySelector('.selector');
 
+
 /*=================
 MENU NAVIGATION
 =================*/
