@@ -118,6 +118,10 @@ body, html {
 
   text-align: center;
 
+  width: fit-content;
+  max-width: 90%;
+  margin: 0 auto;
+
   cursor: pointer;
   transition: all 0.2s ease;
 
