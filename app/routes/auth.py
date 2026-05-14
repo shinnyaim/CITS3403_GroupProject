@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
-from flask_login import login_user, logout_user, login_required
+from flask import Blueprint, jsonify, render_template, redirect, url_for, request, flash
+from flask_login import current_user, login_user, logout_user, login_required
 from app import db
 from app.models import User
 
@@ -36,7 +36,8 @@ def login():
                 return redirect(url_for('auth.login'))
 
             login_user(user)
-            return redirect(url_for('main.profile'))
+            next_page = request.form.get('next')
+            return redirect(url_for(f'main.{next_page}') if next_page else url_for('main.index'))
 
     return render_template('auth.html')
 
@@ -45,4 +46,10 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('auth.login'))
+    return redirect(url_for('main.index'))
+
+@auth.route('/api/me')
+def me():
+    if current_user.is_authenticated:
+        return jsonify({'id': current_user.id, 'username': current_user.username})
+    return jsonify({'id': None}), 401

@@ -70,3 +70,74 @@ items.forEach((item, index) => {
   });
 });
 
+/*=================
+GAME LOG MODAL
+=================*/
+
+$('#gamelogModal').on('show.bs.modal', async () => {
+    const tbody = document.getElementById('gamelogBody');
+    tbody.innerHTML = '';
+
+    const res = await fetch('/api/sessions/get');
+    if (!res.ok) {
+        tbody.innerHTML = '<tr><td colspan="6">Log in to see your game history.</td></tr>';
+        return;
+    }
+
+    const sessions = await res.json();
+    if (sessions.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6">No previous games found.</td></tr>';
+        return;
+    }
+
+    sessions.forEach(session => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${session.group_name}</td>
+            <td>${new Date(session.started_at).toLocaleDateString('en-AU')}</td>
+            <td>${session.days}</td>
+            <td>${session.morale}%</td>
+            <td>${session.progress}%</td>
+            <td>${session.status === 'in_progress' ? `<button onclick="resumeSession(${session.id})">Resume</button>` : session.overall_score + '%'}</td>
+        `;
+        tbody.appendChild(row);
+    });
+});
+
+
+async function resumeSession(sessionId) {
+    const res = await fetch(`/api/session/resume/${sessionId}`);
+    const data = await res.json();
+
+    sessionStorage.setItem('session_id', data.session_id);
+    sessionStorage.setItem('groupName', data.group_name);
+    sessionStorage.setItem('teammates', JSON.stringify(data.teammates));
+    sessionStorage.setItem('seenCardIds', data.seen_event_ids);
+    sessionStorage.setItem('Morale', data.morale);
+    sessionStorage.setItem('Progress', data.progress);
+    sessionStorage.setItem('Day', data.day);
+
+    window.location.href = '/game';
+}
+
+/*=================
+User logged in check
+=================*/
+
+async function checkAuthStatus() {
+    const res = await fetch('/api/me');
+    const startBtn = document.getElementById('startBtn');
+    const authMenuItem = document.getElementById('authMenuItem');
+
+    if (res.ok) {
+        authMenuItem.textContent = 'Log out';
+        authMenuItem.onclick = () => window.location.href = '/logout';
+        startBtn.onclick = () => window.location.href = '/setup';
+    } else {
+        authMenuItem.textContent = 'Sign Up / Log in';
+        authMenuItem.onclick = () => window.location.href = '/auth';
+        startBtn.onclick = () => window.location.href = '/auth?next=home';
+    }
+}
+
+checkAuthStatus();

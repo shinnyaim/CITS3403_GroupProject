@@ -1,9 +1,10 @@
 // --- Game State ---
-let morale = 100;
-let progress = 0;       // starts at 0 as per project spec
-let daysLeft = 14;
+let morale = parseInt(sessionStorage.getItem('Morale')) || 100;
+let progress = parseInt(sessionStorage.getItem('Progress')) || 0;
+let currentDay = parseInt(sessionStorage.getItem('currentDay')) || 1;
 let currentEvent = null;
-let seenCardIds = [];   // tracks seen cards to avoid repeats
+let seenCardIds = sessionStorage.getItem('seenCardIds') ? sessionStorage.getItem('seenCardIds').split(',').map(Number) : [];
+
 const teammates = JSON.parse(sessionStorage.getItem('teammates') || '[]');
 const teammateIds = teammates.map(t => t.id);
 let selectedOptionIndex = null;
@@ -15,16 +16,20 @@ let timeRemaining = TIMER_SECONDS;
 
 // --- On page load ---
 document.addEventListener('DOMContentLoaded', () => {
-    updateGroupName();
+    updateNames();
     loadTeammates();
     updateBars();
     updateDayCounter();
     fetchEventCard();
 });
 
-function updateGroupName() {
-    const groupName = sessionStorage.getItem('groupName') || 'BOBBERS';
-    document.querySelector('.grpName').textContent = `GROUP: ${groupName.toUpperCase()}`;
+async function updateNames() {
+    const groupName = sessionStorage.getItem('groupName');
+    const userResponse = await fetch('/api/me');
+    const user = await userResponse.json();
+
+    document.querySelector('.playerName').textContent = `PLAYER: ${user.username}`;
+    document.querySelector('.grpName').textContent = `GROUP: ${groupName}`; 
 }
 
 function loadTeammates() {
@@ -33,6 +38,24 @@ function loadTeammates() {
         card.querySelector('.name').textContent = t.name;
         card.querySelector('.desc').textContent = t.description;
     });
+}
+
+// --- Update progress bar and percentage displays ---
+function updateBars() {
+    const moraleBar = document.querySelector('#moraleProgress .progress-bar');
+    moraleBar.style.width = morale + '%';
+    moraleBar.setAttribute('aria-valuenow', morale);
+    document.getElementById('moralePercentage').textContent = morale + '%';
+
+    const progressBar = document.querySelector('#workProgress .progress-bar');
+    progressBar.style.width = progress + '%';
+    progressBar.setAttribute('aria-valuenow', progress);
+    document.getElementById('progressPercentage').textContent = progress + '%';
+}
+
+// --- Update day counter display ---
+function updateDayCounter() {
+    document.querySelector('.dayCounter').textContent = 'DAY ' + currentDay + ' / 14';
 }
 
 // --- Fetch a random event card from the API ---
@@ -47,6 +70,7 @@ async function fetchEventCard() {
 
     currentEvent = event;
     seenCardIds.push(event.id);   // mark this card as seen
+
     displayEventCard(event);
 }
 
@@ -90,14 +114,13 @@ function onTimerExpired() {
         return;
     }
 
-    daysLeft--;
-    updateDayCounter();
-
-    if (daysLeft <= 0) {
+    if (currentDay === 14) {
         endGame('days');
         return;
     }
 
+    currentDay++;
+    updateDayCounter();
     fetchEventCard();
 }
 
@@ -133,7 +156,7 @@ function selectOption(index) {
 }
 
 // --- Player confirms their selected option ---
-function chooseOption() {
+async function chooseOption() {
     if (selectedOptionIndex === null) return;
     stopTimer();
 
@@ -152,39 +175,34 @@ function chooseOption() {
     addToEventLog(currentEvent.title, option.text);
     disableOptions();   // prevent picking multiple options per day
 
+    const sessionUpdate = await fetch('/api/session/update', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            session_id: sessionStorage.getItem('session_id'),
+            seen_event_ids: seenCardIds.join(','),
+            morale: morale,
+            progress: progress,
+            day: currentDay
+        })
+    });
+
     // check end conditions
     if (morale <= 0) {
         endGame('morale');
         return;
     }
 
-    daysLeft--;
-    updateDayCounter();
-
-    if (daysLeft <= 0) {
+    if (currentDay === 14) {
         endGame('days');
         return;
     }
 
+    currentDay++;
+    updateDayCounter();
     fetchEventCard();
-}
-
-// --- Update progress bar and percentage displays ---
-function updateBars() {
-    const moraleBar = document.querySelector('#moraleProgress .progress-bar');
-    moraleBar.style.width = morale + '%';
-    moraleBar.setAttribute('aria-valuenow', morale);
-    document.getElementById('moralePercentage').textContent = morale + '%';
-
-    const progressBar = document.querySelector('#workProgress .progress-bar');
-    progressBar.style.width = progress + '%';
-    progressBar.setAttribute('aria-valuenow', progress);
-    document.getElementById('progressPercentage').textContent = progress + '%';
-}
-
-// --- Update day counter display ---
-function updateDayCounter() {
-    document.querySelector('.dayCounter').textContent = daysLeft + ' DAYS LEFT';
 }
 
 // --- Add an entry to the event log ---
@@ -192,7 +210,7 @@ function addToEventLog(title, choiceText) {
     const log = document.querySelector('.eventLogs');
     const entry = document.createElement('div');
     entry.className = 'eventLogDay';
-    entry.textContent = `DAY ${14 - daysLeft + 1}: ${title}`;
+    entry.textContent = `DAY ${currentDay}: ${title}`;
     log.appendChild(entry);
 }
 
@@ -217,12 +235,25 @@ document.getElementById('submitEarly').addEventListener('click', () => {
 });
 
 // --- End the game and redirect to outcome page ---
-function endGame(reason) {
+async function endGame(reason) {
     // store final stats in sessionStorage so outcome.html can read them
+    const dayScore = (1 - currentDay / 14) * 100;
+    const overallScore = parseFloat((progress * 0.5 + morale * 0.3 + dayScore * 0.2).toFixed(2));
+
     sessionStorage.setItem('finalMorale', morale);
     sessionStorage.setItem('finalProgress', progress);
-    sessionStorage.setItem('daysLeft', daysLeft);
+    sessionStorage.setItem('currentDay', currentDay);
     sessionStorage.setItem('endReason', reason);
+    sessionStorage.setItem('overallScore', overallScore);
+
+    await fetch('/api/session/end', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            session_id: sessionStorage.getItem('session_id'),
+            overall_score: overallScore
+        })
+    });
 
     window.location.href = '/outcome';
 }

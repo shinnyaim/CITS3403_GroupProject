@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <!-- <link
+      rel="stylesheet"  
+      href="{{ url_for('static', filename='static/leaderboard.css') }}"
+    /> -->
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='leaderboard.css') }}"
+    />
+    <title>Leaderboard</title>
+  </head>
+  <body>
+    <canvas id="cloudCanvas"></canvas>
+    <!-- <p id="leaderboardTitle">LEADERBOARD</p> -->
+
+    <div class="parent">
+      <div class="titleRow">
+        <div class="titleSpacer"></div>
+        <h1>🏆 LEADERBOARD 🏆</h1>
+        <div class="titleRight">
+          <div class="dropdown">
+            <button id="filterBtn">
+              <img
+                src="{{ url_for('static', filename='filtericon.png') }}"
+                alt="filter"
+              />
+            </button>
+            <div class="dropdownMenu">
+              <a href="">Progress</a>
+              <a href="">Morale</a>
+              <a href="">Days</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <table id="leaderboardTable">
+        <br />
+        <thead>
+          <tr>
+            <th>RANK</th>
+            <th>PLAYER</th>
+            <th>GROUP</th>
+            <th>PROGRESS</th>
+            <th>MORALE</th>
+            <th>DAYS</th>
+            <th>OVERALL SCORE</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboardBody">
+        </tbody>
+      </table>
+    </div>
+    <button id="homeBtn" onclick="window.location.href='/'">HOME</button>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="{{ url_for('static', filename='leaderboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='clouds.js') }}" defer></script>
+  </body>
+</html>

@@ -1,16 +1,14 @@
 // --- Read final stats from sessionStorage ---
 const finalMorale   = parseInt(sessionStorage.getItem('finalMorale'));
 const finalProgress = parseInt(sessionStorage.getItem('finalProgress'));
-const daysLeft      = parseInt(sessionStorage.getItem('daysLeft'));
+const days      = parseInt(sessionStorage.getItem('currentDay'));
 const endReason     = sessionStorage.getItem('endReason');
-
-const daysTaken = 14 - daysLeft;
 
 // --- Update score numbers ---
 document.getElementById('percentageProgress').textContent = finalProgress + '%';
 document.getElementById('percentageMorale').textContent   = finalMorale   + '%';
-document.getElementById('percentageDays').textContent     = daysTaken;
-
+document.getElementById('percentageDays').textContent     = days;
+ 
 // --- Derive grade from progress ---
 const grades = [
     { min: 80, label: 'HIGH DISTINCTION', emoji: '🏆', desc: 'Against all odds, your group actually functioned like a team. Do you know how rare that is?' },
@@ -30,3 +28,7 @@ document.querySelector('.outcomeDesc').textContent = grade.desc;
 if (endReason === 'morale') {
     document.querySelector('.outcomeDesc').textContent = 'Your team completely fell apart. The project never stood a chance.';
 }
+
+// --- Display overall score from session storage ---
+const overallScore = sessionStorage.getItem('overallScore');
+document.getElementById('finalScore').textContent = 'SCORE: ' + overallScore + '%';

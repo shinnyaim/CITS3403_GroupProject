@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, jsonify, request
+from flask_login import current_user, login_required
 from app import db
-from app.models import EventCard, Teammate
+from app.models import EventCard, GameSession, Teammate, User
+from datetime import datetime, timezone
 import random
 
 main = Blueprint('main', __name__)
@@ -80,3 +82,108 @@ def random_event():
             {'text': event.option_c, 'morale': event.option_c_morale, 'progress': event.option_c_progress},
         ]
     })
+
+
+@main.route('/api/session/start', methods=['POST'])
+@login_required
+def start_session():
+    data = request.json
+    group_name = data.get('group_name')
+    teammate_ids = data.get('teammate_ids', [])
+
+    session = GameSession(
+        user_id=current_user.id,
+        group_name=group_name,
+        teammate_ids=','.join(map(str, teammate_ids)),
+        started_at=datetime.now(timezone.utc)
+    )
+
+    db.session.add(session)
+    db.session.commit()
+
+    return jsonify({'session_id': session.id})
+
+@main.route('/api/session/update', methods=['POST'])
+def update_session():
+    data = request.json
+    session_id = data.get('session_id')
+    session = db.session.get(GameSession, session_id)
+
+    session.morale = data.get('morale', session.morale)
+    session.progress = data.get('progress', session.progress)
+    session.day = data.get('day', session.day)
+    session.seen_event_ids = data.get('seen_event_ids', session.seen_event_ids)
+
+    db.session.commit()
+    return jsonify({'ok': True})
+
+@main.route('/api/session/end', methods=['POST'])
+def end_session():
+    data = request.json
+    session_id = data.get('session_id')
+    
+    session = db.session.get(GameSession, session_id)
+
+    if not session:
+        return jsonify({'error': 'Session not found'}), 404
+
+    session.status = 'ended'
+    session.overall_score = data.get('overall_score')
+    db.session.commit()
+    return jsonify({'ok': True})
+
+@main.route('/api/sessions/get', methods=['GET'])
+def get_sessions():
+    if not current_user.is_authenticated:
+        return jsonify({'error': 'Login required'}), 401
+    all_sessions = GameSession.query.filter_by(user_id=current_user.id).all()
+
+    return jsonify([{
+        'id': session.id,
+        'group_name': session.group_name,
+        'morale': session.morale,
+        'progress': session.progress,
+        'days': session.day,
+        'status': session.status,
+        'started_at': session.started_at.isoformat(),
+        'overall_score': session.overall_score
+    } for session in all_sessions])
+
+
+@main.route('/api/session/resume/<int:session_id>', methods=['GET'])
+def resume_session(session_id):
+
+    session = db.session.get(GameSession, session_id)
+
+    if not session or session.user_id != current_user.id:
+        return jsonify({'error': 'Session not found'}), 404
+
+    teammate_ids = [int(i) for i in session.teammate_ids.split(',') if session.teammate_ids]
+    teammates = Teammate.query.filter(Teammate.id.in_(teammate_ids)).all()
+
+    return jsonify({
+        'session_id': session.id,
+        'group_name': session.group_name,
+        'morale': session.morale,
+        'progress': session.progress,
+        'day': session.day,
+        'seen_event_ids': session.seen_event_ids or '',
+        'teammates': [{'id': t.id, 'name': t.name, 'role': t.role, 'description': t.description, 'emoji': t.emoji} for t in teammates]
+    })
+
+
+@main.route('/leaderboard')
+def leaderboard():
+    return render_template('leaderboard.html')
+
+@main.route('/api/sessions/get_all')
+def leaderboard_data():
+    all_sessions = GameSession.query.filter_by(status='ended').order_by(GameSession.overall_score.desc()).all()
+    return jsonify([{
+        'username': session.user.username if session.user else 'Unknown',
+        'group_name': session.group_name or 'Unknown',
+        'progress': session.progress,
+        'morale': session.morale,
+        'days_taken': session.day,
+        'overall_score': session.overall_score or 0
+    } for session in all_sessions])
