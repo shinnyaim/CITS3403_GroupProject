@@ -35,6 +35,8 @@ body {
 #title {
     font-size: 19pt;
     color: white;
+    white-space: normal;
+    word-break: break-word;
 }
 
 /* .title {
