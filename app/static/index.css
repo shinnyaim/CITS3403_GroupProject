@@ -199,29 +199,3 @@ body, html {
   animation: menuPulse 0.8s infinite;
 }
 
-@media (max-width: 768px) {
-
-  .game-title {
-    font-size: 1.8rem;
-  }
-
-  .start-game {
-    font-size: 1.3rem;
-  }
-
-  .menu-list {
-    gap: 0.8rem;
-    font-size: 0.8rem;
-  }
-
-  .instructions-box {
-    padding: 1rem;
-    width: 90%;
-    margin: 0 auto;
-  }
-
-  .game-modal-content {
-    font-size: 0.55rem;
-  }
-}
-

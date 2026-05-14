@@ -32,6 +32,11 @@ def game():
 def outcome():
     return render_template('outcome.html')
 
+@main.route('/profile')
+@login_required
+def profile():
+    return render_template('profile.html')
+
 @main.route('/api/random-teammates')
 def random_teammates():
     all_teammates = Teammate.query.all()
@@ -183,3 +188,4 @@ def leaderboard_data():
         'days_taken': session.day,
         'overall_score': session.overall_score or 0
     } for session in all_sessions])
+
