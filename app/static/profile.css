@@ -96,6 +96,9 @@ html, body {
 }
 
 .currentRunCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   animation-delay: 0.1s;
 }
 .statsCard {
