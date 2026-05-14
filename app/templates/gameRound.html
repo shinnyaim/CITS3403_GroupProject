@@ -41,7 +41,7 @@
       <hr />
 
       <!-- Progress bars -->
-      <div class="progressBars">
+      <div class="progressBars my-3">
         <div class="moraleBar">
           <p id="morale">TEAM MORALE:</p>
           <div id="moraleProgress">
@@ -75,7 +75,6 @@
 
       <!-- Main game area -->
       <div class="secParent">
-
         <!-- Teammates panel -->
         <div class="teammates">
           <p id="urTeam">YOUR TEAMMATES:</p>
@@ -109,7 +108,7 @@
         <div class="gamePlay">
           <p id="eventCardTitle">EVENT CARD</p>
 
-          <div class="eventCard">
+          <div class="eventCard my-3">
             <h6>The Unsolicited Rewrite</h6>
             <br />
             <p class="eventCardDesc">
@@ -119,7 +118,7 @@
             </p>
           </div>
 
-          <button class="options">
+          <button class="options mt-3">
             <span>A)</span> Revert to your original draft
           </button>
           <button class="options">
@@ -129,7 +128,7 @@
             <span>C)</span> Call an emergency group meeting to discuss
           </button>
 
-          <button id="confirmChoice" style="display: none;">CONFIRM</button>
+          <button id="confirmChoice" style="display: none">CONFIRM</button>
           <button id="submitEarly">SUBMIT EARLY?</button>
         </div>
 
@@ -137,7 +136,6 @@
         <div class="eventLogs">
           <p id="eventLog">EVENT LOG:</p>
         </div>
-
       </div>
     </div>
     <script src="{{ url_for('static', filename='clouds.js') }}"></script>
