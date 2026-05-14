@@ -21,7 +21,14 @@ document.addEventListener('DOMContentLoaded', () => {
     updateBars();
     updateDayCounter();
     restoreEventLog();
-    fetchEventCard();
+    
+    const savedEvent = sessionStorage.getItem('currentEvent');
+    if (savedEvent) {
+        currentEvent = JSON.parse(savedEvent);
+        displayEventCard(currentEvent);
+    } else {
+        fetchEventCard();
+    }
 });
 
 async function updateNames() {
@@ -75,6 +82,7 @@ async function fetchEventCard() {
 
     currentEvent = event;
     seenCardIds.push(event.id);   // mark this card as seen
+    sessionStorage.setItem('currentEvent', JSON.stringify(event));
 
     displayEventCard(event);
 }
@@ -109,6 +117,7 @@ function onTimerExpired() {
     document.getElementById('confirmChoice').style.display = 'none';
 
     sessionStorage.removeItem('timeRemaining');
+    sessionStorage.removeItem('currentEvent');
     morale -= 5;
     progress -= 5;
     if (morale < 0) morale = 0;
@@ -168,6 +177,7 @@ async function chooseOption() {
     if (selectedOptionIndex === null) return;
     stopTimer();
     sessionStorage.removeItem('timeRemaining');
+    sessionStorage.removeItem('currentEvent');
 
     const option = currentEvent.options[selectedOptionIndex];
 
