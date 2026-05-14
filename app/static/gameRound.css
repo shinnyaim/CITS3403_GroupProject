@@ -9,6 +9,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px 0; /* adds breathing room top and bottom */
 }
 
 .parent {
@@ -17,20 +18,21 @@ body {
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
     width: 78%;
-    height: 840px;
+    min-height: 600px;   /* minimum height only */
+    height: auto;        /* grows with content */
     position: relative;
     z-index: 1;
     overflow: hidden;
-
+    padding-bottom: 20px; /* breathing room at the bottom */
 }
 
 .gameInfo {
-    height: 70px;
+    height: auto;        /* was fixed — let it grow */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 35px;
-    margin-top: 40px;
+    padding: 20px 35px;
+    margin-top: 20px;    /* reduced from 40px */
 }
 
 .topLeft {
@@ -99,15 +101,14 @@ hr {
     flex-direction: column;
     justify-content: center;
     width: 95%;
-    height: 100px;
-    margin: 0 auto;
-    margin-top: 18px;
-    flex-direction: column;
+    height: auto;        /* was 100px — let it breathe */
+    margin: 10px auto;
+    gap: 12px;           /* replaces fixed height spacing */
 }
 
 .moraleBar {
     width: 90%;
-    height: 50%;
+    height: auto;        /* remove fixed 50% */
     flex-direction: row;
     align-items: center;
     gap: 12px;
@@ -116,9 +117,10 @@ hr {
 
 .progressBar {
     width: 90%;
-    height: 50%;
+    height: auto;        /* remove fixed 50% */
     flex-direction: row;
     align-items: center;
+    gap: 12px;
     display: flex;
 }
 
@@ -179,10 +181,12 @@ hr {
 }
 
 .secParent {
-    /* border: 2px solid blue; */
-    height: 65%;
     display: flex;
     flex-direction: row;
+    align-items: stretch;
+    height: auto;        /* remove fixed 65% */
+    min-height: 400px;   /* ensures enough room for content */
+    flex: 1;
 }
 
 #urTeam {
@@ -198,16 +202,15 @@ hr {
     align-items: center;
     display: flex;
     flex-direction: column;
-
+    padding: 10px 0;
 }
 
 .teammateProfile {
     margin: 5px;
     border-radius: 10px;
     border: 2px solid yellow;
-    height: 30%;
-    width: 200px;
-
+    width: 90%;          /* use percentage instead of fixed 200px */
+    min-height: 80px;    /* minimum height instead of fixed 30% */
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -215,13 +218,17 @@ hr {
 
 .gamePlay {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    overflow-y: auto;    /* scroll if content overflows */
 }
 
 .eventLogs {
     padding: 10px;
     width: 25%;
     overflow-y: auto;
-    max-height: 400px;
+    /* remove max-height: 400px */
 }
 
 .pfp {
@@ -292,10 +299,11 @@ hr {
     display: flex;
     flex-direction: column;
     text-align: center;
-    width: 550px;
+    width: 90%;          /* use percentage instead of fixed 550px */
+    max-width: 550px;    /* keeps it from getting too wide on big screens */
     margin: 0 auto;
     border-radius: 10px;
-    background-color: rgb(0,0,53);
+    background-color: rgb(0, 0, 53);
 }
 
 .eventCardDesc {
@@ -304,16 +312,18 @@ hr {
 
 .options {
     color: yellow;
-    background-color: rgb(0,0,53);
+    background-color: rgb(0, 0, 53);
     font-size: 11px;
     border: 1px solid yellow;
     border-radius: 10px;
-    padding: 20px;
-    width: 550px;
+    padding: 15px 20px;
+    width: 90%;          /* use percentage instead of fixed 550px */
+    max-width: 550px;
     display: flex;
     align-items: center;
-    margin: 15px auto;
-    height: 20px;
+    margin: 8px auto;
+    height: auto;        /* remove fixed 20px */
+    min-height: 45px;    /* ensures text never gets clipped */
 }
 
 .options.selected {
