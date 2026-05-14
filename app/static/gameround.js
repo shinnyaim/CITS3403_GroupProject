@@ -16,6 +16,7 @@ let timeRemaining = TIMER_SECONDS;
 
 // --- On page load ---
 document.addEventListener('DOMContentLoaded', () => {
+    
     updateNames();
     loadTeammates();
     updateBars();
@@ -51,11 +52,15 @@ function updateBars() {
     progressBar.style.width = progress + '%';
     progressBar.setAttribute('aria-valuenow', progress);
     document.getElementById('progressPercentage').textContent = progress + '%';
+
+    sessionStorage.setItem('Morale', morale);
+    sessionStorage.setItem('Progress', progress);
 }
 
 // --- Update day counter display ---
 function updateDayCounter() {
-    document.querySelector('.dayCounter').textContent = 'DAY ' + currentDay + ' / 14';
+    document.querySelector('.dayCounter').textContent = 'DAY ' + currentDay + ' / 14'; 
+    sessionStorage.setItem('currentDay', currentDay);
 }
 
 // --- Fetch a random event card from the API ---
@@ -185,7 +190,7 @@ async function chooseOption() {
             seen_event_ids: seenCardIds.join(','),
             morale: morale,
             progress: progress,
-            day: currentDay
+            currentDay: currentDay + 1  // +1 because we haven't incremented the day counter yet
         })
     });
 
