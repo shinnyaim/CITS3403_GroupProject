@@ -475,5 +475,7 @@ window.debugProfile = {
   }
 };
 
+/*
 console.log('%cProfile Debug Tools Enabled', 'color: #ffeb3b; font-weight: bold;');
 console.log('Use window.debugProfile to test. Type debugProfile for available commands.');
+*/

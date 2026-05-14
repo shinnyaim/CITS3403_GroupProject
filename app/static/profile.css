@@ -352,7 +352,7 @@ html, body {
 .btn-primary {
   background: linear-gradient(180deg, #ffe95c 0%, #d4b600 100%);
   border-color: #fff176;
-  color: #1a1a1a;
+  color: white;
 }
 
 .btn-primary:hover {
