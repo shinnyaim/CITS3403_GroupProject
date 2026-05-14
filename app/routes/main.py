@@ -162,7 +162,7 @@ def resume_session(session_id):
         'group_name': session.group_name,
         'morale': session.morale,
         'progress': session.progress,
-        'day': session.day,
+        'currentDay': session.day,
         'seen_event_ids': session.seen_event_ids or '',
         'teammates': [{'id': t.id, 'name': t.name, 'role': t.role, 'description': t.description, 'emoji': t.emoji} for t in teammates]
     })
