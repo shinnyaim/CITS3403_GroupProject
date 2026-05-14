@@ -39,6 +39,11 @@ body {
     word-break: break-word;
 }
 
+input {
+    width: 90%;
+    max-width: 400px;
+}
+
 /* .title {
     width: 1200px;
     border: solid;
