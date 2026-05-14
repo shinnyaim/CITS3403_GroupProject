@@ -46,6 +46,10 @@ body, html {
 /* TITLE */
 .title-box {
   background-color: rgba(0, 0, 0, 0.7);
+
+  width: fit-content;
+  max-width: 90%;
+  margin: 0 auto;
 }
 
 .game-title {
