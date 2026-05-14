@@ -59,4 +59,3 @@ class PlayerProfile(db.Model):
     fastest_days = db.Column(db.Integer, default=14)
     rank_title  = db.Column(db.String(100), default='Novice')
     total_wins    = db.Column(db.Integer, default=0)
-    user         = db.relationship('User', back_populates='profile')
