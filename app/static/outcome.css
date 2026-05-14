@@ -9,6 +9,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
 h1 {
@@ -20,9 +21,17 @@ h1 {
 .mainParent {
     border: 5px solid yellow;
     width: 55%;
-    height: 700px;
+    height: auto;
+    max-height: 95vh;
+    overflow-y: auto;
     background-color: rgba(0, 0, 0, 0.73);
     border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
 }
 
 #urOutcome {
@@ -36,7 +45,8 @@ h1 {
     color: rgb(41, 214, 41);
     border: 3px solid;
     border-radius: 10px;
-    width: 400px;
+    width: 90%;
+    max-width: 400px;
     font-size: 20px;
     margin: 20px auto 0;
     padding: 8px;
@@ -69,7 +79,8 @@ hr {
 .outcomeDesc {
     color: rgb(41, 214, 41);
     font-size: 11px;
-    width: 600px;
+    width: 90%;
+    max-width: 600px;
     margin: 10px auto 0;
     text-align: center;
 }
@@ -79,19 +90,24 @@ hr {
     display: flex;
     justify-content: center;
     gap: 87px;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0 10px;
 }
 
 .scores {
     border: 2px solid white;
     background-color: rgb(32, 32, 109);
     height: 80px;
-    width: 180px;
+    min-width: 120px;
+    max-width: 180px;
     border-radius: 10px;
     /* display: flex; */
     /* flex-direction: column; */
     justify-content: center;
     text-align: center;
     flex-direction: row;
+    flex: 1;
 }
 
 #progress {
@@ -130,55 +146,42 @@ hr {
     border-radius: 7px;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 @media (max-width: 900px) {
 
-  /* main container grows + stays centered */
+  /* allow parent to grow naturally */
   .mainParent {
     width: 90%;
     height: auto;
-    padding: 20px;
   }
 
-  /* GAME OVER + OUTCOME TEXT wrap + center */
-  h1,
-  #urOutcome {
-    text-align: center;
-    width: 100%;
-    white-space: normal;
+  /* FIX: remove hard widths that cause overflow */
+  .grade {
+    width: 90%;
   }
 
-  /* FINAL SCORE shrinks but stays centered */
-  #finalScore {
-    font-size: 16px;
-  }
-
-  /* DESCRIPTION wraps */
   .outcomeDesc {
     width: 90%;
-    font-size: 10px;
   }
 
-  /* SCORE BOXES stack vertically */
+  /* SCORE SECTION: force full containment */
   .secParent {
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
+    width: 100%;
   }
 
   .scores {
-    width: 70%;
-    height: auto;
-    padding: 10px;
+    width: 80%;
   }
 
-  /* BUTTONS shrink but stay inside container */
-  .buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-
+  /* buttons already fine, just ensure fit */
   .Btn {
-    width: 70%;
-    font-size: 12px;
+    width: 80%;
   }
 }
+
