@@ -1,5 +1,5 @@
 // --- Game State ---
-let morale = parseInt(sessionStorage.getItem('Morale')) || 100;
+let morale = parseInt(sessionStorage.getItem('Morale')) || 70;
 let progress = parseInt(sessionStorage.getItem('Progress')) || 0;
 let currentDay = parseInt(sessionStorage.getItem('currentDay')) || 1;
 let currentEvent = null;
@@ -271,7 +271,7 @@ document.getElementById('submitEarly').addEventListener('click', () => {
 // --- End the game and redirect to outcome page ---
 async function endGame(reason) {
     // store final stats in sessionStorage so outcome.html can read them
-    const dayScore = (1 - currentDay / 14) * 100;
+    const dayScore = (14 - currentDay) / 14 * 100;
     const overallScore = parseFloat((progress * 0.5 + morale * 0.3 + dayScore * 0.2).toFixed(2));
 
     sessionStorage.setItem('finalMorale', morale);
@@ -279,8 +279,12 @@ async function endGame(reason) {
     sessionStorage.setItem('currentDay', currentDay);
     sessionStorage.setItem('endReason', reason);
     sessionStorage.setItem('overallScore', overallScore);
+    
     sessionStorage.removeItem('eventLog');
-
+    sessionStorage.removeItem('currentEvent');
+    sessionStorage.removeItem('morale');
+    sessionStorage.removeItem('progress');
+    
     await fetch('/api/session/end', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

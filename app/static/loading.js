@@ -46,6 +46,9 @@ async function startSession() {
     const sessionData = await sessionRes.json();
     sessionStorage.setItem('session_id', sessionData.session_id);
     sessionStorage.setItem('currentDay', '1');
+    sessionStorage.setItem('Morale', '70');
+    sessionStorage.setItem('Progress', '0');
+
     sessionStorage.removeItem('currentEvent');
     sessionStorage.removeItem('eventLog');
     sessionStorage.removeItem('timeRemaining');
