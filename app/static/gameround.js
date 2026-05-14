@@ -82,11 +82,13 @@ async function fetchEventCard() {
 // --- Timer: start a 30-second countdown for the current card ---
 function startTimer() {
     stopTimer();
-    timeRemaining = TIMER_SECONDS;
+    const stored = parseInt(sessionStorage.getItem('timeRemaining'));
+    timeRemaining = (stored > 0) ? stored : TIMER_SECONDS;
     document.querySelector('.timer').textContent = timeRemaining + 's';
 
     timerInterval = setInterval(() => {
         timeRemaining--;
+        sessionStorage.setItem('timeRemaining', timeRemaining); // persist remaining time in case of accidental refresh
         document.querySelector('.timer').textContent = timeRemaining + 's';
 
         if (timeRemaining <= 0) {
@@ -106,6 +108,7 @@ function stopTimer() {
 function onTimerExpired() {
     document.getElementById('confirmChoice').style.display = 'none';
 
+    sessionStorage.removeItem('timeRemaining');
     morale -= 5;
     progress -= 5;
     if (morale < 0) morale = 0;
@@ -164,6 +167,7 @@ function selectOption(index) {
 async function chooseOption() {
     if (selectedOptionIndex === null) return;
     stopTimer();
+    sessionStorage.removeItem('timeRemaining');
 
     const option = currentEvent.options[selectedOptionIndex];
 
