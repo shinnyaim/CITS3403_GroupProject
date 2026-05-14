@@ -135,11 +135,11 @@ def get_sessions():
     all_sessions = GameSession.query.filter_by(user_id=current_user.id).all()
 
     return jsonify([{
-        'id': session.id,
+        'session_id': session.id,
         'group_name': session.group_name,
         'morale': session.morale,
         'progress': session.progress,
-        'days': session.day,
+        'currentDay': session.day,
         'status': session.status,
         'started_at': session.started_at.isoformat(),
         'overall_score': session.overall_score
@@ -176,10 +176,10 @@ def leaderboard():
 def leaderboard_data():
     all_sessions = GameSession.query.filter_by(status='ended').order_by(GameSession.overall_score.desc()).all()
     return jsonify([{
-        'username': session.user.username if session.user else 'Unknown',
-        'group_name': session.group_name or 'Unknown',
+        'username': session.user.username,
+        'group_name': session.group_name,
         'progress': session.progress,
         'morale': session.morale,
-        'days_taken': session.day,
+        'currentDay': session.day,
         'overall_score': session.overall_score or 0
     } for session in all_sessions])
