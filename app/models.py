@@ -36,6 +36,7 @@ class GameSession(db.Model):
     teammate_ids   = db.Column(db.String(100))
     seen_event_ids = db.Column(db.String(100))
     event_log      = db.Column(db.Text)
+    current_event  = db.Column(db.Text)
     started_at     = db.Column(db.DateTime)
 
     user = db.relationship('User', backref='sessions')

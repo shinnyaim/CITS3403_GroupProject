@@ -116,6 +116,7 @@ async function resumeSession(sessionId) {
     sessionStorage.setItem('Progress', data.progress);
     sessionStorage.setItem('currentDay', data.currentDay);
     sessionStorage.setItem('eventLog', data.event_log);
+    sessionStorage.setItem('currentEvent', data.current_event);
 
     window.location.href = '/game';
 }

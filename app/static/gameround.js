@@ -84,6 +84,15 @@ async function fetchEventCard() {
     seenCardIds.push(event.id);   // mark this card as seen
     sessionStorage.setItem('currentEvent', JSON.stringify(event));
 
+    fetch('/api/session/update', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            session_id: sessionStorage.getItem('session_id'),
+            current_event: JSON.stringify(event)
+        })
+    });
+
     displayEventCard(event);
 }
 
@@ -205,7 +214,8 @@ async function chooseOption() {
             morale: morale,
             progress: progress,
             currentDay: currentDay + 1,
-            event_log: sessionStorage.getItem('eventLog') || '[]'
+            event_log: sessionStorage.getItem('eventLog') || '[]',
+            current_event: sessionStorage.getItem('currentEvent')
         })
     });
 

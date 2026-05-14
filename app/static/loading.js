@@ -46,6 +46,10 @@ async function startSession() {
     const sessionData = await sessionRes.json();
     sessionStorage.setItem('session_id', sessionData.session_id);
     sessionStorage.setItem('currentDay', '1');
+    sessionStorage.removeItem('currentEvent');
+    sessionStorage.removeItem('eventLog');
+    sessionStorage.removeItem('timeRemaining');
+    sessionStorage.removeItem('seenCardIds');
 
     window.location.href = '/game';
 }
