@@ -68,3 +68,8 @@ class ResumeGameTestGame(unittest.TestCase):
     def testValidEmailFalse(self):
         self.assertFalse(isValidEmail("testemail.com"))
     
+    def testCheckCredsTrue(self):
+        self.assertTrue(checkCreds("pass123", "pass123"))
+
+    def testCheckCredsFalse(self):
+        self.assertFalse(checkCreds("pass123", "test"))
