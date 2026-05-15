@@ -206,6 +206,7 @@ async function chooseOption() {
 
     updateBars();
     addToEventLog(currentEvent.title, option.text);
+    currentDay++;
 
     const sessionUpdate = await fetch('/api/session/update', {
         method: 'POST',
@@ -217,7 +218,7 @@ async function chooseOption() {
             seen_event_ids: seenCardIds.join(','),
             morale: morale,
             progress: progress,
-            currentDay: currentDay,
+            currentDay: currentDay - 1, // currentDay was incremented at the start of the next round, so subtract 1 to get the actual day reached
             event_log: sessionStorage.getItem('eventLog') || '[]',
             current_event: sessionStorage.getItem('currentEvent')
         })
@@ -229,12 +230,11 @@ async function chooseOption() {
         return;
     }
 
-    if (currentDay === 14) {
+    if (currentDay > 14) {
         endGame('days');
         return;
     }
 
-    currentDay++;
     updateDayCounter();
     fetchEventCard();
 }
@@ -278,11 +278,11 @@ document.getElementById('submitEarly').addEventListener('click', () => {
 async function endGame(reason) {
     // store final stats in sessionStorage so outcome.html can read them
     const dayScore = (14 - currentDay) / 14 * 100;
-    const overallScore = parseFloat((progress * 0.5 + morale * 0.3 + dayScore * 0.2).toFixed(2));
+    const overallScore = parseFloat((progress * 0.6 + morale * 0.3 + dayScore * 0.1).toFixed(2));
 
     sessionStorage.setItem('finalMorale', morale);
     sessionStorage.setItem('finalProgress', progress);
-    sessionStorage.setItem('currentDay', currentDay);
+    sessionStorage.setItem('currentDay', currentDay - 1); // currentDay was incremented at the end of the last round, so subtract 1 to get the actual day reached   
     sessionStorage.setItem('endReason', reason);
     sessionStorage.setItem('overallScore', overallScore);
     
