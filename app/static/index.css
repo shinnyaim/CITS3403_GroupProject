@@ -46,6 +46,10 @@ body, html {
 /* TITLE */
 .title-box {
   background-color: rgba(0, 0, 0, 0.7);
+
+  width: fit-content;
+  max-width: 90%;
+  margin: 0 auto;
 }
 
 .game-title {
@@ -113,6 +117,10 @@ body, html {
   border-radius: 6px;
 
   text-align: center;
+
+  width: fit-content;
+  max-width: 90%;
+  margin: 0 auto;
 
   cursor: pointer;
   transition: all 0.2s ease;
