@@ -1,4 +1,5 @@
 import unittest
+from app.functions import passwordsMatch
 from app import create_app, db
 from app.models import User, GameSession, Teammate
 from config import TestConfig
