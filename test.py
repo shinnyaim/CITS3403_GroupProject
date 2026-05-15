@@ -50,7 +50,7 @@ class ResumeGameTestGame(unittest.TestCase):
         db.session.commit()
 
     def _login(self):
-    #HELPER FUNCTION FOR TEST USER TO LOGIN
+        #HELPER FUNCTION FOR TEST USER TO LOGIN
         return self.client.post('/auth/login', data={
             'username': 'testplayer',
             'password': 'password123'
