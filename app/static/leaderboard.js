@@ -12,7 +12,7 @@ async function updateLeaderboard() {
             <td>${session.group_name}</td>
             <td>${session.progress}%</td>
             <td>${session.morale}%</td>
-            <td>${session.days_taken}</td>
+            <td>${session.currentDay}</td>
             <td>${session.overall_score}%</td>
         `;
         tbody.appendChild(row);
