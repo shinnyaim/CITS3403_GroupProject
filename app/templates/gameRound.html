@@ -1,31 +1,13 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{% extends "base.html" %}
 
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous"
-    />
+{% block title %}Home- Group Project Simulator{% endblock %}
 
-    <link rel="stylesheet" href="/static/gameRound.css" />
+{% block extra_css %}
+  <link rel="stylesheet" href="{{url_for('static', filename='gameRound.css') }}">
+{% endblock %}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-      rel="stylesheet"
-    />
-
-    <title>Game Round</title>
-  </head>
-
-  <body>
-    <canvas id="cloudCanvas"></canvas>
-    <div class="parent">
+  <!--MAIN GAME AREA-->
+  <div class="parent">
       <!-- Top bar: player info + timer -->
       <div class="gameInfo">
         <div class="topLeft">
@@ -40,7 +22,7 @@
 
       <hr />
 
-      <!-- Progress bars -->
+      <!--PROGRESS BARS -->
       <div class="progressBars my-3">
         <div class="moraleBar">
           <p id="morale">TEAM MORALE:</p>
@@ -73,7 +55,7 @@
 
       <hr />
 
-      <!-- Main game area -->
+      <!-- MAIN GAME AREA -->
       <div class="secParent">
         <!-- Teammates panel -->
         <div class="teammates">
@@ -138,7 +120,9 @@
         </div>
       </div>
     </div>
+  {% endblock %}
+
+  {% block extra_js %}
     <script src="{{ url_for('static', filename='clouds.js') }}"></script>
     <script src="/static/gameround.js"></script>
-  </body>
-</html>
+  {% endblock %}
