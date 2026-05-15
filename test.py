@@ -55,4 +55,8 @@ class ResumeGameTestGame(unittest.TestCase):
             'password': 'password123'
         }, follow_redirects=True)
         
-    
+    def test_password_match_true(self):
+        self.assertTrue(passwordsMatch("123', '123"))
+
+    def test_passwords_match_false(self):
+        self.assertFalse(passwordsMatch('123', '456'))
