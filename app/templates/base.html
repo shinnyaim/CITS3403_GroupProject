@@ -31,12 +31,14 @@
 
                 <div class="nav-menu">
 
-                     {% if request.endpoint != 'main.index' %}
+                    {% if request.endpoint != 'main.index' %}
                     <a href="{{ url_for('main.index') }}"
                        class="nav-item {% if request.endpoint == 'main.index' %}active{% endif %}">
                          HOME
                     </a>
                     {% endif %}
+                    
+                    {% if request.endpoint != 'main.index' %}
                     <a href="{% if current_user.is_authenticated %}
                     {{ url_for('main.home') }}
                     {% else %}
@@ -45,12 +47,19 @@
                     class="nav-item {% if request.endpoint == 'main.home' %}active{% endif %}">
                         PLAY
                     </a>
+                    {% endif %}
+
+                   {% if request.endpoint != 'main.index' %}
                     <a href="{{url_for('main.leaderboard')}}" class="nav-item {% if request.endpoint=='main.leaderboard'%}active{%endif%}">
                         LEADERBOARD
                     </a>
+                    {% endif %}
+
+                    {% if request.endpoint != 'main.index' %}
                     <a href="{{url_for('main.instructions')}}" class="nav-item {% if request.endpoint=='main.instructions'%}active{%endif%}">
                         HELP
                     </a>
+                    {% endif %}
                 </div>
 
                 <div class="nav-user">
