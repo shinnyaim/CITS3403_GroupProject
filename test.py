@@ -73,3 +73,9 @@ class ResumeGameTestGame(unittest.TestCase):
 
     def testCheckCredsFalse(self):
         self.assertFalse(checkCreds("pass123", "test"))
+
+    def testSessTrue(self):
+        self.assertTrue(canAccessSession(1, 1))
+
+    def testSessFalse(self):
+        self.assertFalse(canAccessSession(1, 2))
