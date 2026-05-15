@@ -20,7 +20,7 @@ class ResumeGameTestGame(unittest.TestCase):
 
     def _seed_data(self):
         # THIS JUST CREATES A TEST USER
-        user = User(username='testplayer' email='test@test.com')
+        user = User(username='testplayer', email='test@test.com')
         user.set_password('password123')
         db.session.add(user)
         db.session.commit()
