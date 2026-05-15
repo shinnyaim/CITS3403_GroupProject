@@ -22,7 +22,7 @@
             <img src="{{ url_for('static', filename='uwaBG.png') }}" alt="Pixel Art Background" class="bg-image">
         </div>
 
-        <nav class="navbar-custom">
+        <nav class="navbar-custom" id="mainNav" {% if request.endpoint != 'main.game' %}style="display:block"{% else %}style="display:none"{% endif %}>
             <div class="nav-container">
 
                 <div class="nav-home-link">

@@ -1,3 +1,26 @@
+.page-content {
+    margin-top: 0 !important;
+}
+
+#menuToggle {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1100;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid yellow;
+    color: yellow;
+    font-size: 18px;
+    border-radius: 6px;
+    padding: 2px 8px;
+    cursor: pointer;
+}
+
+.game-nav-visible {
+    display: block !important;
+}
+
+
 .parent {
     margin: 20px auto;
     border-radius: 12px;
@@ -14,12 +37,13 @@
 }
 
 .gameInfo {
-    height: auto;        /* was fixed — let it grow */
+    height: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 35px;
-    margin-top: 20px;    /* reduced from 40px */
+    padding: 20px 30px 0.5px 30px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .topLeft {
@@ -38,6 +62,7 @@
 
 .playerName {
     color: rgb(190,190,190);
+    margin-right: 1ch;
 }
 
 .dayCounter {
@@ -88,9 +113,9 @@ hr {
     flex-direction: column;
     justify-content: center;
     width: 95%;
-    height: auto;        /* was 100px — let it breathe */
-    margin: 10px auto;
-    gap: 12px;           /* replaces fixed height spacing */
+    height: auto;
+    margin: 4px auto;
+    gap: 8px;
 }
 
 .moraleBar {
@@ -196,11 +221,12 @@ hr {
     margin: 5px;
     border-radius: 10px;
     border: 2px solid yellow;
-    width: 90%;          /* use percentage instead of fixed 200px */
-    min-height: 210px;    /* minimum height instead of fixed 30% */
+    width: 90%;
+    height: auto;
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    transition: all 0.3s ease;
 }
 
 .gamePlay {
@@ -234,16 +260,16 @@ hr {
     margin: 0 auto;
 }
 
+.name .emoji {
+    font-size: 3em;
+}
+
 .desc {
     padding-top: 3px;
     display: none;
     font-size: 10px;
     color: white;
     text-align: center;
-}
-
-.teammateProfile:hover .pfp {
-    opacity: 0;
 }
 
 .teammateProfile:hover .desc {
@@ -339,4 +365,82 @@ hr {
     display: flex;
     margin: 10px auto 0 auto;
     cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+    .parent {
+        width: 90%;
+        padding-bottom: 16px;
+    }
+    .gameInfo {
+        padding: 14px 20px 0.5px 20px;
+    }
+    #morale, #progressText {
+        font-size: 11px;
+        min-width: 80px;
+    }
+}
+
+@media (max-width: 900px) {
+    .parent {
+        width: 96%;
+        padding-bottom: 12px;
+    }
+    .gameInfo {
+        padding: 10px 12px 0.5px 12px;
+    }
+    .timer {
+        width: 90px;
+        height: 40px;
+        font-size: 12px;
+    }
+    .topRight {
+        gap: 20px;
+    }
+    #morale, #progressText {
+        font-size: 10px;
+        min-width: 70px;
+    }
+    .teammates {
+        width: 30%;
+    }
+    .eventLogs {
+        width: 20%;
+    }
+    .eventCard, .options {
+        width: 95%;
+    }
+}
+
+@media (max-width: 650px) {
+    .parent {
+        width: 99%;
+        padding-bottom: 8px;
+    }
+    .gameInfo {
+        padding: 8px 8px 0.5px 8px;
+    }
+    .secParent {
+        flex-direction: column;
+    }
+    .teammates {
+        width: 100%;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .teammateProfile {
+        width: 28%;
+    }
+    .eventLogs {
+        width: 100%;
+    }
+    .topRight {
+        gap: 10px;
+    }
+    .timer {
+        width: 70px;
+        height: 34px;
+        font-size: 10px;
+    }
 }

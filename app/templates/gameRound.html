@@ -8,11 +8,13 @@
 
 {% block content %}
 
+  <button id="menuToggle" onclick="toggleNav()">&#9776;</button>
+
   <!--MAIN GAME AREA-->
   <div class="parent">
       <!-- Top bar: player info + timer -->
       <div class="gameInfo">
-        <div class="topLeft">
+        <div class="topLeft d-flex flex-row align-items-center">
           <p class="playerName">PLAYER:</p>
           <p class="grpName">GROUP:</p>
         </div>
@@ -64,25 +66,22 @@
           <p id="urTeam">YOUR TEAMMATES:</p>
 
           <div class="teammateProfile" id="teammate1">
-            <div class="pfp"></div>
             <div class="nameDesc">
-              <p class="name"></p>
+              <p class="name"><span class="emoji"></span> <span class="nameText"></span></p>
               <p class="desc"></p>
             </div>
           </div>
 
           <div class="teammateProfile" id="teammate2">
-            <div class="pfp"></div>
             <div class="nameDesc">
-              <p class="name"></p>
+              <p class="name"><span class="emoji"></span> <span class="nameText"></span></p>
               <p class="desc"></p>
             </div>
           </div>
 
           <div class="teammateProfile" id="teammate3">
-            <div class="pfp"></div>
             <div class="nameDesc">
-              <p class="name"></p>
+              <p class="name"><span class="emoji"></span> <span class="nameText"></span></p>
               <p class="desc"></p>
             </div>
           </div>

@@ -1,3 +1,8 @@
+function toggleNav() {
+    const nav = document.getElementById('mainNav');
+    nav.style.display = nav.style.display === 'none' ? 'block' : 'none';
+}
+
 // --- Game State ---
 let morale = parseInt(sessionStorage.getItem('Morale')) || 70;
 let progress = parseInt(sessionStorage.getItem('Progress')) || 0;
@@ -43,7 +48,8 @@ async function updateNames() {
 function loadTeammates() {
     teammates.forEach((t, i) => {
         const card = document.getElementById(`teammate${i + 1}`);
-        card.querySelector('.name').textContent = t.name;
+        card.querySelector('.emoji').textContent = t.emoji;
+        card.querySelector('.nameText').textContent = t.name;
         card.querySelector('.desc').textContent = t.description;
     });
 }
