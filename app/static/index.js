@@ -95,10 +95,10 @@ $('#gamelogModal').on('show.bs.modal', async () => {
         row.innerHTML = `
             <td>${session.group_name}</td>
             <td>${new Date(session.started_at).toLocaleDateString('en-AU')}</td>
-            <td>${session.days}</td>
+            <td>${session.currentDay}</td>
             <td>${session.morale}%</td>
             <td>${session.progress}%</td>
-            <td>${session.status === 'in_progress' ? `<button onclick="resumeSession(${session.id})">Resume</button>` : session.overall_score + '%'}</td>
+            <td>${session.status === 'in_progress' ? `<button onclick="resumeSession(${session.session_id})">Resume</button>` : session.overall_score + '%'}</td>
         `;
         tbody.appendChild(row);
     });
@@ -115,7 +115,9 @@ async function resumeSession(sessionId) {
     sessionStorage.setItem('seenCardIds', data.seen_event_ids);
     sessionStorage.setItem('Morale', data.morale);
     sessionStorage.setItem('Progress', data.progress);
-    sessionStorage.setItem('Day', data.day);
+    sessionStorage.setItem('currentDay', data.currentDay);
+    sessionStorage.setItem('eventLog', data.event_log);
+    sessionStorage.setItem('currentEvent', data.current_event);
 
     window.location.href = '/game';
 }
