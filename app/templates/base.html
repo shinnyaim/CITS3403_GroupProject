@@ -64,7 +64,9 @@
 
                 <div class="nav-user">
                     {% if current_user.is_authenticated %}
+
                     <span class="nav-username">{{current_user.username }}</span>
+
                     <a href="{{url_for('main.profile') }}" class="nav-item nav-profile {% if request.endpoint == 'main.profile'%}active{% endif %}">
                         PROFILE
                     </a>
@@ -72,12 +74,13 @@
                         LOGOUT
                     </a>
                     {% else %}
+                    {% if request.endpoint not in ['main.index', 'auth.login'] %}
                     <a href="{{url_for('auth.login') }}" class="nav-item nav-auth {%if request.endpoint == 'auth.login'%}active{%endif%}">
                         LOGIN
                     </a>
-                {% endif %}
+                    {% endif %}
+                    {% endif %}
                 </div>
-
             </div>
         </nav>
 
