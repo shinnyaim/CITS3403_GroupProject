@@ -6,3 +6,6 @@ def isValidEmail(email):
 
 def checkCreds(storedPW, inputPw):
     return storedPW == inputPw
+
+def canAccessSession(userID, sessionUserID):
+    return userID == sessionUserID
