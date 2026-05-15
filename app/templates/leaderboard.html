@@ -21,18 +21,20 @@
               />
             </button>
             <div class="dropdownMenu">
-              <a href="">Progress</a>
-              <a href="">Morale</a>
-              <a href="">Days</a>
+              <a href="" onclick="updateLeaderboard('overall'); return false;">Overall Score</a>
+              <a href="" onclick="updateLeaderboard('progress'); return false;">Progress</a>
+              <a href="" onclick="updateLeaderboard('morale'); return false;">Morale</a>
+              <a href="" onclick="updateLeaderboard('days'); return false;">Days</a>
             </div>
           </div>
         </div>
       </div>
+      <h1 id="filterTitle">OVERALL</h1>
       <table id="leaderboardTable">
         <br />
         <thead>
           <tr>
-            <th>RANK</th>
+            <th id = rank>RANK</th>
             <th>PLAYER</th>
             <th>GROUP</th>
             <th>PROGRESS</th>
