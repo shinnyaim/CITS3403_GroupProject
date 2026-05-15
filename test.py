@@ -47,3 +47,10 @@ class ResumeGameTestGame(unittest.TestCase):
         )
         db.session.add(session)
         db.session.commit()
+
+        def _login(self):
+            #HELPER FUNCTION FOR TEST USER TO LOGIN
+            return self.client.post('/auth/login', data={
+                'username': 'testplayer',
+                'password': 'password123'
+            }, follow_redirects=True)
