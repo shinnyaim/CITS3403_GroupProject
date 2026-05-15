@@ -61,3 +61,10 @@ class ResumeGameTestGame(unittest.TestCase):
 
     def test_passwords_match_false(self):
         self.assertFalse(passwordsMatch('123', '456'))
+
+    def testValidEmailTrue(self):
+        self.assertTrue(isValidEmail("test@gmail.com"))
+
+    def testValidEmailFalse(self):
+        self.assertFalse(isValidEmail("testemail.com"))
+    
