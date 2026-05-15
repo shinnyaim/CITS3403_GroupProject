@@ -196,7 +196,6 @@ html, body {
 .page-content {
   margin-top: 80px;
   position: relative;
-  z-index: 2;
   min-height: calc(100vh - 80px);
 }
 
