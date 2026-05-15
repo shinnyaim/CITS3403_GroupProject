@@ -1,14 +1,8 @@
 body {
-    background-image: url(uwaBG.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    min-height: 100vh; /* USER CAN SEE FULL CONTENT */
-    font-family: "Press Start 2P", system-ui;
-    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
 h1 {
@@ -20,9 +14,17 @@ h1 {
 .mainParent {
     border: 5px solid yellow;
     width: 55%;
-    height: 700px;
+    height: auto;
+    max-height: 95vh;
+    overflow-y: auto;
     background-color: rgba(0, 0, 0, 0.73);
     border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
 }
 
 #urOutcome {
@@ -36,7 +38,8 @@ h1 {
     color: rgb(41, 214, 41);
     border: 3px solid;
     border-radius: 10px;
-    width: 400px;
+    width: 90%;
+    max-width: 400px;
     font-size: 20px;
     margin: 20px auto 0;
     padding: 8px;
@@ -69,7 +72,8 @@ hr {
 .outcomeDesc {
     color: rgb(41, 214, 41);
     font-size: 11px;
-    width: 600px;
+    width: 90%;
+    max-width: 600px;
     margin: 10px auto 0;
     text-align: center;
 }
@@ -79,19 +83,24 @@ hr {
     display: flex;
     justify-content: center;
     gap: 87px;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0 10px;
 }
 
 .scores {
     border: 2px solid white;
     background-color: rgb(32, 32, 109);
     height: 80px;
-    width: 180px;
+    min-width: 120px;
+    max-width: 180px;
     border-radius: 10px;
     /* display: flex; */
     /* flex-direction: column; */
     justify-content: center;
     text-align: center;
     flex-direction: row;
+    flex: 1;
 }
 
 #progress {
@@ -129,3 +138,43 @@ hr {
     background-color: yellow;
     border-radius: 7px;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+
+  /* allow parent to grow naturally */
+  .mainParent {
+    width: 90%;
+    height: auto;
+  }
+
+  /* FIX: remove hard widths that cause overflow */
+  .grade {
+    width: 90%;
+  }
+
+  .outcomeDesc {
+    width: 90%;
+  }
+
+  /* SCORE SECTION: force full containment */
+  .secParent {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .scores {
+    width: 80%;
+  }
+
+  /* buttons already fine, just ensure fit */
+  .Btn {
+    width: 80%;
+  }
+}
+

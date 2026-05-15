@@ -37,13 +37,6 @@ html, body {
   object-fit: cover;
 }
 
-#cloudCanvas {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-}
-
 .profileWrapper {
   position: relative;
   z-index: 2;
