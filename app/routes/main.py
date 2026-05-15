@@ -181,7 +181,8 @@ def resume_session(session_id):
 def leaderboard():
     return render_template('leaderboard.html')
 
-@main.route('/api/sessions/get_all')
+
+@main.route('/api/sessions/get_all/overall')
 def leaderboard_data():
     all_sessions = GameSession.query.filter_by(status='ended').order_by(GameSession.overall_score.desc()).all()
     return jsonify([{
@@ -193,3 +194,38 @@ def leaderboard_data():
         'overall_score': session.overall_score or 0
     } for session in all_sessions])
 
+@main.route('/api/sessions/get_all/progress')
+def leaderboard_progress():
+    all_sessions = GameSession.query.filter_by(status='ended').order_by(GameSession.progress.desc()).all()
+    return jsonify([{
+        'username': session.user.username,
+        'group_name': session.group_name,
+        'progress': session.progress,
+        'morale': session.morale,
+        'currentDay': session.day,
+        'overall_score': session.overall_score or 0
+    } for session in all_sessions])
+
+@main.route('/api/sessions/get_all/morale')
+def leaderboard_morale():
+    all_sessions = GameSession.query.filter_by(status='ended').order_by(GameSession.morale.desc()).all()
+    return jsonify([{
+        'username': session.user.username,
+        'group_name': session.group_name,
+        'progress': session.progress,
+        'morale': session.morale,
+        'currentDay': session.day,
+        'overall_score': session.overall_score or 0
+    } for session in all_sessions])
+
+@main.route('/api/sessions/get_all/days')
+def leaderboard_days():
+    all_sessions = GameSession.query.filter_by(status='ended').order_by(GameSession.day.desc()).all()
+    return jsonify([{
+        'username': session.user.username,
+        'group_name': session.group_name,
+        'progress': session.progress,
+        'morale': session.morale,
+        'currentDay': session.day,
+        'overall_score': session.overall_score or 0
+    } for session in all_sessions])
