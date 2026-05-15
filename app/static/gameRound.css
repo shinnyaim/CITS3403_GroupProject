@@ -27,7 +27,7 @@
     border: 4px solid yellow;
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
-    width: 78%;
+    width: 88%;
     min-height: 600px;   /* minimum height only */
     height: auto;        /* grows with content */
     position: relative;
@@ -210,11 +210,11 @@ hr {
 }
 
 .teammates {
-    width: 25%;
+    width: 20%;
     align-items: center;
     display: flex;
     flex-direction: column;
-    padding: 10px 0;
+    padding: 10px 8px;
 }
 
 .teammateProfile {
@@ -225,6 +225,8 @@ hr {
     height: auto;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
     transition: all 0.3s ease;
 }
@@ -239,9 +241,9 @@ hr {
 
 .eventLogs {
     padding: 10px;
-    width: 25%;
+    width: 20%;
     overflow-y: auto;
-    /* remove max-height: 400px */
+    max-height: 500px;
 }
 
 .pfp {
@@ -301,7 +303,7 @@ hr {
     color: yellow;
     font-size: 13px;
     max-width: fit-content;
-    padding: 10px;
+    padding: 4px 10px;
     margin: 0 auto;
 }
 
@@ -312,8 +314,8 @@ hr {
     display: flex;
     flex-direction: column;
     text-align: center;
-    width: 90%;          /* use percentage instead of fixed 550px */
-    max-width: 550px;    /* keeps it from getting too wide on big screens */
+    width: 95%;
+    max-width: 800px;
     margin: 0 auto;
     border-radius: 10px;
     background-color: rgb(0, 0, 53);
@@ -330,8 +332,8 @@ hr {
     border: 1px solid yellow;
     border-radius: 10px;
     padding: 15px 20px;
-    width: 90%;          /* use percentage instead of fixed 550px */
-    max-width: 550px;
+    width: 95%;
+    max-width: 800px;
     display: flex;
     align-items: center;
     margin: 8px auto;
@@ -365,82 +367,4 @@ hr {
     display: flex;
     margin: 10px auto 0 auto;
     cursor: pointer;
-}
-
-@media (max-width: 1200px) {
-    .parent {
-        width: 90%;
-        padding-bottom: 16px;
-    }
-    .gameInfo {
-        padding: 14px 20px 0.5px 20px;
-    }
-    #morale, #progressText {
-        font-size: 11px;
-        min-width: 80px;
-    }
-}
-
-@media (max-width: 900px) {
-    .parent {
-        width: 96%;
-        padding-bottom: 12px;
-    }
-    .gameInfo {
-        padding: 10px 12px 0.5px 12px;
-    }
-    .timer {
-        width: 90px;
-        height: 40px;
-        font-size: 12px;
-    }
-    .topRight {
-        gap: 20px;
-    }
-    #morale, #progressText {
-        font-size: 10px;
-        min-width: 70px;
-    }
-    .teammates {
-        width: 30%;
-    }
-    .eventLogs {
-        width: 20%;
-    }
-    .eventCard, .options {
-        width: 95%;
-    }
-}
-
-@media (max-width: 650px) {
-    .parent {
-        width: 99%;
-        padding-bottom: 8px;
-    }
-    .gameInfo {
-        padding: 8px 8px 0.5px 8px;
-    }
-    .secParent {
-        flex-direction: column;
-    }
-    .teammates {
-        width: 100%;
-        flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-    .teammateProfile {
-        width: 28%;
-    }
-    .eventLogs {
-        width: 100%;
-    }
-    .topRight {
-        gap: 10px;
-    }
-    .timer {
-        width: 70px;
-        height: 34px;
-        font-size: 10px;
-    }
 }
