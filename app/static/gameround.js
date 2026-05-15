@@ -211,7 +211,7 @@ async function chooseOption() {
             seen_event_ids: seenCardIds.join(','),
             morale: morale,
             progress: progress,
-            currentDay: currentDay + 1,
+            currentDay: currentDay,
             event_log: sessionStorage.getItem('eventLog') || '[]',
             current_event: sessionStorage.getItem('currentEvent')
         })
