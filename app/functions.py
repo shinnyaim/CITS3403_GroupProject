@@ -9,3 +9,7 @@ def checkCreds(storedPW, inputPw):
 
 def canAccessSession(userID, sessionUserID):
     return userID == sessionUserID
+
+def updateProgress(curProgress, increment):
+    newValue = curProgress + increment
+    return min(newValue, 100)
