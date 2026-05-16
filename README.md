@@ -13,13 +13,22 @@ The app takes on a pixel theme with blocky text to offer a more indie game-like 
 
 | UWA ID   | Name           | GitHub User Name |
 | :------- | :------------- | :--------------- |
-| 24849627 | Jo Almero      | Jo               |
-| 24464914 | Nafis Biswas   | Nafis            |
-| 24436991 | Shin Nyaim Thu | Shin             |
+| 24849627 | Jo Almero      | jozellerebecca   |
+| 24464914 | Nafis Biswas   | nafisbiswas      |
+| 24436991 | Shin Nyaim Thu | shinnyaim        |
 
-Instructions for how to launch application
-:---
-...
+Instructions for how to launch application:
+
+1. The user first needs to clone the repo into their IDE
+2. The user will need to generate their own secret key
+3. User should first check if .env is on .gitignore
+4. Install dotenv by: pip install python-dotenv
+5. Create a .env file on the root branch
+6. Generate a secret key by using this command on their terminal: python -c "import secrets; print(secrets.token_hex(32))"
+7. Put the secret key in the .env file by: SECRET_KEY= generated key
+8. In the command, type: python run.py
+9. Click on the URL that will appear in the terminal: http://127.0.0.1:5000
+10. To quite, enter CTRL+C
 
 Instructions for how to run the tests for the application.
 UNIT TESTING:
