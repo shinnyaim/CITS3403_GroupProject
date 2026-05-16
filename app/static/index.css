@@ -112,6 +112,36 @@
 }
 
 /* =================
+   INSTRUCTIONS MODAL
+================= */
+
+.game-modal-content {
+  background: rgba(0, 0, 0, 0.92);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
+  font-size: 0.65rem;
+  line-height: 1.8;
+}
+
+.game-modal-content .modal-title {
+  color: white;
+  font-size: 1rem;
+  text-shadow: 2px 2px 0 #000;
+}
+
+.game-modal-content .close {
+  color: white;
+  font-size: 1.5rem;
+  opacity: 0.8;
+}
+
+.game-modal-content .close:hover {
+  color: #fcff50 !important;
+  opacity: 1;
+}
+
+/* =================
    GAME MODALS
 ================= */
 
@@ -142,8 +172,8 @@
   color: #fcff50 !important;
 }
 
-/* TABLE FIXES */
-
+/*
+table*/
 .gameModalContent .table {
   margin-bottom: 0;
   color: white;
