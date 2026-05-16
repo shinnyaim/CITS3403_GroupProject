@@ -169,7 +169,7 @@ def resume_session(session_id):
         'group_name': session.group_name,
         'morale': session.morale,
         'progress': session.progress,
-        'currentDay': session.day,
+        'currentDay': session.day + 1,  # add 1 because we want to show the next day when resuming
         'seen_event_ids': session.seen_event_ids or '',
         'event_log': session.event_log or '[]',
         'current_event': session.current_event or 'null',

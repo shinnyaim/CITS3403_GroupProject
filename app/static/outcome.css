@@ -1,14 +1,4 @@
 body {
-    background-image: url(uwaBG.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    min-height: 100vh; /* USER CAN SEE FULL CONTENT */
-    font-family: "Press Start 2P", system-ui;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     overflow: hidden;
 }
 
@@ -26,12 +16,12 @@ h1 {
     overflow-y: auto;
     background-color: rgba(0, 0, 0, 0.73);
     border-radius: 10px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
     overflow-x: hidden;
+    margin: 20px auto;
 }
 
 #urOutcome {

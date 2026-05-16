@@ -1,36 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Group Project Simulator</title>
+{% extends "base.html" %}
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+{% block title %}Home- Group Project Simulator{% endblock %}
+
+{% block extra_css %}
   <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
-</head>
-<body>
+{% endblock %}
 
-  <!-- Clouds Background Canvas -->
-  <canvas id="cloudCanvas"></canvas>
+{% block content %}
 
-  <!-- Pixelated Background Image -->
-  <div class="background-container">
-    <img src="{{ url_for('static', filename='uwaBG.png') }}" alt="Pixel Art Background" class="bg-image">
-  </div>
-
-  <!-- Main Menu Overlay -->
+  <!-- MAIN MENU OVERLAY (CONTENT BELOW NAVBAR)-->
   <div class="menu-overlay d-flex flex-column align-items-center justify-content-center min-vh-100 text-center">
 
-    <!-- Game Title Box -->
+    <!--GAME TITLE BOX-->
     <div class="title-box p-4 rounded mb-4">
       <h1 class="game-title">Group Project Simulator</h1>
     </div>
-
-    <!-- Start Game Button -->
+    <!--START GAME BUTTON-->
     <button class="start-game" id="startBtn">START GAME</button>
 
-    <!-- Menu List  -->
+    <!--MENU LIST-->
     <div class="menu-list mt-3">
       <div class="menu-item" id="authMenuItem">Sign Up / Log in</div>
       <div class="menu-item" data-toggle="modal" data-target="#gamelogModal">Game Log / Resume</div>
@@ -39,13 +27,12 @@
       <!-- Moving selector arrow -->
       <div class="selector"></div>
     </div>
-  
-    <!-- Instructions Trigger -->
-    <div class="instructions-box mt-4" data-toggle="modal" data-target="#instructionsModal">How to Play</div>
 
+    <!--INSTRUCTIONS TRIGGER-->
+    <div class="instructions-box mt-4" data-toggle="modal" data-target="#instructionsModal">How to Play</div>
   </div>
 
-    <!-- Instructions Modal; Using Bootstrap -->
+    <!--INSTRUCTIONS MODAL; Using bootstrap-->
     <div class="modal fade" id="instructionsModal" tabindex="-1"
         aria-labelledby="instructionsModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
@@ -72,9 +59,8 @@
         </div>
       </div>
     </div>
-       
-          
-    <!--Game Log Model- Bootstrap -->
+
+    <!--GAME LOG MODAL; Using Bootstrap-->
     <div class="modal fade" id="gamelogModal" tabindex="-1" aria-labelledby="gamelogModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content game-modal-content">
@@ -103,11 +89,9 @@
     </div>
   </div>
 
-  <!-- Bootstrap JS Bundle; jQuery first, then Bootstrap JS, and custom JS-->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ url_for('static', filename='clouds.js') }}"></script>
-    <script src="{{ url_for('static', filename='index.js') }}"></script>
+{% endblock %}
 
-</body>
-</html> 
+{% block extra_js %}
+  <script src="{{ url_for('static', filename='index.js') }}"></script>
+{% endblock %}
+
