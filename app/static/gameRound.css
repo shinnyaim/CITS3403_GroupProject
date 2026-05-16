@@ -1,23 +1,33 @@
-body {
-    background-image: url(uwaBG.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    min-height: 100vh;
-    font-family: "Press Start 2P", system-ui;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 0; /* adds breathing room top and bottom */
+.page-content {
+    margin-top: 0 !important;
 }
 
+#menuToggle {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1100;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid yellow;
+    color: yellow;
+    font-size: 18px;
+    border-radius: 6px;
+    padding: 2px 8px;
+    cursor: pointer;
+}
+
+.game-nav-visible {
+    display: block !important;
+}
+
+
 .parent {
+    margin: 20px auto;
     border-radius: 12px;
     border: 4px solid yellow;
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
-    width: 78%;
+    width: 88%;
     min-height: 600px;   /* minimum height only */
     height: auto;        /* grows with content */
     position: relative;
@@ -27,12 +37,13 @@ body {
 }
 
 .gameInfo {
-    height: auto;        /* was fixed — let it grow */
+    height: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 35px;
-    margin-top: 20px;    /* reduced from 40px */
+    padding: 20px 30px 0.5px 30px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .topLeft {
@@ -51,6 +62,7 @@ body {
 
 .playerName {
     color: rgb(190,190,190);
+    margin-right: 1ch;
 }
 
 .dayCounter {
@@ -101,9 +113,9 @@ hr {
     flex-direction: column;
     justify-content: center;
     width: 95%;
-    height: auto;        /* was 100px — let it breathe */
-    margin: 10px auto;
-    gap: 12px;           /* replaces fixed height spacing */
+    height: auto;
+    margin: 4px auto;
+    gap: 8px;
 }
 
 .moraleBar {
@@ -198,22 +210,25 @@ hr {
 }
 
 .teammates {
-    width: 25%;
+    width: 20%;
     align-items: center;
     display: flex;
     flex-direction: column;
-    padding: 10px 0;
+    padding: 10px 8px;
 }
 
 .teammateProfile {
     margin: 5px;
     border-radius: 10px;
     border: 2px solid yellow;
-    width: 90%;          /* use percentage instead of fixed 200px */
-    min-height: 210px;    /* minimum height instead of fixed 30% */
+    width: 90%;
+    height: auto;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
+    transition: all 0.3s ease;
 }
 
 .gamePlay {
@@ -226,9 +241,9 @@ hr {
 
 .eventLogs {
     padding: 10px;
-    width: 25%;
+    width: 20%;
     overflow-y: auto;
-    /* remove max-height: 400px */
+    max-height: 500px;
 }
 
 .pfp {
@@ -247,16 +262,16 @@ hr {
     margin: 0 auto;
 }
 
+.name .emoji {
+    font-size: 3em;
+}
+
 .desc {
     padding-top: 3px;
     display: none;
     font-size: 10px;
     color: white;
     text-align: center;
-}
-
-.teammateProfile:hover .pfp {
-    opacity: 0;
 }
 
 .teammateProfile:hover .desc {
@@ -288,7 +303,7 @@ hr {
     color: yellow;
     font-size: 13px;
     max-width: fit-content;
-    padding: 10px;
+    padding: 4px 10px;
     margin: 0 auto;
 }
 
@@ -299,8 +314,8 @@ hr {
     display: flex;
     flex-direction: column;
     text-align: center;
-    width: 90%;          /* use percentage instead of fixed 550px */
-    max-width: 550px;    /* keeps it from getting too wide on big screens */
+    width: 95%;
+    max-width: 800px;
     margin: 0 auto;
     border-radius: 10px;
     background-color: rgb(0, 0, 53);
@@ -317,8 +332,8 @@ hr {
     border: 1px solid yellow;
     border-radius: 10px;
     padding: 15px 20px;
-    width: 90%;          /* use percentage instead of fixed 550px */
-    max-width: 550px;
+    width: 95%;
+    max-width: 800px;
     display: flex;
     align-items: center;
     margin: 8px auto;
@@ -352,12 +367,4 @@ hr {
     display: flex;
     margin: 10px auto 0 auto;
     cursor: pointer;
-}
-#cloudCanvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
 }

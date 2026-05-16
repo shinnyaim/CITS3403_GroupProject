@@ -29,7 +29,7 @@ class GameSession(db.Model):
     
     morale         = db.Column(db.Integer, default=100)
     progress       = db.Column(db.Integer, default=0)
-    day            = db.Column(db.Integer, default=1)
+    day            = db.Column(db.Integer, default=0)
     status         = db.Column(db.String(20), default='in_progress')
     overall_score  = db.Column(db.Float, default=0.0)
     
