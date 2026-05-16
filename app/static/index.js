@@ -75,33 +75,52 @@ GAME LOG MODAL
 =================*/
 
 $('#gamelogModal').on('show.bs.modal', async () => {
-    const tbody = document.getElementById('gamelogBody');
-    tbody.innerHTML = '';
+  const tbody = document.getElementById('gamelogBody');
+  tbody.innerHTML = '';
 
+  try {
     const res = await fetch('/api/sessions/get');
+
     if (!res.ok) {
-        tbody.innerHTML = '<tr><td colspan="6">Log in to see your game history.</td></tr>';
-        return;
+      tbody.innerHTML = '<tr><td colspan="6">Log in to see your game history.</td></tr>';
+      return;
     }
 
     const sessions = await res.json();
-    if (sessions.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6">No previous games found.</td></tr>';
-        return;
+
+    if (!sessions.length) {
+      tbody.innerHTML = '<tr><td colspan="6">No previous games found.</td></tr>';
+      return;
     }
 
     sessions.forEach(session => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${session.group_name}</td>
-            <td>${new Date(session.started_at).toLocaleDateString('en-AU')}</td>
-            <td>${session.currentDay}</td>
-            <td>${session.morale}%</td>
-            <td>${session.progress}%</td>
-            <td>${session.status === 'in_progress' ? `<button onclick="resumeSession(${session.session_id})">Resume</button>` : session.overall_score + '%'}</td>
-        `;
-        tbody.appendChild(row);
+      const row = document.createElement('tr');
+
+      row.innerHTML = `
+        <td>${session.group_name}</td>
+        <td>${new Date(session.started_at).toLocaleDateString('en-AU')}</td>
+        <td>${session.currentDay}</td>
+        <td>${session.morale}%</td>
+        <td>${session.progress}%</td>
+        <td>
+          ${
+            session.status === 'in_progress'
+              ? `<button class="btn btn-sm btn-success"
+                  onclick="resumeSession(${session.session_id})">
+                  Resume
+                 </button>`
+              : session.overall_score + '%'
+          }
+        </td>
+      `;
+
+      tbody.appendChild(row);
     });
+
+  } catch (err) {
+    console.error(err);
+    tbody.innerHTML = '<tr><td colspan="6">Error loading game log</td></tr>';
+  }
 });
 
 
