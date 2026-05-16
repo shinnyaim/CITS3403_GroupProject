@@ -288,26 +288,40 @@ function saveAvatarPreference(avatarName) {
   console.log('Avatar saved locally:', avatarName);
 }
 
-/*  GAME LOG MODAL SETUP  */
-function setupGameLogModal() {
-  const gameLogModal = document.getElementById('gameLogModal');
-  
-  if (gameLogModal) {
-    gameLogModal.addEventListener('show.bs.modal', loadGameLog);
-  }
-}
+$('#gamelogModal').on('show.bs.modal', async () => {
+    const tbody = document.getElementById('gamelogBody');
+    tbody.innerHTML = '';
 
-function loadGameLog() {
-  const gameLogContent = document.getElementById('gameLogContent');
-  
-  if (!gameLogContent) return;
-  
-  // In production, fetch from backend:
-  // fetchGameHistoryFromBackend();
-  
-  // For now, use demo data
-  populateGameLog(playerData.gameHistory);
-}
+    const res = await fetch('/api/sessions/get');
+    if (!res.ok) {
+        tbody.innerHTML = '<tr><td colspan="6">Log in to see your game history.</td></tr>';
+        return;
+    }
+
+    const sessions = await res.json();
+
+    if (sessions.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6">No previous games found.</td></tr>';
+        return;
+    }
+
+    sessions.forEach(session => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${session.group_name}</td>
+            <td>${new Date(session.started_at).toLocaleDateString('en-AU')}</td>
+            <td>${session.currentDay}</td>
+            <td>${session.morale}%</td>
+            <td>${session.progress}%</td>
+            <td>
+              ${session.status === 'in_progress'
+                ? `<button onclick="resumeSession(${session.session_id})">Resume</button>`
+                : session.overall_score + '%'}
+            </td>
+        `;
+        tbody.appendChild(row);
+    });
+});
 
 async function fetchGameHistoryFromBackend() {
   try {
