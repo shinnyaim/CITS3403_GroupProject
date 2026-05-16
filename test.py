@@ -1,5 +1,10 @@
 import unittest
-from app.functions import passwordsMatch
+from app.functions import (
+    passwordsMatch,
+    isValidEmail,
+    checkCreds,
+    canAccessSession,
+    updateProgress)
 from app import create_app, db
 from app.models import User, GameSession, Teammate
 from config import TestConfig
@@ -84,4 +89,4 @@ class ResumeGameTestGame(unittest.TestCase):
         self.assertEqual(updateProgress(50, 10), 60)
 
     def test_update_prog_cap_at_100(self):
-        self.assertEqual(updateProgress(95, 10) 100)
+        self.assertEqual(updateProgress(95, 10), 100)
