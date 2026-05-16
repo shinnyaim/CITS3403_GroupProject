@@ -35,7 +35,18 @@ def outcome():
 @main.route('/profile')
 @login_required
 def profile():
-    return render_template('profile.html')
+
+    best_session = (
+        GameSession.query
+        .filter_by(user_id=current_user.id, status='ended')
+        .order_by(GameSession.overall_score.desc())
+        .first()
+    )
+
+    return render_template(
+        'profile.html',
+        best_session=best_session
+    )
 
 @main.route('/api/random-teammates')
 def random_teammates():
