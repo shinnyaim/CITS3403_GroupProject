@@ -62,20 +62,26 @@ class ResumeGameTestGame(unittest.TestCase):
     def test_passwords_match_false(self):
         self.assertFalse(passwordsMatch('123', '456'))
 
-    def testValidEmailTrue(self):
+    def test_valid_email_true(self):
         self.assertTrue(isValidEmail("test@gmail.com"))
 
-    def testValidEmailFalse(self):
+    def test_valid_email_false(self):
         self.assertFalse(isValidEmail("testemail.com"))
     
-    def testCheckCredsTrue(self):
+    def test_check_creds_true(self):
         self.assertTrue(checkCreds("pass123", "pass123"))
 
-    def testCheckCredsFalse(self):
+    def test_check_creds_false(self):
         self.assertFalse(checkCreds("pass123", "test"))
 
-    def testSessTrue(self):
+    def test_sess_true(self):
         self.assertTrue(canAccessSession(1, 1))
 
-    def testSessFalse(self):
+    def test_sess_false(self):
         self.assertFalse(canAccessSession(1, 2))
+
+    def test_update_prog_normal(self):
+        self.assertEqual(updateProgress(50, 10), 60)
+
+    def test_update_prog_cap_at_100(self):
+        self.assertEqual(updateProgress(95, 10) 100)
