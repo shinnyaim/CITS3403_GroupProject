@@ -10,7 +10,7 @@ from app.models import User, GameSession, Teammate
 from config import TestConfig
 from datetime import datetime, timezone
 
-class ResumeGameTestGame(unittest.TestCase):
+class BasicTests(unittest.TestCase):
     def setUp(self):
         self.app = create_app(TestConfig)
         self.app_context = self.app.app_context()
