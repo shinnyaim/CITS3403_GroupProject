@@ -111,29 +111,57 @@
   border-color: #fcff50;
 }
 
-.game-modal-content {
+/* =================
+   GAME MODALS
+================= */
+
+.gameModalContent {
   background: rgba(0, 0, 0, 0.92);
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
   font-size: 0.65rem;
   line-height: 1.8;
+  overflow: hidden;
 }
 
-.game-modal-content .modal-title {
-  font-size: 0.9rem;
+.gameModalContent .modal-title {
+  color: white;
+  font-size: 1rem;
+  text-shadow: 2px 2px 0 #000;
 }
 
-.game-modal-content .close {
+.gameModalContent .close {
+  color: white;
   font-size: 1.5rem;
   opacity: 0.8;
 }
 
-.game-modal-content .close:hover {
+.gameModalContent .close:hover {
   opacity: 1;
   color: #fcff50 !important;
 }
 
+/* TABLE FIXES */
+
+.gameModalContent .table {
+  margin-bottom: 0;
+  color: white;
+}
+
+.gameModalContent .table thead th {
+  border-color: rgba(255,255,255,0.15);
+}
+
+.gameModalContent .table td,
+.gameModalContent .table th {
+  vertical-align: middle;
+  border-color: rgba(255,255,255,0.08);
+}
+
+.gameModalContent .table-responsive {
+  overflow-x: auto;
+}
 
 /* ==========================
    ANIMATIONS  
