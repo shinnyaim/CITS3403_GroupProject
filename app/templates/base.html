@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width", initial-scale="1.0">
+        <title>{% block title%}Group Project Simulator{% endblock %}</title>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="{{url_for('static', filename='base.css') }}">
+
+        <!--PAGE SPECIFIC STYLES-->
+        {% block extra_css %}{%endblock %}
+    </head>
+
+    <body>
+        <canvas id="cloudCanvas"></canvas>
+        <div class="background-container">
+            <img src="{{ url_for('static', filename='uwaBG.png') }}" alt="Pixel Art Background" class="bg-image">
+        </div>
+
+        <nav class="navbar-custom" id="mainNav" {% if request.endpoint != 'main.game' %}style="display:block"{% else %}style="display:none"{% endif %}>
+            <div class="nav-container">
+
+                <div class="nav-home-link">
+                        ☕ Group Project Simulator
+                </div>
+
+                <div class="nav-menu">
+
+                    {% if request.endpoint != 'main.index' %}
+                    <a href="{{ url_for('main.index') }}"
+                       class="nav-item {% if request.endpoint == 'main.index' %}active{% endif %}">
+                         HOME
+                    </a>
+                    {% endif %}
+                    
+                    {% if request.endpoint != 'main.index' %}
+                    <a href="{% if current_user.is_authenticated %}
+                    {{ url_for('main.home') }}
+                    {% else %}
+                    {{ url_for('auth.login', next=url_for('main.home')) }}
+                    {% endif %}"
+                    class="nav-item {% if request.endpoint == 'main.home' %}active{% endif %}">
+                        PLAY
+                    </a>
+                    {% endif %}
+
+                   {% if request.endpoint != 'main.index' %}
+                    <a href="{{url_for('main.leaderboard')}}" class="nav-item {% if request.endpoint=='main.leaderboard'%}active{%endif%}">
+                        LEADERBOARD
+                    </a>
+                    {% endif %}
+
+                    {% if request.endpoint != 'main.index' %}
+                    <a href="{{url_for('main.instructions')}}" class="nav-item {% if request.endpoint=='main.instructions'%}active{%endif%}">
+                        HELP
+                    </a>
+                    {% endif %}
+                </div>
+
+                <div class="nav-user">
+                    {% if current_user.is_authenticated %}
+
+                    <span class="nav-username">{{current_user.username }}</span>
+
+                    <a href="{{url_for('main.profile') }}" class="nav-item nav-profile {% if request.endpoint == 'main.profile'%}active{% endif %}">
+                        PROFILE
+                    </a>
+                    <a href="{{url_for('auth.logout') }}" class="nav-item nav-logout">
+                        LOGOUT
+                    </a>
+                    {% else %}
+                    {% if request.endpoint not in ['main.index', 'auth.login'] %}
+                    <a href="{{url_for('auth.login') }}" class="nav-item nav-auth {%if request.endpoint == 'auth.login'%}active{%endif%}">
+                        LOGIN
+                    </a>
+                    {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+
+        <!--MAIN CONTENT AREA-->
+        <main class="page-content">
+            {% block content %}
+            <!--PAGE CONTENT GOES HERE-->
+            {% endblock %}
+        </main>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="{{ url_for('static', filename='clouds.js') }}"></script>
+
+        {% block extra_js%}{% endblock %}
+    </body>
+
+</html>

@@ -1,0 +1,294 @@
+/* =============================================
+   BASE STYLES & NAVBAR
+============================================= */
+
+:root {
+  --color-primary: #ffeb3b;
+  --color-dark: rgba(0, 0, 0, 0.92);
+  --color-darker: rgba(0, 0, 0, 0.95);
+  --color-accent: #64b5f6;
+  --shadow-glow: 0 0 15px rgba(255, 235, 59, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Press Start 2P', monospace;
+  background: linear-gradient(135deg, rgba(10, 0, 61, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%);
+  color: white;
+  overflow-y: auto;
+}
+
+.background-container {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+}
+
+.bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#cloudCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* =============================================
+   NAVBAR STYLES
+============================================= */
+
+.navbar-custom {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: var(--color-darker);
+  border-bottom: 3px solid var(--color-primary);
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), var(--shadow-glow);
+  padding: 0;
+}
+
+.nav-container {
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 30px;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* Logo/Home Button */
+.nav-logo {
+  flex-shrink: 0;
+}
+
+.nav-home-link {
+  font-size: 0.9rem;
+  color: var(--color-primary);
+  text-decoration: none;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  transition: all 0.2s ease;
+  display: inline-block;
+  padding: 8px 15px;
+  border: 2px solid transparent;
+  border-radius: 4px;
+}
+
+.nav-home-link:hover {
+  color: white;
+  text-shadow: 0 0 10px var(--color-primary);
+  transform: scale(1.08);
+}
+
+/* Main Menu Items */
+.nav-menu {
+  display: flex;
+  gap: 25px;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav-item {
+  font-size: 0.65rem;
+  color: rgb(200, 200, 220);
+  text-decoration: none;
+  letter-spacing: 1px;
+  padding: 8px 12px;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  white-space: nowrap;
+}
+
+.nav-item:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  text-shadow: 0 0 8px var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.nav-item.active {
+  color: var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
+  text-shadow: 0 0 10px var(--color-primary), 2px 2px 4px rgba(0, 0, 0, 0.8);
+  animation: navPulse 1s ease-in-out infinite;
+}
+
+/* User Menu (Right Side) */
+.nav-user {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.nav-username {
+  font-size: 0.6rem;
+  color: var(--color-accent);
+  letter-spacing: 1px;
+  padding: 6px 10px;
+  border: 1px solid rgba(100, 181, 246, 0.5);
+  border-radius: 3px;
+  background: rgba(100, 181, 246, 0.1);
+  white-space: nowrap;
+}
+
+.nav-profile {
+  color: var(--color-accent);
+}
+
+.nav-profile:hover {
+  border-color: var(--color-accent);
+  text-shadow: 0 0 8px var(--color-accent);
+}
+
+.nav-profile.active {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  text-shadow: 0 0 10px var(--color-accent), 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.nav-logout {
+  color: #ff6b6b;
+}
+
+.nav-logout:hover {
+  border-color: #ff6b6b;
+  text-shadow: 0 0 8px #ff6b6b;
+}
+
+.nav-auth {
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+
+.nav-auth:hover {
+  background: rgba(255, 235, 59, 0.1);
+  text-shadow: 0 0 10px var(--color-primary);
+}
+
+.nav-auth.active {
+  background: rgba(255, 235, 59, 0.15);
+  border-color: var(--color-primary);
+}
+
+/* =============================================
+   PAGE CONTENT AREA
+============================================= */
+
+.page-content {
+  margin-top: 80px;
+  position: relative;
+  min-height: calc(100vh - 80px);
+}
+
+/* =============================================
+   ANIMATIONS; Consistent with game animations
+============================================= */
+
+@keyframes navPulse {
+  0%, 100% {
+    text-shadow: 0 0 8px var(--color-primary), 2px 2px 4px rgba(0, 0, 0, 0.8);
+  }
+  50% {
+    text-shadow: 0 0 15px var(--color-primary), 2px 2px 4px rgba(0, 0, 0, 0.8);
+  }
+}
+
+/* =============================================
+   FOR RESPONSIVE DESIGN
+============================================= */
+
+@media (max-width: 1024px) {
+  .nav-container {
+    padding: 10px 20px;
+    gap: 20px;
+  }
+
+  .nav-menu {
+    gap: 15px;
+  }
+
+  .nav-item {
+    font-size: 0.6rem;
+    padding: 6px 10px;
+  }
+
+  .nav-home-link {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-container {
+    padding: 12px 15px;
+    gap: 15px;
+  }
+
+  .nav-menu {
+    flex-basis: 100%;
+    gap: 10px;
+    justify-content: flex-start;
+    order: 3;
+  }
+
+  .nav-item {
+    font-size: 0.55rem;
+    padding: 5px 8px;
+  }
+
+  .nav-username {
+    font-size: 0.5rem;
+  }
+
+  .nav-user {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-custom {
+    border-bottom-width: 2px;
+  }
+
+  .nav-container {
+    padding: 10px 12px;
+    gap: 12px;
+  }
+
+  .nav-menu {
+    gap: 8px;
+  }
+
+  .nav-item {
+    font-size: 0.5rem;
+    padding: 4px 6px;
+  }
+
+  .nav-home-link {
+    font-size: 0.7rem;
+  }
+
+  .page-content {
+    margin-top: 90px;
+  }
+}
