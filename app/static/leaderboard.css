@@ -1,25 +1,8 @@
 body {
-    background-image: url(uwaBG.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    min-height: 100vh; /* USER CAN SEE FULL CONTENT */
-    font-family: "Press Start 2P", system-ui;
-    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-
-#cloudCanvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;
-    pointer-events: none;
 }
 
 .titleRow {
@@ -68,7 +51,7 @@ h1 {
     width: 75%;
     padding-top: 25px;
     padding-bottom: 25px;
-    /* padding: 25px; */
+    margin: 20px auto;
 }
 
 #homeBtn {

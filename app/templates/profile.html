@@ -1,26 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Player Profile</title>
+{% extends "base.html" %}
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/static/profile.css">
-</head>
+{% block title %}Home- Group Project Simulator{% endblock %}
 
-<body>
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
+{% endblock %}
 
-  <canvas id="cloudCanvas"></canvas>
+{% block content %}
 
-  <div class="background-container">
-    <img src="/static/uwaBG.png" alt="Pixel Art Background" class="bg-image">
-  </div>
-  <button onclick="window.history.back()" class="back-btn">
-    Back to Menu
-</button>
-  <div class="profileWrapper">
+<div class="profileWrapper">
 
     <div class="profileHeader text-center">
       <h1 class="profileTitle">PLAYER PROFILE</h1>
@@ -141,19 +129,6 @@
         </div>
       </div>
 
-      <!-- FOOTER BUTTONS -->
-      <div class="row g-4 mt-3 mb-5">
-        <div class="col-12">
-          <div class="footerButtonGroup">
-            <button class="gameBtn btn-primary" onclick="viewLeaderboard()">
-              LEADERBOARD
-            </button>
-            <button class="gameBtn btn-danger" onclick="logout()">
-              LOGOUT
-            </button>
-          </div>
-        </div>
-      </div>
 
     </div>
 
@@ -195,12 +170,8 @@
       </div>
     </div>
   </div>
+{% endblock %}
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-  
-  <script src="/static/clouds.js"></script>
-  <script src="/static/profile.js"></script>
-
-</body>
-</html>
+{% block extra_js %}
+  <script src="{{ url_for('static', filename='profile.js') }}"></script>
+{% endblock %}
