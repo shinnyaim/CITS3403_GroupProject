@@ -35,6 +35,13 @@ body {
 #title {
     font-size: 19pt;
     color: white;
+    white-space: normal;
+    word-break: break-word;
+}
+
+input {
+    width: 90%;
+    max-width: 400px;
 }
 
 /* .title {
@@ -54,8 +61,10 @@ body {
     padding-top: 40px;
     padding-bottom: 40px;
     background-color: rgba(0, 0, 0, 0.5);
-    width: 1200px;
-    /* height: 200px; */
+    width: 90%;
+    max-width: 1200px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
     justify-content: center;
     align-items: center;
     text-align: center;

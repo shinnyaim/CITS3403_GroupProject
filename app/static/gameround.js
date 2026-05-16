@@ -1,5 +1,5 @@
 // --- Game State ---
-let morale = parseInt(sessionStorage.getItem('Morale')) || 100;
+let morale = parseInt(sessionStorage.getItem('Morale')) || 70;
 let progress = parseInt(sessionStorage.getItem('Progress')) || 0;
 let currentDay = parseInt(sessionStorage.getItem('currentDay')) || 1;
 let currentEvent = null;
@@ -20,7 +20,15 @@ document.addEventListener('DOMContentLoaded', () => {
     loadTeammates();
     updateBars();
     updateDayCounter();
-    fetchEventCard();
+    restoreEventLog();
+    
+    const savedEvent = sessionStorage.getItem('currentEvent');
+    if (savedEvent) {
+        currentEvent = JSON.parse(savedEvent);
+        displayEventCard(currentEvent);
+    } else {
+        fetchEventCard();
+    }
 });
 
 async function updateNames() {
@@ -51,11 +59,15 @@ function updateBars() {
     progressBar.style.width = progress + '%';
     progressBar.setAttribute('aria-valuenow', progress);
     document.getElementById('progressPercentage').textContent = progress + '%';
+
+    sessionStorage.setItem('Morale', morale);
+    sessionStorage.setItem('Progress', progress);
 }
 
 // --- Update day counter display ---
 function updateDayCounter() {
-    document.querySelector('.dayCounter').textContent = 'DAY ' + currentDay + ' / 14';
+    document.querySelector('.dayCounter').textContent = 'DAY ' + currentDay + ' / 14'; 
+    sessionStorage.setItem('currentDay', currentDay);
 }
 
 // --- Fetch a random event card from the API ---
@@ -70,6 +82,16 @@ async function fetchEventCard() {
 
     currentEvent = event;
     seenCardIds.push(event.id);   // mark this card as seen
+    sessionStorage.setItem('currentEvent', JSON.stringify(event));
+
+    fetch('/api/session/update', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            session_id: sessionStorage.getItem('session_id'),
+            current_event: JSON.stringify(event)
+        })
+    });
 
     displayEventCard(event);
 }
@@ -77,11 +99,13 @@ async function fetchEventCard() {
 // --- Timer: start a 30-second countdown for the current card ---
 function startTimer() {
     stopTimer();
-    timeRemaining = TIMER_SECONDS;
+    const stored = parseInt(sessionStorage.getItem('timeRemaining'));
+    timeRemaining = (stored > 0) ? stored : TIMER_SECONDS;
     document.querySelector('.timer').textContent = timeRemaining + 's';
 
     timerInterval = setInterval(() => {
         timeRemaining--;
+        sessionStorage.setItem('timeRemaining', timeRemaining); // persist remaining time in case of accidental refresh
         document.querySelector('.timer').textContent = timeRemaining + 's';
 
         if (timeRemaining <= 0) {
@@ -101,6 +125,8 @@ function stopTimer() {
 function onTimerExpired() {
     document.getElementById('confirmChoice').style.display = 'none';
 
+    sessionStorage.removeItem('timeRemaining');
+    sessionStorage.removeItem('currentEvent');
     morale -= 5;
     progress -= 5;
     if (morale < 0) morale = 0;
@@ -139,7 +165,6 @@ function displayEventCard(event) {
     buttons[1].onclick = () => selectOption(1);
     buttons[2].onclick = () => selectOption(2);
 
-    enableOptions();
     startTimer();
 }
 
@@ -159,6 +184,8 @@ function selectOption(index) {
 async function chooseOption() {
     if (selectedOptionIndex === null) return;
     stopTimer();
+    sessionStorage.removeItem('timeRemaining');
+    sessionStorage.removeItem('currentEvent');
 
     const option = currentEvent.options[selectedOptionIndex];
 
@@ -173,7 +200,6 @@ async function chooseOption() {
 
     updateBars();
     addToEventLog(currentEvent.title, option.text);
-    disableOptions();   // prevent picking multiple options per day
 
     const sessionUpdate = await fetch('/api/session/update', {
         method: 'POST',
@@ -185,7 +211,9 @@ async function chooseOption() {
             seen_event_ids: seenCardIds.join(','),
             morale: morale,
             progress: progress,
-            day: currentDay
+            currentDay: currentDay + 1,
+            event_log: sessionStorage.getItem('eventLog') || '[]',
+            current_event: sessionStorage.getItem('currentEvent')
         })
     });
 
@@ -212,17 +240,23 @@ function addToEventLog(title, choiceText) {
     entry.className = 'eventLogDay';
     entry.textContent = `DAY ${currentDay}: ${title}`;
     log.appendChild(entry);
+
+    const stored = JSON.parse(sessionStorage.getItem('eventLog') || '[]');
+    stored.push({ day: currentDay, title });
+    sessionStorage.setItem('eventLog', JSON.stringify(stored));
 }
 
-// --- Disable option buttons after a choice is made ---
-function disableOptions() {
-    document.querySelectorAll('.options').forEach(btn => btn.disabled = true);
+function restoreEventLog() {
+    const stored = JSON.parse(sessionStorage.getItem('eventLog') || '[]');
+    const log = document.querySelector('.eventLogs');
+    stored.forEach(({ day, title }) => {
+        const entry = document.createElement('div');
+        entry.className = 'eventLogDay';
+        entry.textContent = `DAY ${day}: ${title}`;
+        log.appendChild(entry);
+    });
 }
 
-// --- Enable option buttons for a new card ---
-function enableOptions() {
-    document.querySelectorAll('.options').forEach(btn => btn.disabled = false);
-}
 
 // --- Confirm button ---
 document.getElementById('confirmChoice').addEventListener('click', () => {
@@ -237,7 +271,7 @@ document.getElementById('submitEarly').addEventListener('click', () => {
 // --- End the game and redirect to outcome page ---
 async function endGame(reason) {
     // store final stats in sessionStorage so outcome.html can read them
-    const dayScore = (1 - currentDay / 14) * 100;
+    const dayScore = (14 - currentDay) / 14 * 100;
     const overallScore = parseFloat((progress * 0.5 + morale * 0.3 + dayScore * 0.2).toFixed(2));
 
     sessionStorage.setItem('finalMorale', morale);
@@ -245,7 +279,12 @@ async function endGame(reason) {
     sessionStorage.setItem('currentDay', currentDay);
     sessionStorage.setItem('endReason', reason);
     sessionStorage.setItem('overallScore', overallScore);
-
+    
+    sessionStorage.removeItem('eventLog');
+    sessionStorage.removeItem('currentEvent');
+    sessionStorage.removeItem('morale');
+    sessionStorage.removeItem('progress');
+    
     await fetch('/api/session/end', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
