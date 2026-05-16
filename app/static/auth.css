@@ -35,7 +35,10 @@ button:hover {
 ===========================*/
 .background-container {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: -2;
 }
 
@@ -47,13 +50,27 @@ button:hover {
 
 #cloudCanvas {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: -1;
   pointer-events: none;
 }
 
 .menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow-y: auto;
 }
 
 /* ==========================
@@ -122,6 +139,18 @@ button:hover {
   min-height: 200px;
 }
 
+.error-message {
+  font-size: 0.6rem;
+  color: #ff4d4d;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: none;
+  text-align: left;
+}
+ 
+.error-message.show {
+  display: block;
+}
 /* ==========================
     Inputs
 ===========================*/
