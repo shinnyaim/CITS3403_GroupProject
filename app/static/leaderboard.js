@@ -1,5 +1,12 @@
-async function updateLeaderboard() {
-    const res = await fetch('/api/sessions/get_all');
+let filter = sessionStorage.getItem('filter') || 'overall';
+
+async function updateLeaderboard(currentFilter) {
+    sessionStorage.setItem('filter', currentFilter);
+
+    const filterTitle = document.getElementById('filterTitle');
+    filterTitle.textContent = currentFilter.toUpperCase();
+
+    const res = await fetch('/api/sessions/get_all/' + currentFilter);
     const sessions = await res.json();
     const tbody = document.getElementById('leaderboardBody');
     tbody.innerHTML = '';
@@ -12,12 +19,13 @@ async function updateLeaderboard() {
             <td>${session.group_name}</td>
             <td>${session.progress}%</td>
             <td>${session.morale}%</td>
-            <td>${session.days_taken}</td>
+            <td>${session.currentDay}</td>
             <td>${session.overall_score}%</td>
         `;
         tbody.appendChild(row);
     });
 }
 
-updateLeaderboard();
-setInterval(updateLeaderboard, 30000);
+
+updateLeaderboard(filter); 
+setInterval(() => updateLeaderboard(sessionStorage.getItem('filter') || 'overall'), 30000);
