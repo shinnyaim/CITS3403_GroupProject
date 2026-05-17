@@ -187,5 +187,9 @@ hr {
   .Btn {
     width: 80%;
   }
+
+  #menuToggle {
+    display: block;
+  }
 }
 
