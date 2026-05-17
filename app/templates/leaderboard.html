@@ -8,7 +8,7 @@
 
 {% block content %}
 
-    <div class="parent">
+    <div class="parent px-3">
       <div class="titleRow">
         <div class="titleSpacer"></div>
         <h1>🏆 LEADERBOARD 🏆</h1>
@@ -30,7 +30,11 @@
         </div>
       </div>
       <h1 id="filterTitle">OVERALL</h1>
-      <table id="leaderboardTable">
+      <div class="searchRow d-flex align-items-center mt-3">
+        <span class="mr-3">SEARCH PLAYER</span>
+        <input type="text" id="playerSearch" placeholder="USERNAME..." oninput="searchPlayer()" />
+      </div>
+      <table id="leaderboardTable"> 
         <br />
         <thead>
           <tr>
