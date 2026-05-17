@@ -116,10 +116,14 @@ def start_session():
     return jsonify({'session_id': session.id})
 
 @main.route('/api/session/update', methods=['POST'])
+@login_required
 def update_session():
     data = request.json
     session_id = data.get('session_id')
     session = db.session.get(GameSession, session_id)
+
+    if not session or session.user_id != current_user.id:
+        return jsonify({'error': 'Session not found'}), 404
 
     session.morale = data.get('morale', session.morale)
     session.progress = data.get('progress', session.progress)
@@ -132,13 +136,13 @@ def update_session():
     return jsonify({'ok': True})
 
 @main.route('/api/session/end', methods=['POST'])
+@login_required
 def end_session():
     data = request.json
     session_id = data.get('session_id')
-    
     session = db.session.get(GameSession, session_id)
 
-    if not session:
+    if not session or session.user_id != current_user.id:
         return jsonify({'error': 'Session not found'}), 404
 
     session.status = 'ended'
@@ -165,6 +169,7 @@ def get_sessions():
 
 
 @main.route('/api/session/resume/<int:session_id>', methods=['GET'])
+@login_required
 def resume_session(session_id):
 
     session = db.session.get(GameSession, session_id)
@@ -192,7 +197,7 @@ def resume_session(session_id):
 def leaderboard():
     return render_template('leaderboard.html')
 
-
+ 
 @main.route('/api/sessions/get_all/overall')
 def leaderboard_data():
     all_sessions = GameSession.query.filter_by(status='ended').order_by(GameSession.overall_score.desc()).all()
