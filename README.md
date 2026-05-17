@@ -76,17 +76,17 @@ Testing:
 **Instructions for how to run the tests for the application:**
 
 UNIT TESTING:
-For unit testing, we've setup a fake database. The functions are stored in functions.py while the unit tests are in test.py, where assertions are applied on
+For unit testing, we've setup a fake database. The functions are stored in functions.py while the unit tests are in unitTest.py, where assertions are applied on
 the functions.
 
 To run all tests:
 
-python -m unittest test.py
+python -m unittest unitTest.py
 
 To run a specific function:
 
-python -m unittest test.BasicTests.unit_test
-Example: python -m unittest test.BasicTests.test_password_match_true
+python -m unittest unitTest.BasicTests.unit_test
+Example: python -m unittest unitTest.BasicTests.test_password_match_true
 
 **Instructions for Selenium testing:**
 
@@ -99,12 +99,12 @@ pip install selenium
 
 To run all tests:
 
-python -m unittest tests.test_system -v
+python -m unittest seleniumTest.test_system -v
 
 To run a specific function:
 
 python -m unittest tests.test_system.SystemTests.system_test
-Example: python -m unittest tests.test_system.SystemTests.test_invalid_login_shows_error -v
+Example: python -m unittest seleniumTest.SystemTests.test_invalid_login_shows_error -v
 
 **License**
 
