@@ -112,6 +112,9 @@ def start_session():
     session = GameSession(
         user_id=current_user.id,
         group_name=group_name,
+        morale=70,
+        progress=0,
+        day=1,
         teammate_ids=','.join(map(str, teammate_ids)),
         started_at=datetime.now(timezone.utc)
     )
