@@ -3,6 +3,39 @@ function toggleNav() {
     nav.style.display = nav.style.display === 'none' ? 'block' : 'none';
 }
 
+// This only appears if the user launched the app on a mobile 
+function togglePopup(id) {
+    const popup = document.getElementById(id);
+    const isOpening = !popup.classList.contains('active');
+
+    if (isOpening) {
+        const content = popup.querySelector('.mobilePopupContent');
+
+        if (id === 'teammatesPopup') {
+            const realPanel = document.getElementById('teammatesPanel');
+            content.appendChild(realPanel);
+
+        } else if (id === 'eventLogPopup') {
+            const realPanel = document.getElementById('eventLogsPanel');
+            content.appendChild(realPanel);
+        }
+    } else {
+        // on close, move panels back to secParent so desktop still works
+        const secParent = document.querySelector('.secParent');
+        const realTeammates = document.getElementById('teammatesPanel');
+        const realLog = document.getElementById('eventLogsPanel');
+
+        if (realTeammates && !secParent.contains(realTeammates)) {
+            secParent.insertBefore(realTeammates, secParent.firstChild);
+        }
+        if (realLog && !secParent.contains(realLog)) {
+            secParent.appendChild(realLog);
+        }
+    }
+
+    popup.classList.toggle('active');
+}
+
 // --- Game State ---
 let morale = parseInt(sessionStorage.getItem('Morale')) || 70;
 let progress = parseInt(sessionStorage.getItem('Progress')) || 0;
