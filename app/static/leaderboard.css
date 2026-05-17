@@ -191,4 +191,15 @@ td {
         left: auto;
         min-width: 140px; /* prevents it from being too wide */
     }
+
+    span {
+        font-size: 9pt;
+    }
+
+    input {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        font-size: 9pt;
+    }
 }
