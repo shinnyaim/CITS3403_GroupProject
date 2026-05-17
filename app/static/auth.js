@@ -1,28 +1,76 @@
+
+// ==========================================
+// MODULE 1: TAB SWITCHING (LOGIN / SIGNUP)
+// ==========================================
 document.addEventListener("DOMContentLoaded", () => {
-  const tabs = {
-    login: document.getElementById("loginTab"),
-    signup: document.getElementById("signupTab")
-  };
+  const loginTab = document.getElementById("loginTab");
+  const signupTab = document.getElementById("signupTab");
+  const loginForm = document.getElementById("loginForm");
+  const signupForm = document.getElementById("signupForm");
 
-  const forms = {
-    login: document.getElementById("loginForm"),
-    signup: document.getElementById("signupForm")
-  };
-
-  if (!tabs.login || !tabs.signup || !forms.login || !forms.signup) return;
-
-  function setMode(mode) {
-    const isLogin = mode === "login";
-
-    forms.login.style.display = isLogin ? "block" : "none";
-    forms.signup.style.display = isLogin ? "none" : "block";
-
-    tabs.login.classList.toggle("active", isLogin);
-    tabs.signup.classList.toggle("active", !isLogin);
+  // Exit if elements don't exist
+  if (!loginTab || !signupTab || !loginForm || !signupForm) {
+    console.warn("Auth tab elements not found");
+    return;
   }
 
-  tabs.login.addEventListener("click", () => setMode("login"));
-  tabs.signup.addEventListener("click", () => setMode("signup"));
+  function switchMode(mode) {
+    const isLogin = mode === "login";
 
-  setMode("login");
+    loginForm.style.display = isLogin ? "block" : "none";
+    signupForm.style.display = isLogin ? "none" : "block";
+
+    loginTab.classList.toggle("active", isLogin);
+    signupTab.classList.toggle("active", !isLogin);
+  }
+
+  loginTab.addEventListener("click", () => switchMode("login"));
+  signupTab.addEventListener("click", () => switchMode("signup"));
+
+  switchMode("login");
+});
+
+// ==========================================
+// MODULE 2: DISPLAY FLASH MESSAGES FOR SELENIUM
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+  const errorBox = document.getElementById("loginError");
+  
+  if (!errorBox) {
+    console.warn("Error box not found");
+    return;
+  }
+
+  const errorText = errorBox.innerText.trim();
+  
+  if (errorText) {
+    errorBox.classList.add("show");
+  }
+});
+
+// ==========================================
+// MODULE 3: FORM SUBMISSION (NORMAL POST)
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+  const loginFormEl = document.querySelector("#loginForm form");
+  const errorBox = document.getElementById("loginError");
+  
+  if (!loginFormEl || !errorBox) return;
+
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("password");
+
+  if (emailInput) {
+    emailInput.addEventListener("input", () => {
+      errorBox.classList.remove("show");
+    });
+  }
+
+  if (passwordInput) {
+    passwordInput.addEventListener("input", () => {
+      errorBox.classList.remove("show");
+    });
+  }
+
+
 });

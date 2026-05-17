@@ -20,42 +20,75 @@
       <button id="loginTab" class="auth-tab active">LOG IN</button>
     </div>
 
-    <!-- Flash Messages-->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% for category, message in messages %}
-        <div class="alert flash-alert mb-2">
-          {{ message }}
-        </div>
-      {% endfor %}
-    {% endwith %}
+    <!-- ERROR MESSAGE BOX (REQUIRED FOR SELENIUM) -->
+    <div id="loginError" class="error-message">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {{ messages[0] }}
+        {% endif %}
+      {% endwith %}
+    </div>
 
-    <!-- LOGIN FORM-->
     <div class="auth-form-box" id="loginForm">
       <form method="POST">
-        <input type="hidden" name="action" value="login">
-        <input type="hidden" name="next" value="{{ request.args.get('next', '') }}">
+        <input type="hidden" name="action" value="login"/>
+        <input type="hidden" name="next" value="{{ request.args.get('next', '') }}"/>
 
-        <input type="email" name="email" class="auth-input" placeholder="Email" required>
-        <input type="password" name="password" class="auth-input" placeholder="Password" required>
+        <input type="email"
+               id="email"
+               name="email"
+               class="auth-input"
+               placeholder="Email"
+               required />
 
-        <button class="auth-submit" type="submit">LOGIN</button>
-      </form> 
+        <input type="password"
+               id="password"
+               name="password"
+               class="auth-input"
+               placeholder="Password"
+               required />
+
+        <button id="loginBtn" class="auth-submit" type="submit">
+          LOGIN
+        </button>
+      </form>
     </div>
 
     <!-- SIGNUP FORM-->
     <div class="auth-form-box" id="signupForm" style="display:none;">
       <form method="POST">
-        <input type="hidden" name="action" value="signup">
+        <input type="hidden" name="action" value="signup"/>
+   
+        <input type="hidden" name="action" value="signup"/>
 
-        <input type="text" name="username" class="auth-input" placeholder="Username" required>
-        <input type="email" name="email" class="auth-input" placeholder="Email" required>
-        <input type="password" name="password" class="auth-input" placeholder="Password" required>
+        <input type="text"
+               name="username"
+               class="auth-input"
+               placeholder="Username"
+               required />
 
-        <button class="auth-submit">JOIN GAME</button>
+        <input type="email"
+               name="email"
+               class="auth-input"
+               placeholder="Email"
+               required />
+
+        <input type="password"
+               name="password"
+               class="auth-input"
+               placeholder="Password"
+               required />
+
+        <button id="signupBtn" class="auth-submit" type="submit">
+          JOIN GAME
+        </button>
       </form>
     </div>
 
-    <a href="{{ url_for('main.index') }}" class="back-link mt-3">Back to Menu</a>
+    <!-- BACK LINK -->
+    <a href="{{ url_for('main.index') }}" class="back-link mt-3">
+      Back to Menu
+    </a>
 
   </div>
 
