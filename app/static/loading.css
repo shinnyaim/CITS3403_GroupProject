@@ -44,7 +44,7 @@
 
 @media (max-width: 480px) {
     .parent {
-        margin: 0 8px 0 8px;
+        margin: 0 8px 12px 8px;
     }
 }
 
@@ -60,7 +60,7 @@
         justify-content: center;
         align-items: center;
         text-align: center;
-        font-size: 15px;
+        font-size: 13.5px;
     }
 }
 
