@@ -33,6 +33,7 @@ def calculate_rank(best_score):
         return 'Deadline Dodger'
     else:
         return 'Barely Made It'
+    
 def convert_score_to_grade(score):
     if score is None or score == 0:
         return 'N/A'
