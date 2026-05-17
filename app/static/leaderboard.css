@@ -176,3 +176,13 @@ td {
     display: block;
   }
 }
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 9pt;
+    }
+
+    .dropdownMenu a{
+        font-size: 8pt;
+    }
+}
