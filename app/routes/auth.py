@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, render_template, redirect, url_for, reques
 from flask_login import current_user, login_user, logout_user, login_required
 from app import db
 from app.models import User
+from app.forms import LoginForm
 
 auth = Blueprint('auth', __name__)
 
