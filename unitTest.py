@@ -83,3 +83,26 @@ class BasicTests(unittest.TestCase):
 
     def test_update_prog_cap_at_100(self):
         self.assertEqual(updateProgress(95, 10), 100)
+    
+    from app.functions import convertScoreToGrade
+
+    def test_grade_HD(self):
+        self.assertEqual(convertScoreToGrade(90), 'HD')
+
+    def test_grade_D(self):
+        self.assertEqual(convertScoreToGrade(80), 'D')
+
+    def test_grade_C(self):
+        self.assertEqual(convertScoreToGrade(70), 'C')
+
+    def test_grade_P(self):
+        self.assertEqual(convertScoreToGrade(60), 'P')
+
+    def test_grade_F(self):
+        self.assertEqual(convertScoreToGrade(59), 'F')
+
+    def test_grade_none(self):
+        self.assertEqual(convertScoreToGrade(None), 'N/A')
+
+    def test_grade_zero(self):
+        self.assertEqual(convertScoreToGrade(0), 'N/A')
