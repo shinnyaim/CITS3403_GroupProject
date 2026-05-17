@@ -79,5 +79,6 @@ button:hover {
     #grpName {
         width: 200px;
         height: 25px;
+        font-size: 10pt;
     }
 }
