@@ -1,10 +1,12 @@
 import unittest
 from app.functions import (
+    calculate_rank, 
     passwordsMatch,
     isValidEmail,
     checkCreds,
     canAccessSession,
-    updateProgress)
+    updateProgress,
+    convert_score_to_grade)
 from app import create_app, db
 from app.models import User, GameSession, Teammate
 from config import TestConfig
@@ -83,3 +85,43 @@ class BasicTests(unittest.TestCase):
 
     def test_update_prog_cap_at_100(self):
         self.assertEqual(updateProgress(95, 10), 100)
+    
+    # RANK TESTS
+    def test_rank_none(self):
+        self.assertEqual(calculate_rank(None), 'Novice')
+
+
+    # The following applies assertion on each grade
+    def test_rank_zero(self):
+        self.assertEqual(calculate_rank(0), 'Novice')
+
+    def test_rank_59(self):
+        self.assertEqual(calculate_rank(59), 'Barely Made It')
+
+    def test_rank_60(self):
+        self.assertEqual(calculate_rank(60), 'Deadline Dodger')
+
+    def test_rank_95(self):
+        self.assertEqual(calculate_rank(95), 'Project Master')
+
+    # GRADE TESTS
+    def test_grade_HD(self):
+        self.assertEqual(convert_score_to_grade(90), 'HD')
+
+    def test_grade_D(self):
+        self.assertEqual(convert_score_to_grade(80), 'D')
+
+    def test_grade_C(self):
+        self.assertEqual(convert_score_to_grade(70), 'C')
+
+    def test_grade_P(self):
+        self.assertEqual(convert_score_to_grade(60), 'P')
+
+    def test_grade_F(self):
+        self.assertEqual(convert_score_to_grade(59), 'F')
+
+    def test_grade_none(self):
+        self.assertEqual(convert_score_to_grade(None), 'N/A')
+
+    def test_grade_zero(self):
+        self.assertEqual(convert_score_to_grade(0), 'N/A')
