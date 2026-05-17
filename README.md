@@ -66,7 +66,7 @@ Testing:
 
 1. Clone repository
 
-git clone <repository-url>
+git clone https://github.com/shinnyaim/CITS3403_GroupProject.git
 cd CITS3403_GroupProject
 
 2. Create virtual environment
