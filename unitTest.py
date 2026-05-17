@@ -90,10 +90,8 @@ class BasicTests(unittest.TestCase):
     def test_rank_none(self):
         self.assertEqual(calculate_rank(None), 'Novice')
 
-<<<<<<< HEAD
 
     # The following applies assertion on each grade
-=======
     def test_rank_zero(self):
         self.assertEqual(calculate_rank(0), 'Novice')
 
@@ -107,7 +105,6 @@ class BasicTests(unittest.TestCase):
         self.assertEqual(calculate_rank(95), 'Project Master')
 
     # GRADE TESTS
->>>>>>> bcf1df3c744dcc928d84324c0c87482e2f9b869c
     def test_grade_HD(self):
         self.assertEqual(convert_score_to_grade(90), 'HD')
 
