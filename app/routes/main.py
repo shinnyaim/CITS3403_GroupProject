@@ -107,6 +107,8 @@ def random_event():
 def start_session():
     data = request.json
     group_name = data.get('group_name')
+    if not group_name or len(group_name) >12:
+        return jsonify({'error': 'Group name must be 12 characters or less'}), 400
     teammate_ids = data.get('teammate_ids', [])
 
     session = GameSession(
