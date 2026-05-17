@@ -85,6 +85,8 @@ class BasicTests(unittest.TestCase):
     def test_update_prog_cap_at_100(self):
         self.assertEqual(updateProgress(95, 10), 100)
 
+
+    # The following applies assertion on each grade
     def test_grade_HD(self):
         self.assertEqual(convert_score_to_grade(90), 'HD')
 
