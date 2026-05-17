@@ -53,6 +53,7 @@ def profile():
     )
 
 @main.route('/api/random-teammates')
+@login_required
 def random_teammates():
     all_teammates = Teammate.query.all()
     if len(all_teammates) < 3:
@@ -65,6 +66,7 @@ def random_teammates():
     ])
 
 @main.route('/api/random-event')
+@login_required
 def random_event():
     """Returns a random event card filtered to the player's current teammates."""
     ids_param = request.args.get('teammate_ids', '')
