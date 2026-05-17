@@ -8,90 +8,87 @@
 
 {% block content %}
 
-  <div class="menu-overlay d-flex flex-column align-items-center justify-content-center min-vh-100 text-center">
+<div class="menu-overlay d-flex flex-column align-items-center justify-content-center min-vh-100 text-center">
 
-    <div class="title-box p-4 mb-4">
-      <h1 class="game-title">Group Project Simulator</h1>
-    </div>
-
-    <!-- Tabs -->
-    <div class="auth-tabs mb-3">
-      <button id="signupTab" class="auth-tab">SIGN UP</button>
-      <button id="loginTab" class="auth-tab active">LOG IN</button>
-    </div>
-
-    <!-- ERROR MESSAGE BOX (REQUIRED FOR SELENIUM) -->
-    <div id="loginError" class="error-message">
-      {% with messages = get_flashed_messages() %}
-        {% if messages %}
-          {{ messages[0] }}
-        {% endif %}
-      {% endwith %}
-    </div>
-
-    <div class="auth-form-box" id="loginForm">
-      <form method="POST">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> 
-        <input type="hidden" name="action" value="login"/>
-        <input type="hidden" name="next" value="{{ request.args.get('next', '') }}"/>
-
-        <input type="email"
-               id="email"
-               name="email"
-               class="auth-input"
-               placeholder="Email"
-               required />
-
-        <input type="password"
-               id="password"
-               name="password"
-               class="auth-input"
-               placeholder="Password"
-               required />
-
-        <button id="loginBtn" class="auth-submit" type="submit">
-          LOGIN
-        </button>
-      </form>
-    </div>
-
-    <!-- SIGNUP FORM-->
-    <div class="auth-form-box" id="signupForm" style="display:none;">
-      <form method="POST">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-   
-        <input type="hidden" name="action" value="signup"/>
-
-        <input type="text"
-               name="username"
-               class="auth-input"
-               placeholder="Username"
-               required />
-
-        <input type="email"
-               name="email"
-               class="auth-input"
-               placeholder="Email"
-               required />
-
-        <input type="password"
-               name="password"
-               class="auth-input"
-               placeholder="Password"
-               required />
-
-        <button id="signupBtn" class="auth-submit" type="submit">
-          JOIN GAME
-        </button>
-      </form>
-    </div>
-
-    <!-- BACK LINK -->
-    <a href="{{ url_for('main.index') }}" class="back-link mt-3">
-      Back to Menu
-    </a>
-
+  <div class="title-box p-4 mb-4">
+    <h1 class="game-title">Group Project Simulator</h1>
   </div>
+
+  <div class="auth-tabs mb-3">
+    <button id="signupTab" class="auth-tab">SIGN UP</button>
+    <button id="loginTab" class="auth-tab active">LOG IN</button>
+  </div>
+
+  <div id="loginError" class="error-message">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {{ messages[0] }}
+      {% endif %}
+    {% endwith %}
+  </div>
+
+  <div class="auth-form-box" id="loginForm">
+
+    <form method="POST">
+      {{ login_form.hidden_tag() }}
+
+      <input type="hidden" name="action" value="login">
+      <input type="hidden" name="next" value="{{ request.args.get('next', '') }}">
+
+      {{ login_form.email(
+          class="auth-input",
+          placeholder="Email",
+          id="email"
+      ) }}
+
+      {{ login_form.password(
+          class="auth-input",
+          placeholder="Password",
+          id="password"
+      ) }}
+
+      <button id="loginBtn" class="auth-submit" type="submit">
+        LOGIN
+      </button>
+
+    </form>
+  </div>
+
+  <div class="auth-form-box" id="signupForm" style="display:none;">
+
+    <form method="POST">
+      {{ signup_form.hidden_tag() }}
+
+      <input type="hidden" name="action" value="signup">
+
+      {{ signup_form.username(
+          class="auth-input",
+          placeholder="Username"
+      ) }}
+
+      {{ signup_form.email(
+          class="auth-input",
+          placeholder="Email"
+      ) }}
+
+      {{ signup_form.password(
+          class="auth-input",
+          placeholder="Password"
+      ) }}
+
+      <button id="signupBtn" class="auth-submit" type="submit">
+        JOIN GAME
+      </button>
+
+    </form>
+  </div>
+
+  <!-- BACK LINK -->
+  <a href="{{ url_for('main.index') }}" class="back-link mt-3">
+    Back to Menu
+  </a>
+
+</div>
 
 {% endblock %}
 
