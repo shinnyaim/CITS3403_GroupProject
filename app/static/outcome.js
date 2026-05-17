@@ -1,3 +1,8 @@
+function toggleNav() {
+    const nav = document.getElementById('mainNav');
+    nav.style.display = nav.style.display === 'none' ? 'block' : 'none';
+}
+
 // --- Read final stats from sessionStorage ---
 const finalMorale   = parseInt(sessionStorage.getItem('finalMorale'));
 const finalProgress = parseInt(sessionStorage.getItem('finalProgress'));
