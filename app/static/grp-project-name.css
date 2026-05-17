@@ -60,3 +60,26 @@ button:hover {
     color: white;
     cursor: pointer;
 }
+
+@media (max-width: 768px) {
+    #title {
+        font-size: 10pt;
+        padding: 8px;
+    }
+
+    label {
+        font-size: 8pt;
+    }
+
+    button {
+        width: 170px;
+        height: 38px;
+        font-size: 10pt;
+    }
+
+    #grpName {
+        width: 200px;
+        height: 25px;
+        font-size: 10pt;
+    }
+}

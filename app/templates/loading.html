@@ -1,56 +1,50 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block title %}Loading- Group Project Simulator{%
+endblock %} {% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='loading.css') }}" />
+{% endblock %} {% block content %}
 
-{% block title %}Loading- Group Project Simulator{% endblock %}
+<button id="menuToggle" onclick="toggleNav()">&#9776;</button>
 
-{% block extra_css %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='loading.css') }}">
-{% endblock %}
-{% block content %}
+<div class="parent">
+  <p id="mainTitle">ASSIGNING YOUR TEAMMATES...</p>
 
-    <div class="parent">
-      <p id="mainTitle">ASSIGNING YOUR TEAMMATES...</p>
+  <div class="progress">
+    <div
+      class="progress-bar"
+      id="loadingBar"
+      role="progressbar"
+      style="width: 25%"
+      aria-valuenow="25"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    ></div>
+  </div>
 
-      <div class="progress">
-        <div
-          class="progress-bar"
-          id="loadingBar"
-          role="progressbar"
-          style="width: 25%"
-          aria-valuenow="25"
-          aria-valuemin="0"
-          aria-valuemax="100"
-        ></div>
-      </div>
-
-      <div class="cardsRow">
-        <div class="teammateCard" id="card1">
-          <p class="card-emoji">?</p>
-          <p class="cardName">???</p>
-          <p class="cardRole">Identifying...</p>
-          <p class="cardDesc">???</p>
-        </div>
-
-        <div class="teammateCard" id="card2">
-          <p class="card-emoji">?</p>
-          <p class="cardName">???</p>
-          <p class="cardRole">Identifying...</p>
-          <p class="cardDesc">???</p>
-        </div>
-
-        <div class="teammateCard" id="card3">
-          <p class="card-emoji">?</p>
-          <p class="cardName">???</p>
-          <p class="cardRole">Identifying...</p>
-          <p class="cardDesc">???</p>
-        </div>
-      </div>
-      <br />
-      <button id="beginBtn" onclick="startSession()">
-        BEGIN!
-      </button>
+  <div class="cardsRow">
+    <div class="teammateCard" id="card1">
+      <p class="card-emoji">?</p>
+      <p class="cardName">???</p>
+      <p class="cardRole">Identifying...</p>
+      <p class="cardDesc">???</p>
     </div>
-{% endblock %}
 
-{% block extra_js %}
-    <script src="/static/loading.js"></script>
+    <div class="teammateCard" id="card2">
+      <p class="card-emoji">?</p>
+      <p class="cardName">???</p>
+      <p class="cardRole">Identifying...</p>
+      <p class="cardDesc">???</p>
+    </div>
+
+    <div class="teammateCard" id="card3">
+      <p class="card-emoji">?</p>
+      <p class="cardName">???</p>
+      <p class="cardRole">Identifying...</p>
+      <p class="cardDesc">???</p>
+    </div>
+  </div>
+  <br />
+  <button id="beginBtn" onclick="startSession()">BEGIN!</button>
+</div>
+{% endblock %} {% block extra_js %}
+<script src="/static/loading.js"></script>
 {% endblock %}

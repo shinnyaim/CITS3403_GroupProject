@@ -1,3 +1,17 @@
+#menuToggle {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1100;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid yellow;
+    color: yellow;
+    font-size: 18px;
+    border-radius: 6px;
+    padding: 2px 8px;
+    cursor: pointer;
+}
+
 .page-content {
     display: flex;
     justify-content: center;
@@ -156,5 +170,42 @@ td {
         width: 95%;
         padding-top: 15px;
         padding-bottom: 15px;
+    }
+
+    #menuToggle {
+    display: block;
+  }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 9pt;
+    }
+
+    .dropdownMenu a{
+        font-size: 8pt;
+    }
+
+    .dropdownMenu {
+        right: 0;
+        left: auto;
+        min-width: 140px; /* prevents it from being too wide */
+    }
+
+    span {
+        font-size: 9pt;
+    }
+
+    input {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        font-size: 9pt;
+    }
+
+    #leaderboardTable {
+        display: block;
+        overflow-x: auto;
+        scroll-behavior: smooth;
     }
 }

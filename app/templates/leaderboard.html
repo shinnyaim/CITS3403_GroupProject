@@ -1,59 +1,88 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block title %}Home- Group Project Simulator{%
+endblock %} {% block extra_css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='leaderboard.css') }}"
+/>
+{% endblock %} {% block content %}
 
-{% block title %}Home- Group Project Simulator{% endblock %}
+<button id="menuToggle" onclick="toggleNav()">&#9776;</button>
 
-{% block extra_css %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='leaderboard.css') }}">
-{% endblock %}
-
-{% block content %}
-
-    <div class="parent px-3">
-      <div class="titleRow">
-        <div class="titleSpacer"></div>
-        <h1>🏆 LEADERBOARD 🏆</h1>
-        <div class="titleRight">
-          <div class="dropdown">
-            <button id="filterBtn">
-              <img
-                src="{{ url_for('static', filename='filtericon.png') }}"
-                alt="filter"
-              />
-            </button>
-            <div class="dropdownMenu">
-              <a href="" onclick="updateLeaderboard('overall'); return false;">Overall Score</a>
-              <a href="" onclick="updateLeaderboard('progress'); return false;">Progress</a>
-              <a href="" onclick="updateLeaderboard('morale'); return false;">Morale</a>
-              <a href="" onclick="updateLeaderboard('days'); return false;">Days</a>
-            </div>
-          </div>
+<div class="parent px-3">
+  <div class="titleRow">
+    <div class="titleSpacer"></div>
+    <h1>🏆 LEADERBOARD 🏆</h1>
+    <div class="titleRight">
+      <div class="dropdown">
+        <button id="filterBtn">
+          <img
+            src="{{ url_for('static', filename='filtericon.png') }}"
+            alt="filter"
+          />
+        </button>
+        <div class="dropdownMenu">
+          <a
+            href=""
+            onclick="
+              updateLeaderboard('overall');
+              return false;
+            "
+            >Overall Score</a
+          >
+          <a
+            href=""
+            onclick="
+              updateLeaderboard('progress');
+              return false;
+            "
+            >Progress</a
+          >
+          <a
+            href=""
+            onclick="
+              updateLeaderboard('morale');
+              return false;
+            "
+            >Morale</a
+          >
+          <a
+            href=""
+            onclick="
+              updateLeaderboard('days');
+              return false;
+            "
+            >Days</a
+          >
         </div>
       </div>
-      <h1 id="filterTitle">OVERALL</h1>
-      <div class="searchRow d-flex align-items-center mt-3">
-        <span class="mr-3">SEARCH PLAYER</span>
-        <input type="text" id="playerSearch" placeholder="USERNAME..." oninput="searchPlayer()" />
-      </div>
-      <table id="leaderboardTable"> 
-        <br />
-        <thead>
-          <tr>
-            <th id = rank>RANK</th>
-            <th>PLAYER</th>
-            <th>GROUP</th>
-            <th>PROGRESS</th>
-            <th>MORALE</th>
-            <th>DAYS</th>
-            <th>OVERALL SCORE</th>
-          </tr>
-        </thead>
-        <tbody id="leaderboardBody">
-        </tbody>
-      </table>
     </div>
+  </div>
+  <h1 id="filterTitle">OVERALL</h1>
+  <div class="searchRow d-flex align-items-center mt-3">
+    <span class="mr-3">SEARCH PLAYER</span>
+    <input
+      type="text"
+      id="playerSearch"
+      placeholder="USERNAME..."
+      oninput="searchPlayer()"
+    />
+  </div>
+  <table id="leaderboardTable">
+    <br />
+    <thead>
+      <tr>
+        <th id="rank">RANK</th>
+        <th>PLAYER</th>
+        <th>GROUP</th>
+        <th>PROGRESS</th>
+        <th>MORALE</th>
+        <th>DAYS</th>
+        <th>OVERALL SCORE</th>
+      </tr>
+    </thead>
+    <tbody id="leaderboardBody"></tbody>
+  </table>
+</div>
+{% endblock %} {% block extra_js %}
+<script src="{{ url_for('static', filename='leaderboard.js') }}"></script>
 {% endblock %}
- 
-{% block extra_js %}
-    <script src="{{ url_for('static', filename='leaderboard.js') }}"></script>
-{% endblock %}
-

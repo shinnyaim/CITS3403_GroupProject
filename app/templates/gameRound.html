@@ -1,128 +1,148 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block title %}Home- Group Project Simulator{%
+endblock %} {% block extra_css %}
+<link
+  rel="stylesheet"
+  href="{{url_for('static', filename='gameRound.css') }}"
+/>
+{% endblock %} {% block content %}
 
-{% block title %}Home- Group Project Simulator{% endblock %}
+<button id="menuToggle" onclick="toggleNav()">&#9776;</button>
 
-{% block extra_css %}
-  <link rel="stylesheet" href="{{url_for('static', filename='gameRound.css') }}">
-{% endblock %}
+<!--MAIN GAME AREA-->
+<div class="parent">
+  <!-- Top bar: player info + timer -->
+  <div class="gameInfo">
+    <div class="topLeft d-flex flex-row align-items-center">
+      <p class="playerName">PLAYER:</p>
+      <p class="grpName">GROUP:</p>
+    </div>
+    <div class="topRight">
+      <p class="timer">00:30</p>
+      <p class="dayCounter">14 DAYS LEFT</p>
+    </div>
+  </div>
 
-{% block content %}
+  <hr />
 
-  <button id="menuToggle" onclick="toggleNav()">&#9776;</button>
+  <!--PROGRESS BARS -->
+  <div class="progressBars my-3">
+    <div class="moraleBar">
+      <p id="morale">TEAM MORALE:</p>
+      <div id="moraleProgress">
+        <div
+          class="progress-bar"
+          role="progressbar"
+          aria-valuenow="100"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        ></div>
+      </div>
+      <p id="moralePercentage">100%</p>
+    </div>
 
-  <!--MAIN GAME AREA-->
-  <div class="parent">
-      <!-- Top bar: player info + timer -->
-      <div class="gameInfo">
-        <div class="topLeft d-flex flex-row align-items-center">
-          <p class="playerName">PLAYER:</p>
-          <p class="grpName">GROUP:</p>
-        </div>
-        <div class="topRight">
-          <p class="timer">00:30</p>
-          <p class="dayCounter">14 DAYS LEFT</p>
+    <div class="progressBar">
+      <p id="progressText">PROJECT PROGRESS:</p>
+      <div id="workProgress">
+        <div
+          class="progress-bar"
+          role="progressbar"
+          aria-valuenow="100"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        ></div>
+      </div>
+      <p id="progressPercentage">0%</p>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- MAIN GAME AREA -->
+  <div class="secParent">
+    <!-- Teammates panel (hidden on mobile, shown via popup) -->
+    <div class="teammates" id="teammatesPanel">
+      <p id="urTeam">YOUR TEAMMATES:</p>
+      <div class="teammateProfile" id="teammate1">
+        <div class="nameDesc">
+          <p class="name">
+            <span class="emoji"></span> <span class="nameText"></span>
+          </p>
+          <p class="desc"></p>
         </div>
       </div>
-
-      <hr />
-
-      <!--PROGRESS BARS -->
-      <div class="progressBars my-3">
-        <div class="moraleBar">
-          <p id="morale">TEAM MORALE:</p>
-          <div id="moraleProgress">
-            <div
-              class="progress-bar"
-              role="progressbar"
-              aria-valuenow="100"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-          <p id="moralePercentage">100%</p>
-        </div>
-
-        <div class="progressBar">
-          <p id="progressText">PROJECT PROGRESS:</p>
-          <div id="workProgress">
-            <div
-              class="progress-bar"
-              role="progressbar"
-              aria-valuenow="100"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-          <p id="progressPercentage">0%</p>
+      <div class="teammateProfile" id="teammate2">
+        <div class="nameDesc">
+          <p class="name">
+            <span class="emoji"></span> <span class="nameText"></span>
+          </p>
+          <p class="desc"></p>
         </div>
       </div>
-
-      <hr />
-
-      <!-- MAIN GAME AREA -->
-      <div class="secParent">
-        <!-- Teammates panel -->
-        <div class="teammates">
-          <p id="urTeam">YOUR TEAMMATES:</p>
-
-          <div class="teammateProfile" id="teammate1">
-            <div class="nameDesc">
-              <p class="name"><span class="emoji"></span> <span class="nameText"></span></p>
-              <p class="desc"></p>
-            </div>
-          </div>
-
-          <div class="teammateProfile" id="teammate2">
-            <div class="nameDesc">
-              <p class="name"><span class="emoji"></span> <span class="nameText"></span></p>
-              <p class="desc"></p>
-            </div>
-          </div>
-
-          <div class="teammateProfile" id="teammate3">
-            <div class="nameDesc">
-              <p class="name"><span class="emoji"></span> <span class="nameText"></span></p>
-              <p class="desc"></p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Event card + choices -->
-        <div class="gamePlay">
-          <p id="eventCardTitle">EVENT CARD</p>
-
-          <div class="eventCard my-3">
-            <h6>The Unsolicited Rewrite</h6>
-            <br />
-            <p class="eventCardDesc">
-              Priya rewrote your entire introduction section at 2am without
-              telling anyone. She says it was 'not up to standard.' Your
-              original draft is gone.
-            </p>
-          </div>
-
-          <button class="options mt-3">
-            <span>A)</span> Revert to your original draft
-          </button>
-          <button class="options">
-            <span>B)</span> Keep her version and adapt your sections
-          </button>
-          <button class="options">
-            <span>C)</span> Call an emergency group meeting to discuss
-          </button>
-
-          <button id="confirmChoice" style="display: none">CONFIRM</button>
-          <button id="submitEarly">SUBMIT EARLY?</button>
-        </div>
-
-        <!-- Event log panel -->
-        <div class="eventLogs">
-          <p id="eventLog">EVENT LOG:</p>
+      <div class="teammateProfile" id="teammate3">
+        <div class="nameDesc">
+          <p class="name">
+            <span class="emoji"></span> <span class="nameText"></span>
+          </p>
+          <p class="desc"></p>
         </div>
       </div>
     </div>
-  {% endblock %}
 
-  {% block extra_js %}
-    <script src="/static/gameround.js"></script>
+    <!-- Event card + choices -->
+    <div class="gamePlay">
+      <p id="eventCardTitle">EVENT CARD</p>
+      <div class="eventCard my-3">
+        <h6>The Unsolicited Rewrite</h6>
+        <br />
+        <p class="eventCardDesc">
+          Priya rewrote your entire introduction section at 2am without telling
+          anyone. She says it was 'not up to standard.' Your original draft is
+          gone.
+        </p>
+      </div>
+      <button class="options mt-3">
+        <span>A)</span> Revert to your original draft
+      </button>
+      <button class="options">
+        <span>B)</span> Keep her version and adapt your sections
+      </button>
+      <button class="options">
+        <span>C)</span> Call an emergency group meeting to discuss
+      </button>
+      <button id="confirmChoice" style="display: none">CONFIRM</button>
+      <button id="submitEarly">SUBMIT EARLY?</button>
+    </div>
+
+    <!-- Event log panel -->
+    <div class="eventLogs" id="eventLogsPanel">
+      <p id="eventLog">EVENT LOG:</p>
+    </div>
+  </div>
+
+  <!-- Mobile popup trigger buttons -->
+  <div class="mobilePopupBtns">
+    <button onclick="togglePopup('teammatesPopup')">TEAM</button>
+    <button onclick="togglePopup('eventLogPopup')">LOG</button>
+  </div>
+
+  <!-- Teammates popup -->
+  <div class="mobilePopup" id="teammatesPopup">
+    <div class="mobilePopupContent">
+      <button class="closePopup" onclick="togglePopup('teammatesPopup')">
+        ✕
+      </button>
+    </div>
+  </div>
+
+  <!-- Event log popup -->
+  <div class="mobilePopup" id="eventLogPopup">
+    <div class="mobilePopupContent">
+      <button class="closePopup" onclick="togglePopup('eventLogPopup')">
+        ✕
+      </button>
+    </div>
+  </div>
+  {% endblock %} {% block extra_js %}
+  <script src="/static/gameround.js"></script>
   {% endblock %}
+</div>

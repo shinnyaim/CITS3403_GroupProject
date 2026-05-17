@@ -23,6 +23,9 @@
   font-size: 2.5rem;
   text-shadow: 2px 2px 0 #000;
   margin: 0;
+
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* START BUTTON*/
@@ -223,3 +226,8 @@ table*/
   animation: menuPulse 0.8s infinite;
 }
 
+@media (max-width: 768px) {
+  .game-title {
+    font-size: 1.5rem;
+  }
+}
