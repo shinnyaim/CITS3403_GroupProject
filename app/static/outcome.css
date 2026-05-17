@@ -187,6 +187,7 @@ hr {
   /* buttons already fine, just ensure fit */
   .Btn {
     width: 100%;
+    overflow-wrap: break-word;
   }
 
   .buttons {
