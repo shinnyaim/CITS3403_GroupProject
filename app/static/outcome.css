@@ -191,5 +191,9 @@ hr {
   #menuToggle {
     display: block;
   }
+
+  h1 {
+    font-size: 23pt;
+  }
 }
 
