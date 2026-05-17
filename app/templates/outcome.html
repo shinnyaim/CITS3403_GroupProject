@@ -1,44 +1,42 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block title %}Home- Group Project Simulator{%
+endblock %} {% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='outcome.css') }}" />
+{% endblock %} {% block content %}
 
-{% block title %}Home- Group Project Simulator{% endblock %}
+<button id="menuToggle" onclick="toggleNav()">&#9776;</button>
 
-{% block extra_css %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='outcome.css') }}">
-{% endblock %}
-
-{% block content %}
-
-    <div class="mainParent">
-      <h1>GAME OVER</h1>
-      <p id="urOutcome">Your group's outcome...</p>
-      <div class="grade"></div>
-      <p class="emoji"></p>
-      <p id="finalScore"></p>
-      <p class="outcomeDesc"></p>
-      <hr />
-      <div class="secParent">
-        <div class="scores">
-          <p id="progress">Progress:</p>
-          <p id="percentageProgress"></p>
-        </div>
-        <div class="scores">
-          <p id="morale">Morale:</p>
-          <p id="percentageMorale"></p>
-        </div>
-        <div class="scores">
-          <p id="days">Days Taken:</p>
-          <p id="percentageDays"></p>
-        </div>
-      </div>
-      <div class="buttons">
-        <button class="Btn" onclick="window.location.href='/'">Home</button>
-        <button class="Btn" onclick="window.location.href='/setup'">PLAY AGAIN?</button>
-        <button class="Btn" onclick="window.location.href='/leaderboard'">LEADERBOARD</button>
-      </div>
+<div class="mainParent">
+  <h1>GAME OVER</h1>
+  <p id="urOutcome">Your group's outcome...</p>
+  <div class="grade"></div>
+  <p class="emoji"></p>
+  <p id="finalScore"></p>
+  <p class="outcomeDesc"></p>
+  <hr />
+  <div class="secParent">
+    <div class="scores">
+      <p id="progress">Progress:</p>
+      <p id="percentageProgress"></p>
     </div>
+    <div class="scores">
+      <p id="morale">Morale:</p>
+      <p id="percentageMorale"></p>
+    </div>
+    <div class="scores">
+      <p id="days">Days Taken:</p>
+      <p id="percentageDays"></p>
+    </div>
+  </div>
+  <div class="buttons">
+    <button class="Btn" onclick="window.location.href = '/'">Home</button>
+    <button class="Btn" onclick="window.location.href = '/setup'">
+      PLAY AGAIN?
+    </button>
+    <button class="Btn" onclick="window.location.href = '/leaderboard'">
+      LEADERBOARD
+    </button>
+  </div>
+</div>
+{% endblock %} {% block extra_js %}
+<script src="{{ url_for('static', filename='outcome.js') }}"></script>
 {% endblock %}
-
-{% block extra_js %}
-    <script src="{{ url_for('static', filename='outcome.js') }}"></script>
-{% endblock %}
- 
