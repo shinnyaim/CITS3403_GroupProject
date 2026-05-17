@@ -125,7 +125,13 @@ $('#gamelogModal').on('show.bs.modal', async () => {
 
 
 async function resumeSession(sessionId) {
+  try {
     const res = await fetch(`/api/session/resume/${sessionId}`);
+
+    if (!res.ok) {
+      throw new Error('Failed to resume session');
+    }
+
     const data = await res.json();
 
     sessionStorage.setItem('session_id', data.session_id);
@@ -139,6 +145,10 @@ async function resumeSession(sessionId) {
     sessionStorage.setItem('currentEvent', data.current_event);
 
     window.location.href = '/game';
+  } catch (err) {
+    console.error(err);
+    alert('Could not resume this game. Please try again.');
+  }
 }
 
 /*=================
@@ -146,6 +156,7 @@ User logged in check
 =================*/
 
 async function checkAuthStatus() {
+  try {
     const res = await fetch('/api/me');
     const startBtn = document.getElementById('startBtn');
     const authMenuItem = document.getElementById('authMenuItem');
@@ -159,6 +170,15 @@ async function checkAuthStatus() {
         authMenuItem.onclick = () => window.location.href = '/auth';
         startBtn.onclick = () => window.location.href = '/auth?next=/setup';
     }
+  } catch (err) {
+    console.error(err);
+    const startBtn = document.getElementById('startBtn');
+    const authMenuItem = document.getElementById('authMenuItem');
+
+    authMenuItem.textContent = 'Sign Up / Log in';
+    authMenuItem.onclick = () => window.location.href = '/auth';
+    startBtn.onclick = () => window.location.href = '/auth?next=/setup';
+  }
 }
 
 checkAuthStatus();

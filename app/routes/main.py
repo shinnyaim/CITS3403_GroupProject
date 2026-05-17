@@ -12,6 +12,7 @@ def index():
     return render_template('index.html')
 
 @main.route('/setup')
+@login_required
 def home():
     return render_template('grp-project-name.html')
 
@@ -21,14 +22,17 @@ def instructions():
     return render_template('How_to_play.html')
 
 @main.route('/loading')
+@login_required
 def loading():
     return render_template('loading.html')
 
 @main.route('/game')
+@login_required
 def game():
     return render_template('gameRound.html')
 
 @main.route('/outcome')
+@login_required
 def outcome():
     return render_template('outcome.html')
 
@@ -49,6 +53,7 @@ def profile():
     )
 
 @main.route('/api/random-teammates')
+@login_required
 def random_teammates():
     all_teammates = Teammate.query.all()
     if len(all_teammates) < 3:
@@ -61,6 +66,7 @@ def random_teammates():
     ])
 
 @main.route('/api/random-event')
+@login_required
 def random_event():
     """Returns a random event card filtered to the player's current teammates."""
     ids_param = request.args.get('teammate_ids', '')
@@ -106,6 +112,9 @@ def start_session():
     session = GameSession(
         user_id=current_user.id,
         group_name=group_name,
+        morale=70,
+        progress=0,
+        day=1,
         teammate_ids=','.join(map(str, teammate_ids)),
         started_at=datetime.now(timezone.utc)
     )
@@ -122,6 +131,9 @@ def update_session():
     session_id = data.get('session_id')
     session = db.session.get(GameSession, session_id)
 
+    if not session or session.user_id != current_user.id:
+        return jsonify({'error': 'Session not found'}), 404
+
     session.morale = data.get('morale', session.morale)
     session.progress = data.get('progress', session.progress)
     session.day = data.get('currentDay', session.day)
@@ -137,10 +149,9 @@ def update_session():
 def end_session():
     data = request.json
     session_id = data.get('session_id')
-    
     session = db.session.get(GameSession, session_id)
 
-    if not session:
+    if not session or session.user_id != current_user.id:
         return jsonify({'error': 'Session not found'}), 404
 
     session.status = 'ended'
@@ -149,6 +160,7 @@ def end_session():
     return jsonify({'ok': True})
 
 @main.route('/api/sessions/get', methods=['GET'])
+@login_required
 def get_sessions():
     if not current_user.is_authenticated:
         return jsonify({'error': 'Login required'}), 401
@@ -195,7 +207,7 @@ def resume_session(session_id):
 def leaderboard():
     return render_template('leaderboard.html')
 
-
+ 
 @main.route('/api/sessions/get_all/overall')
 def leaderboard_data():
     all_sessions = GameSession.query.filter_by(status='ended').order_by(GameSession.overall_score.desc()).all()

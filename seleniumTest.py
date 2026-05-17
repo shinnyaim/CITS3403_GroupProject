@@ -16,13 +16,42 @@ def run_server():
 
 
 class SystemTests(unittest.TestCase):
-
+    
     @classmethod
     def setUpClass(cls):
-        cls.server = threading.Thread(target=run_server)
+        from app import create_app, db
+        from app.models import User, GameSession  # adjust import to match your actual model path
+        from datetime import datetime, timezone
+
+        cls.flask_app = create_app()
+        with cls.flask_app.app_context():
+            user = User.query.filter_by(email="test@test.com").first()
+            if not user:
+                user = User(username="testuser", email="test@test.com")
+                user.set_password("password123")
+                db.session.add(user)
+                db.session.commit()
+            
+            if not GameSession.query.filter_by(user_id=user.id, status='ended').first():
+                session = GameSession(
+                    user_id=user.id,
+                    group_name='Test Group',
+                    morale=80,
+                    progress=90,
+                    day=10,
+                    status='ended',
+                    overall_score=85,
+                    started_at=datetime.now(timezone.utc)
+                )
+                db.session.add(session)
+                db.session.commit()
+
+        cls.server = threading.Thread(
+            target=lambda: cls.flask_app.run(port=5000, debug=False, use_reloader=False)
+        )
         cls.server.daemon = True
         cls.server.start()
-        time.sleep(2)  # give Flask time to boot
+        time.sleep(2)
 
     def setUp(self):
         self.driver = webdriver.Chrome()
@@ -93,25 +122,6 @@ class SystemTests(unittest.TestCase):
     # -----------------------------------------------------
     # TEST 4: TEST FULL USER FLOW: login -> see leaderboard
     # -----------------------------------------------------
-    @classmethod
-    def setUpClass(cls):
-        from app import create_app, db
-        from app.models import User  # adjust import to match your actual model path
-
-        cls.flask_app = create_app()
-        with cls.flask_app.app_context():
-            if not User.query.filter_by(email="test@test.com").first():
-                u = User(username="testuser", email="test@test.com")
-                u.set_password("password123")
-                db.session.add(u)
-                db.session.commit()
-
-        cls.server = threading.Thread(
-            target=lambda: cls.flask_app.run(port=5000, debug=False, use_reloader=False)
-        )
-        cls.server.daemon = True
-        cls.server.start()
-        time.sleep(2)
 
     def test_login_then_view_dashboard(self):
 
