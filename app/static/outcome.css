@@ -1,3 +1,17 @@
+#menuToggle {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1100;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid yellow;
+    color: yellow;
+    font-size: 18px;
+    border-radius: 6px;
+    padding: 2px 8px;
+    cursor: pointer;
+}
+
 body {
     overflow: hidden;
 }
