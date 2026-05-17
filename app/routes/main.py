@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, jsonify, request
 from flask_login import current_user, login_required
 from app import db
-from app.models import EventCard, GameSession, Teammate, User
+from app.models import EventCard, GameSession, Teammate, User, PlayerProfile
 from datetime import datetime, timezone
 import random
 
@@ -244,3 +244,99 @@ def leaderboard_days():
         'overall_score': session.overall_score or 0,
         'session_id': session.id
     } for session in all_sessions])
+
+@main.route('/api/user/profile', methods=['GET'])
+@login_required
+def get_user_profile():
+    player_profile = PlayerProfile.query.filter_by(user_id=current_user.id).first()
+    if not player_profile:
+        player_profile = PlayerProfile(user_id=current_user.id)
+        db.session.add(player_profile)
+        db.session.commit()
+
+        # get best session
+        best_session = (
+            GameSession.query.filter_by(user_id=current_user.id, status='ended')
+            .order_by(GameSession.overall_score.desc())
+            .first()
+        )
+
+        #calculate stats from all sessions
+        all_sessions = GameSession.query.filter_by(user_id=current_user.id, status='ended').all()
+
+        games_played = len(all_sessions)
+        best_grade = 'N/A'
+        avg_morale = 0
+        fastest_days = 14
+
+        if all_sessions:
+            scores = [s.overall_score for s in all_sessions if s.overall_score]
+            morales = [s.morale for s in all_sessions if s.morale]
+            days = [s.day for s in all_sessions if s.day]
+
+            # Convert score to grade (assuming 0-100 scale like in UWA)
+            best_score = max(scores) if scores else 0
+            if best_score >= 90:
+                best_grade = 'HD'
+            elif best_score >= 80:
+                best_grade = 'D'
+            elif best_score >= 70:
+                best_grade = 'C'
+            elif best_score >= 60:
+                best_grade = 'P'
+            else:
+                best_grade = 'F'
+            
+            avg_morale = int(sum(morales) / len(morales)) if morales else 0
+
+            fastest_days = min(days) if days else 14
+        
+        response = {
+            'username': current_user.username,
+            'email': current_user.email,
+            'avatar': player_profile.avatar,
+            'rank': player_profile.rank_title,
+            'stats': {
+                'gamesPlayed': games_played,
+                'bestGrade': best_grade,
+                'avgMorale': avg_morale,
+                'fastestDays': fastest_days
+            },
+            'bestRun': None
+        }
+        # Add best run details if exists
+        if best_session:
+            response['bestRun'] = {
+                'groupName': best_session.group_name,
+                'morale': best_session.morale,
+                'progress': best_session.progress,
+                'daysLeft': 14 - best_session.day,
+                'overallScore': best_session.overall_score,
+                'status': best_session.status,
+                'startedAt': best_session.started_at.isoformat() if best_session.started_at else None
+            }
+    
+        return jsonify(response)
+
+@main.route('/api/user/avatar', methods=['POST'])
+@login_required
+def save_avatar():
+    """
+    Save avatar preference to database
+    """
+    data = request.json
+    avatar = data.get('avatar')
+ 
+    if not avatar:
+        return jsonify({'error': 'No avatar provided'}), 400
+ 
+    # Get or create PlayerProfile
+    player_profile = PlayerProfile.query.filter_by(user_id=current_user.id).first()
+    if not player_profile:
+        player_profile = PlayerProfile(user_id=current_user.id, avatar=avatar)
+        db.session.add(player_profile)
+    else:
+        player_profile.avatar = avatar
+ 
+    db.session.commit()
+    return jsonify({'ok': True, 'avatar': avatar})
