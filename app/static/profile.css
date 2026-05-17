@@ -696,3 +696,10 @@
   }
 }
 
+@media (max-width: 480px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+  }
+}
