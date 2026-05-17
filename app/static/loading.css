@@ -42,6 +42,12 @@
     padding-top: 2rem;
 }
 
+@media (max-width: 480px) {
+    .parent {
+        margin: 0 8px 0 8px;
+    }
+}
+
 #mainTitle {
     font-size: 18px;
     color: yellow;
