@@ -198,10 +198,14 @@ function setupAvatarSelection() {
  
       // Save to database
       try {
+
+        const token = document.querySelector('meta[name="csrf-token"]').content;
+
         const res = await fetch('/api/user/avatar', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-CSRFToken': token
           },
           body: JSON.stringify({ avatar: avatarName })
         });
