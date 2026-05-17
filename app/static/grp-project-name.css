@@ -64,6 +64,7 @@ button:hover {
 @media (max-width: 768px) {
     #title {
         font-size: 10pt;
+        padding: 8px;
     }
 
     label {
