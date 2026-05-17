@@ -181,6 +181,7 @@ hr {
 
   .scores {
     width: 80%;
+    margin-bottom: 10px;
   }
 
   /* buttons already fine, just ensure fit */
