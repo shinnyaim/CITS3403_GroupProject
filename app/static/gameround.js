@@ -14,6 +14,11 @@ const teammates = JSON.parse(sessionStorage.getItem('teammates') || '[]');
 const teammateIds = teammates.map(t => t.id);
 let selectedOptionIndex = null;
 
+function getCsrfToken() {
+    const token = document.querySelector('meta[name="csrf-token"]');
+    return token ? token.content : '';
+}
+
 // --- Timer State ---
 const TIMER_SECONDS = 30;
 let timerInterval = null;
@@ -96,12 +101,21 @@ async function fetchEventCard() {
 
         fetch('/api/session/update', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCsrfToken()
+            },
             body: JSON.stringify({
                 session_id: sessionStorage.getItem('session_id'),
                 current_event: JSON.stringify(event)
             })
-        }).catch(e => console.error('Failed to save event:', e));
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to save event');
+                }
+            })
+            .catch(e => console.error('Failed to save event:', e));
 
         displayEventCard(event);
     } catch (e) {
@@ -216,9 +230,12 @@ async function chooseOption() {
     currentDay++;
 
     try {
-        await fetch('/api/session/update', {
+        const res = await fetch('/api/session/update', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCsrfToken()
+            },
             body: JSON.stringify({
                 session_id: sessionStorage.getItem('session_id'),
                 seen_event_ids: seenCardIds.join(','),
@@ -229,6 +246,9 @@ async function chooseOption() {
                 current_event: sessionStorage.getItem('currentEvent')
             })
         });
+        if (!res.ok) {
+            throw new Error('Failed to save session');
+        }
     } catch (e) {
         console.error('Failed to save session:', e);
     }
@@ -301,14 +321,20 @@ async function endGame(reason) {
     sessionStorage.removeItem('progress');
     
     try {
-        await fetch('/api/session/end', {
+        const res = await fetch('/api/session/end', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCsrfToken()
+            },
             body: JSON.stringify({
                 session_id: sessionStorage.getItem('session_id'),
                 overall_score: overallScore
             })
         });
+        if (!res.ok) {
+            throw new Error('Failed to end session');
+        }
     } catch (e) {
         console.error('Failed to end session:', e);
     }
