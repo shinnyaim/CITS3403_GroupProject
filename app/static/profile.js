@@ -293,16 +293,26 @@ $('#gamelogModal').on('show.bs.modal', async () => {
 RESUME SESSION
 ================= */
 async function resumeSession(sessionId) {
-  const res = await fetch(`/api/session/resume/${sessionId}`);
-  const data = await res.json();
- 
-  sessionStorage.setItem('session_id', data.session_id);
-  sessionStorage.setItem('groupName', data.group_name);
-  sessionStorage.setItem('currentDay', data.currentDay);
-  sessionStorage.setItem('morale', data.morale);
-  sessionStorage.setItem('progress', data.progress);
- 
-  window.location.href = '/game';
+  try {
+    const res = await fetch(`/api/session/resume/${sessionId}`);
+
+    if (!res.ok) {
+      throw new Error('Failed to resume session');
+    }
+
+    const data = await res.json();
+  
+    sessionStorage.setItem('session_id', data.session_id);
+    sessionStorage.setItem('groupName', data.group_name);
+    sessionStorage.setItem('currentDay', data.currentDay);
+    sessionStorage.setItem('morale', data.morale);
+    sessionStorage.setItem('progress', data.progress);
+  
+    window.location.href = '/game';
+  } catch (err) {
+    console.error('Resume session error:', err);
+    alert('Could not resume this game. Please try again.');
+  }
 }
 
 /* =================
