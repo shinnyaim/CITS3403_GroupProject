@@ -13,3 +13,23 @@ def canAccessSession(userID, sessionUserID):
 def updateProgress(curProgress, increment):
     newValue = curProgress + increment
     return min(newValue, 100)
+
+def calculate_rank(best_score):
+    """
+    Calculate rank based on best run score.
+    Returns a rank title based on overall performance.
+    """
+    if best_score is None or best_score == 0:
+        return 'Novice'
+    elif best_score >= 95:
+        return 'Project Master'
+    elif best_score >= 90:
+        return 'Deadline Victor'
+    elif best_score >= 80:
+        return 'Team Player'
+    elif best_score >= 70:
+        return 'Competent Manager'
+    elif best_score >= 60:
+        return 'Deadline Dodger'
+    else:
+        return 'Barely Made It'

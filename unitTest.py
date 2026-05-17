@@ -1,5 +1,6 @@
 import unittest
 from app.functions import (
+    calculate_rank, 
     passwordsMatch,
     isValidEmail,
     checkCreds,
@@ -83,3 +84,20 @@ class BasicTests(unittest.TestCase):
 
     def test_update_prog_cap_at_100(self):
         self.assertEqual(updateProgress(95, 10), 100)
+    
+    # --- Rank tests ---
+    def test_rank_none(self):
+        self.assertEqual(calculate_rank(None), 'Novice')
+
+    def test_rank_zero(self):
+        self.assertEqual(calculate_rank(0), 'Novice')
+
+    def test_rank_59(self):
+        self.assertEqual(calculate_rank(59), 'Barely Made It')
+
+    def test_rank_60(self):
+        self.assertEqual(calculate_rank(60), 'Deadline Dodger')
+
+    def test_rank_95(self):
+        self.assertEqual(calculate_rank(95), 'Project Master')
+
