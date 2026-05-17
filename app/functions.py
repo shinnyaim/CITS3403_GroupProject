@@ -14,7 +14,7 @@ def updateProgress(curProgress, increment):
     newValue = curProgress + increment
     return min(newValue, 100)
 
-def convertScoreToGrade(score):
+def convert_score_to_grade(score):
     if score is None or score == 0:
         return 'N/A'
     elif score >= 90:
