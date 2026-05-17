@@ -13,3 +13,17 @@ def canAccessSession(userID, sessionUserID):
 def updateProgress(curProgress, increment):
     newValue = curProgress + increment
     return min(newValue, 100)
+
+def convertScoreToGrade(score):
+    if score is None or score == 0:
+        return 'N/A'
+    elif score >= 90:
+        return 'HD'
+    elif score >= 80:
+        return 'D'
+    elif score >= 70:
+        return 'C'
+    elif score >= 60:
+        return 'P'
+    else:
+        return 'F'
