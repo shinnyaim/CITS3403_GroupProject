@@ -185,4 +185,10 @@ td {
     .dropdownMenu a{
         font-size: 8pt;
     }
+
+    .dropdownMenu {
+        right: 0;
+        left: auto;
+        min-width: 140px; /* prevents it from being too wide */
+    }
 }
