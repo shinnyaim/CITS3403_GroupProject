@@ -4,7 +4,8 @@ from app.functions import (
     isValidEmail,
     checkCreds,
     canAccessSession,
-    updateProgress)
+    updateProgress,
+    convert_score_to_grade)
 from app import create_app, db
 from app.models import User, GameSession, Teammate
 from config import TestConfig
@@ -83,26 +84,24 @@ class BasicTests(unittest.TestCase):
 
     def test_update_prog_cap_at_100(self):
         self.assertEqual(updateProgress(95, 10), 100)
-    
-    from app.functions import convertScoreToGrade
 
     def test_grade_HD(self):
-        self.assertEqual(convertScoreToGrade(90), 'HD')
+        self.assertEqual(convert_score_to_grade(90), 'HD')
 
     def test_grade_D(self):
-        self.assertEqual(convertScoreToGrade(80), 'D')
+        self.assertEqual(convert_score_to_grade(80), 'D')
 
     def test_grade_C(self):
-        self.assertEqual(convertScoreToGrade(70), 'C')
+        self.assertEqual(convert_score_to_grade(70), 'C')
 
     def test_grade_P(self):
-        self.assertEqual(convertScoreToGrade(60), 'P')
+        self.assertEqual(convert_score_to_grade(60), 'P')
 
     def test_grade_F(self):
-        self.assertEqual(convertScoreToGrade(59), 'F')
+        self.assertEqual(convert_score_to_grade(59), 'F')
 
     def test_grade_none(self):
-        self.assertEqual(convertScoreToGrade(None), 'N/A')
+        self.assertEqual(convert_score_to_grade(None), 'N/A')
 
     def test_grade_zero(self):
-        self.assertEqual(convertScoreToGrade(0), 'N/A')
+        self.assertEqual(convert_score_to_grade(0), 'N/A')
