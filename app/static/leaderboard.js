@@ -1,3 +1,8 @@
+function toggleNav() {
+    const nav = document.getElementById('mainNav');
+    nav.style.display = nav.style.display === 'none' ? 'block' : 'none';
+}
+
 let filter = sessionStorage.getItem('filter') || 'overall';
 let player = sessionStorage.getItem('player') 
 
