@@ -226,3 +226,8 @@ table*/
   animation: menuPulse 0.8s infinite;
 }
 
+@media (max-width: 768px) {
+  .game-title {
+    font-size: 1.5rem;
+  }
+}
