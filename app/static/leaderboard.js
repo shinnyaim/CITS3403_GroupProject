@@ -15,9 +15,10 @@ async function updateLeaderboard(currentFilter) {
     sessions.forEach((session, i) => {
         if (player && session.username !== player) return; // Filter by player if set
         const row = document.createElement('tr');
+        row.className = 'playerRow';
         row.innerHTML = `
             <td>${i + 1}</td>
-            <td>${session.username}</td>
+            <td class="username">${session.username}</td>  <!-- ← ADD class="username" -->
             <td>${session.group_name}</td>
             <td>${session.progress}%</td>
             <td>${session.morale}%</td>
@@ -28,6 +29,7 @@ async function updateLeaderboard(currentFilter) {
     });
 }
 
+updateLeaderboard(filter); 
 
 function searchPlayer() {
     const input = document.getElementById('playerSearch').value.trim();
@@ -39,6 +41,5 @@ function searchPlayer() {
     player = sessionStorage.getItem('player');
     updateLeaderboard(sessionStorage.getItem('filter') || 'overall');
 }
-
-updateLeaderboard(filter);
 setInterval(() => updateLeaderboard(sessionStorage.getItem('filter') || 'overall'), 30000);
+
