@@ -116,6 +116,7 @@ def start_session():
     return jsonify({'session_id': session.id})
 
 @main.route('/api/session/update', methods=['POST'])
+@login_required
 def update_session():
     data = request.json
     session_id = data.get('session_id')
@@ -132,6 +133,7 @@ def update_session():
     return jsonify({'ok': True})
 
 @main.route('/api/session/end', methods=['POST'])
+@login_required
 def end_session():
     data = request.json
     session_id = data.get('session_id')
@@ -165,6 +167,7 @@ def get_sessions():
 
 
 @main.route('/api/session/resume/<int:session_id>', methods=['GET'])
+@login_required
 def resume_session(session_id):
 
     session = db.session.get(GameSession, session_id)
