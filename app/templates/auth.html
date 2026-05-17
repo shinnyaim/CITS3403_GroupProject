@@ -14,13 +14,11 @@
     <h1 class="game-title">Group Project Simulator</h1>
   </div>
 
-  <!-- Tabs -->
   <div class="auth-tabs mb-3">
     <button id="signupTab" class="auth-tab">SIGN UP</button>
     <button id="loginTab" class="auth-tab active">LOG IN</button>
   </div>
 
-  <!-- ERROR MESSAGE -->
   <div id="loginError" class="error-message">
     {% with messages = get_flashed_messages() %}
       {% if messages %}
@@ -29,7 +27,6 @@
     {% endwith %}
   </div>
 
-  <!-- ===================== LOGIN FORM ===================== -->
   <div class="auth-form-box" id="loginForm">
 
     <form method="POST">
@@ -57,7 +54,6 @@
     </form>
   </div>
 
-  <!-- ===================== SIGNUP FORM ===================== -->
   <div class="auth-form-box" id="signupForm" style="display:none;">
 
     <form method="POST">
