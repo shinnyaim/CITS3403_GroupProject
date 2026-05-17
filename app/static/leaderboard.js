@@ -30,6 +30,7 @@ async function updateLeaderboard(currentFilter) {
 }
 
 updateLeaderboard(filter); 
+
 function searchPlayer() {
     const input = document.getElementById('playerSearch').value.trim();
     if (input) {
