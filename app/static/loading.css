@@ -130,6 +130,12 @@
     animation: blinkColors 1s infinite;
 }
 
+@media (max-width: 480px) {
+    #beginBtn {
+        margin-bottom: 40px;
+    }
+}
+
 @keyframes blinkColors {
     0% {
         background-color: yellow;
