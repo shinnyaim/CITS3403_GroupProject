@@ -44,8 +44,8 @@
                 {% endif %}
 
                 {% if request.endpoint != 'main.index' %}
-                <a href="{{ url_for('main.game') if current_user.is_authenticated else url_for('auth.auth_page') }}"
-                   class="nav-item {% if request.endpoint == 'main.game' %}active{% endif %}">
+                <a href="{{ url_for('main.home') if current_user.is_authenticated else url_for('auth.auth_page') }}"
+                   class="nav-item {% if request.endpoint == 'main.home' %}active{% endif %}">
                     PLAY
                 </a>
                 {% endif %}
