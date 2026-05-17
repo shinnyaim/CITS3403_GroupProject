@@ -154,7 +154,7 @@ hr {
   box-sizing: border-box;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 480px) {
 
   /* allow parent to grow naturally */
   .mainParent {
