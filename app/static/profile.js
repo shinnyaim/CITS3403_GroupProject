@@ -1,3 +1,8 @@
+function toggleNav() {
+    const nav = document.getElementById('mainNav');
+    nav.style.display = nav.style.display === 'none' ? 'block' : 'none';
+} 
+
 /* =================
 PLAYER DATA (DEV FALLBACK)
 ================= */
