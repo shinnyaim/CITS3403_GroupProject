@@ -60,3 +60,10 @@ button:hover {
     color: white;
     cursor: pointer;
 }
+
+@media (max-width: 768px) {
+    #title {
+        font-size: 11pt;
+    }
+}
+
