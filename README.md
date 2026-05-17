@@ -69,9 +69,10 @@ Testing:
 8. Create a virtual environment through this command: python -m venv venv
 9. Activate the virtual environment by Windows: venv\Scripts\activate , for Mac/Linux: source venv/bin/activate
 10. Install dependencies: pip install -r requirements.txt
-11. Run the application through the command: python run.py
-12. Click on the URL that will appear in the terminal: http://127.0.0.1:5000
-13. To quit, enter CTRL+C
+11. Before running the application for the first time on a new laptop, run python seed.py once to populate the SQLite database with teammates and event cards
+12. Run the application through the command: python run.py
+13. Click on the URL that will appear in the terminal: http://127.0.0.1:5000
+14. To quit, enter CTRL+C
 
 **Instructions for how to run the tests for the application:**
 
