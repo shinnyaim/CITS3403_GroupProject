@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, jsonify, request
 from flask_login import current_user, login_required
 from app import db
-from app.models import EventCard, GameSession, Teammate, User
+from app.models import EventCard, GameSession, Teammate, User, PlayerProfile
 from datetime import datetime, timezone
 import random
 
@@ -116,6 +116,7 @@ def start_session():
     return jsonify({'session_id': session.id})
 
 @main.route('/api/session/update', methods=['POST'])
+@login_required
 def update_session():
     data = request.json
     session_id = data.get('session_id')
@@ -132,6 +133,7 @@ def update_session():
     return jsonify({'ok': True})
 
 @main.route('/api/session/end', methods=['POST'])
+@login_required
 def end_session():
     data = request.json
     session_id = data.get('session_id')
@@ -165,6 +167,7 @@ def get_sessions():
 
 
 @main.route('/api/session/resume/<int:session_id>', methods=['GET'])
+@login_required
 def resume_session(session_id):
 
     session = db.session.get(GameSession, session_id)
@@ -202,7 +205,8 @@ def leaderboard_data():
         'progress': session.progress,
         'morale': session.morale,
         'currentDay': session.day,
-        'overall_score': session.overall_score or 0
+        'overall_score': session.overall_score or 0,
+        'session_id': session.id
     } for session in all_sessions])
 
 @main.route('/api/sessions/get_all/progress')
@@ -214,7 +218,8 @@ def leaderboard_progress():
         'progress': session.progress,
         'morale': session.morale,
         'currentDay': session.day,
-        'overall_score': session.overall_score or 0
+        'overall_score': session.overall_score or 0,
+        'session_id': session.id
     } for session in all_sessions])
 
 @main.route('/api/sessions/get_all/morale')
@@ -226,7 +231,8 @@ def leaderboard_morale():
         'progress': session.progress,
         'morale': session.morale,
         'currentDay': session.day,
-        'overall_score': session.overall_score or 0
+        'overall_score': session.overall_score or 0,
+        'session_id': session.id
     } for session in all_sessions])
 
 @main.route('/api/sessions/get_all/days')
@@ -238,5 +244,146 @@ def leaderboard_days():
         'progress': session.progress,
         'morale': session.morale,
         'currentDay': session.day,
-        'overall_score': session.overall_score or 0
+        'overall_score': session.overall_score or 0,
+        'session_id': session.id
     } for session in all_sessions])
+
+def calculate_rank(best_score):
+    """
+    Calculate rank based on best run score.
+    Returns a rank title based on overall performance.
+    """
+    if best_score is None or best_score == 0:
+        return 'Novice'
+    elif best_score >= 95:
+        return 'Project Master'
+    elif best_score >= 90:
+        return 'Deadline Victor'
+    elif best_score >= 80:
+        return 'Team Player'
+    elif best_score >= 70:
+        return 'Competent Manager'
+    elif best_score >= 60:
+        return 'Deadline Dodger'
+    else:
+        return 'Barely Made It'
+
+def convert_score_to_grade(score):
+    """Convert numeric score (0-100) to letter grade."""
+    if score is None or score == 0:
+        return 'N/A'
+    elif score >= 90:
+        return 'HD'
+    elif score >= 80:
+        return 'D'
+    elif score >= 70:
+        return 'C'
+    elif score >= 60:
+        return 'P'
+    else:
+        return 'F'
+
+
+@main.route('/api/user/profile', methods=['GET'])
+@login_required
+def get_user_profile():
+    """
+    Returns complete user profile with:
+    - Current user info (username, email, avatar)
+    - Best run details (for stat bars)
+    - Personal stats (calculated from all completed games)
+    - Rank (based on best run score)
+    """
+    # Get or create PlayerProfile
+    player_profile = PlayerProfile.query.filter_by(user_id=current_user.id).first()
+    if not player_profile:
+        player_profile = PlayerProfile(user_id=current_user.id)
+        db.session.add(player_profile)
+        db.session.commit()
+ 
+    # ✓ MOVED OUTSIDE - THIS ALWAYS CALCULATES
+    # Get best session (for stat bars + rank)
+    best_session = (
+        GameSession.query
+        .filter_by(user_id=current_user.id, status='ended')
+        .order_by(GameSession.overall_score.desc())
+        .first()
+    )
+ 
+    # Calculate stats from ALL completed sessions
+    all_sessions = GameSession.query.filter_by(user_id=current_user.id, status='ended').all()
+ 
+    games_played = len(all_sessions)
+    best_grade = 'N/A'
+    avg_morale = 0
+    fastest_days = 14
+ 
+    if all_sessions:
+        scores = [s.overall_score for s in all_sessions if s.overall_score]
+        morales = [s.morale for s in all_sessions if s.morale]
+        days = [s.day for s in all_sessions if s.day]
+ 
+        # Convert best score to grade
+        best_score = max(scores) if scores else 0
+        best_grade = convert_score_to_grade(best_score)
+        
+        # Calculate average morale
+        avg_morale = int(sum(morales) / len(morales)) if morales else 0
+ 
+        # Find fastest submission (minimum days)
+        fastest_days = min(days) if days else 14
+ 
+    # Determine rank based on best run
+    best_score = best_session.overall_score if best_session else 0
+    rank_title = calculate_rank(best_score)
+ 
+    response = {
+        'username': current_user.username,
+        'email': current_user.email,
+        'avatar': player_profile.avatar,
+        'rank': rank_title,  # Based on best run
+        'stats': {
+            'gamesPlayed': games_played,
+            'bestGrade': best_grade,
+            'avgMorale': avg_morale,
+            'fastestDays': fastest_days
+        },
+        'bestRun': None
+    }
+ 
+    # Add best run details for stat bars
+    if best_session:
+        response['bestRun'] = {
+            'groupName': best_session.group_name,
+            'morale': best_session.morale,
+            'progress': best_session.progress,
+            'daysLeft': 14 - best_session.day,
+            'overallScore': best_session.overall_score,
+            'status': best_session.status,
+            'startedAt': best_session.started_at.isoformat() if best_session.started_at else None
+        }
+ 
+    return jsonify(response)
+
+@main.route('/api/user/avatar', methods=['POST'])
+@login_required
+def save_avatar():
+    """
+    Save avatar preference to database
+    """
+    data = request.json
+    avatar = data.get('avatar')
+ 
+    if not avatar:
+        return jsonify({'error': 'No avatar provided'}), 400
+ 
+    # Get or create PlayerProfile
+    player_profile = PlayerProfile.query.filter_by(user_id=current_user.id).first()
+    if not player_profile:
+        player_profile = PlayerProfile(user_id=current_user.id, avatar=avatar)
+        db.session.add(player_profile)
+    else:
+        player_profile.avatar = avatar
+ 
+    db.session.commit()
+    return jsonify({'ok': True, 'avatar': avatar})

@@ -77,9 +77,8 @@ class PlayerProfile(db.Model):
     id           = db.Column(db.Integer, primary_key=True)
     user_id      = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, unique=True)
     avatar       = db.Column(db.String(50), default='sprite3.png')
-    games_played = db.Column(db.Integer, default=0)
-    total_morale = db.Column(db.Integer, default=0)
-    best_grade   = db.Column(db.String(10), default='N/A')
-    fastest_days = db.Column(db.Integer, default=14)
     rank_title  = db.Column(db.String(100), default='Novice')
-    total_wins    = db.Column(db.Integer, default=0)
+    user = db.relationship('User', backref='profile', uselist=False)
+    
+    def __repr__(self):
+        return f'<PlayerProfile {self.user.username}>'
