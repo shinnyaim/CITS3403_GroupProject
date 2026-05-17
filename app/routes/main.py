@@ -12,6 +12,7 @@ def index():
     return render_template('index.html')
 
 @main.route('/setup')
+@login_required
 def home():
     return render_template('grp-project-name.html')
 
@@ -21,14 +22,17 @@ def instructions():
     return render_template('How_to_play.html')
 
 @main.route('/loading')
+@login_required
 def loading():
     return render_template('loading.html')
 
 @main.route('/game')
+@login_required
 def game():
     return render_template('gameRound.html')
 
 @main.route('/outcome')
+@login_required
 def outcome():
     return render_template('outcome.html')
 
@@ -151,6 +155,7 @@ def end_session():
     return jsonify({'ok': True})
 
 @main.route('/api/sessions/get', methods=['GET'])
+@login_required
 def get_sessions():
     if not current_user.is_authenticated:
         return jsonify({'error': 'Login required'}), 401
