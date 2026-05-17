@@ -43,9 +43,11 @@ async function startSession() {
     const groupName = sessionStorage.getItem('groupName') || 'My Group';
     const teammateIds = selectedTeammates.map(t => t.id);
 
+    const token = document.querySelector('meta[name="csrf-token"]').content;
+
     const sessionRes = await fetch('/api/session/start', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json',  'X-CSRFToken': token },
         body: JSON.stringify({ group_name: groupName, teammate_ids: teammateIds })
     });
     const sessionData = await sessionRes.json();

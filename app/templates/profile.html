@@ -6,9 +6,116 @@ endblock %} {% block extra_css %}
 <button id="menuToggle" onclick="toggleNav()">&#9776;</button>
 
 <div class="profileWrapper">
-  <div class="profileHeader text-center">
-    <h1 class="profileTitle">PLAYER PROFILE</h1>
-    <p class="profileSubtitle">Your university survival stats!</p>
+
+    <div class="profileHeader text-center">
+      <h1 class="profileTitle">PLAYER PROFILE</h1>
+      <p class="profileSubtitle">Your university survival stats!</p>
+    </div>
+
+    <div class="profileContent">
+
+      <!-- TOP SECTION: Avatar Card + Current Run -->
+      <div class="row g-4">
+
+        <!-- LEFT: Avatar Card -->
+        <div class="col-lg-3">
+          <div class="card-profile avatarCard">
+            <div class="avatarContainer" id="avatarContainer" role="button" tabindex="0" aria-label="Click to change avatar">
+              <img src="/static/avatars/sprite3.png" alt="Player Avatar" class="mainAvatar" />
+              <div class="avatarOverlay">CLICK TO CHANGE</div>
+            </div>
+            
+            <p class="playerName" id="playerNameDisplay">PLAYER: BOB</p>
+            <p class="groupName" id="groupDisplay">GROUP: BOBBERS</p>
+
+            <!-- Rank Box -->
+            <div class="rankBox">
+              <p class="rankLabel">RANK</p>
+              <h3 class="rankTitle" id="rankDisplay">DEADLINE DODGER</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Current Run Card -->
+        <div class="col-lg-9">
+          <div class="card-profile currentRunCard">
+            <h2 class="cardTitle">BEST RUN</h2>
+
+            <!-- Progress Stat Block -->
+            <div class="statBlock">
+              <div class="statHeader">
+                <p class="statLabel">PROJECT PROGRESS</p>
+                <span class="statValue" id="progressText">70%</span>
+              </div>
+              <div class="barBackground">
+                <div class="progressFill" id="progressBar" style="width: 70%"></div>
+              </div>
+            </div>
+
+            <!-- Morale Stat Block -->
+            <div class="statBlock">
+              <div class="statHeader">
+                <p class="statLabel">MORALE</p>
+                <span class="statValue" id="moraleText">55%</span>
+              </div>
+              <div class="barBackground">
+                <div class="moraleFill" id="moraleBar" style="width: 55%"></div>
+              </div>
+            </div>
+
+            <!-- Days Stat Block -->
+            <div class="statBlock">
+              <div class="statHeader">
+                <p class="statLabel">DAYS LEFT</p>
+                <span class="statValue" id="daysText">8 / 14</span>
+              </div>
+              <div class="barBackground">
+                <div class="daysFill" id="daysBar" style="width: 57%"></div>
+              </div>
+            </div>            
+          </div>
+        </div>
+
+      </div>
+
+      <!-- PLAYER STATS SECTION -->
+      <div class="row g-4 mt-2">
+        <div class="col-12">
+          <div class="card-profile statsCard">
+            <h2 class="cardTitle">PERSONAL STATS</h2>
+            <div class="row g-3">
+              <div class="col-6 col-sm-6 col-md-3">
+                <div class="miniStat">
+                  <h3 id="gamesPlayedCount">24</h3>
+                  <p>GAMES PLAYED</p>
+                </div>
+              </div>
+              <div class="col-6 col-sm-6 col-md-3">
+                <div class="miniStat">
+                  <h3 id="bestGradeDisplay">HD</h3>
+                  <p>BEST GRADE</p>
+                </div>
+              </div>
+              <div class="col-6 col-sm-6 col-md-3">
+                <div class="miniStat">
+                  <h3 id="avgMoraleDisplay">82%</h3>
+                  <p>AVG MORALE FOR ALL GAMES</p>
+                </div>
+              </div>
+              <div class="col-6 col-sm-6 col-md-3">
+                <div class="miniStat">
+                  <h3 id="fastestDaysDisplay">DAY 9</h3>
+                  <p>FASTEST DAYS TAKEN TO SUBMIT</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
   </div>
 
   <div class="profileContent">
