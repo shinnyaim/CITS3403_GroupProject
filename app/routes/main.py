@@ -202,7 +202,8 @@ def leaderboard_data():
         'progress': session.progress,
         'morale': session.morale,
         'currentDay': session.day,
-        'overall_score': session.overall_score or 0
+        'overall_score': session.overall_score or 0,
+        'session_id': session.id
     } for session in all_sessions])
 
 @main.route('/api/sessions/get_all/progress')
@@ -214,7 +215,8 @@ def leaderboard_progress():
         'progress': session.progress,
         'morale': session.morale,
         'currentDay': session.day,
-        'overall_score': session.overall_score or 0
+        'overall_score': session.overall_score or 0,
+        'session_id': session.id
     } for session in all_sessions])
 
 @main.route('/api/sessions/get_all/morale')
@@ -226,7 +228,8 @@ def leaderboard_morale():
         'progress': session.progress,
         'morale': session.morale,
         'currentDay': session.day,
-        'overall_score': session.overall_score or 0
+        'overall_score': session.overall_score or 0,
+        'session_id': session.id
     } for session in all_sessions])
 
 @main.route('/api/sessions/get_all/days')
@@ -238,5 +241,6 @@ def leaderboard_days():
         'progress': session.progress,
         'morale': session.morale,
         'currentDay': session.day,
-        'overall_score': session.overall_score or 0
+        'overall_score': session.overall_score or 0,
+        'session_id': session.id
     } for session in all_sessions])
