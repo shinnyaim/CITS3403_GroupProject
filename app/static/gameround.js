@@ -38,11 +38,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function updateNames() {
     const groupName = sessionStorage.getItem('groupName');
-    const userResponse = await fetch('/api/me');
-    const user = await userResponse.json();
-
-    document.querySelector('.playerName').textContent = `PLAYER: ${user.username}`;
-    document.querySelector('.grpName').textContent = `GROUP: ${groupName}`; 
+    try {
+        const userResponse = await fetch('/api/me');
+        const user = await userResponse.json();
+        document.querySelector('.playerName').textContent = `PLAYER: ${user.username}`;
+    } catch (e) {
+        console.error('Failed to fetch user:', e);
+    }
+    document.querySelector('.grpName').textContent = `GROUP: ${groupName}`;
 }
 
 function loadTeammates() {
@@ -78,28 +81,32 @@ function updateDayCounter() {
 
 // --- Fetch a random event card from the API ---
 async function fetchEventCard() {
-    const res = await fetch(`/api/random-event?teammate_ids=${teammateIds.join(',')}&seen=${seenCardIds.join(',')}`);
-    const event = await res.json();
+    try {
+        const res = await fetch(`/api/random-event?teammate_ids=${teammateIds.join(',')}&seen=${seenCardIds.join(',')}`);
+        const event = await res.json();
 
-    if (event.error) {
-        console.error('No event cards found:', event.error);
-        return;
+        if (event.error) {
+            console.error('No event cards found:', event.error);
+            return;
+        }
+
+        currentEvent = event;
+        seenCardIds.push(event.id);
+        sessionStorage.setItem('currentEvent', JSON.stringify(event));
+
+        fetch('/api/session/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                session_id: sessionStorage.getItem('session_id'),
+                current_event: JSON.stringify(event)
+            })
+        }).catch(e => console.error('Failed to save event:', e));
+
+        displayEventCard(event);
+    } catch (e) {
+        console.error('Failed to fetch event card:', e);
     }
-
-    currentEvent = event;
-    seenCardIds.push(event.id);   // mark this card as seen
-    sessionStorage.setItem('currentEvent', JSON.stringify(event));
-
-    fetch('/api/session/update', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            session_id: sessionStorage.getItem('session_id'),
-            current_event: JSON.stringify(event)
-        })
-    });
-
-    displayEventCard(event);
 }
 
 // --- Timer: start a 30-second countdown for the current card ---
@@ -208,21 +215,23 @@ async function chooseOption() {
     addToEventLog(currentEvent.title, option.text);
     currentDay++;
 
-    const sessionUpdate = await fetch('/api/session/update', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            session_id: sessionStorage.getItem('session_id'),
-            seen_event_ids: seenCardIds.join(','),
-            morale: morale,
-            progress: progress,
-            currentDay: currentDay - 1, // currentDay was incremented at the start of the next round, so subtract 1 to get the actual day reached
-            event_log: sessionStorage.getItem('eventLog') || '[]',
-            current_event: sessionStorage.getItem('currentEvent')
-        })
-    });
+    try {
+        await fetch('/api/session/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                session_id: sessionStorage.getItem('session_id'),
+                seen_event_ids: seenCardIds.join(','),
+                morale: morale,
+                progress: progress,
+                currentDay: currentDay - 1,
+                event_log: sessionStorage.getItem('eventLog') || '[]',
+                current_event: sessionStorage.getItem('currentEvent')
+            })
+        });
+    } catch (e) {
+        console.error('Failed to save session:', e);
+    }
 
     // check end conditions
     if (morale <= 0) {
@@ -291,14 +300,18 @@ async function endGame(reason) {
     sessionStorage.removeItem('morale');
     sessionStorage.removeItem('progress');
     
-    await fetch('/api/session/end', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            session_id: sessionStorage.getItem('session_id'),
-            overall_score: overallScore
-        })
-    });
+    try {
+        await fetch('/api/session/end', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                session_id: sessionStorage.getItem('session_id'),
+                overall_score: overallScore
+            })
+        });
+    } catch (e) {
+        console.error('Failed to end session:', e);
+    }
 
     window.location.href = '/outcome';
 }
