@@ -100,12 +100,12 @@ pip install selenium
 
 To run all tests:
 
-python -m unittest seleniumTest.test_system -v
+python -m unittest seleniumTest.SystemTests -v
 
 To run a specific function:
 
-python -m unittest tests.test_system.SystemTests.system_test
-Example: python -m unittest seleniumTest.SystemTests.test_invalid_login_shows_error -v
+python -m unittest seleniumTest.SystemTests.test_login_then_view_dashboard -v
+
 
 **License**
 
