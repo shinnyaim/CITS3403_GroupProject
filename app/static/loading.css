@@ -48,6 +48,16 @@
     animation: colorBlink 1s step-end infinite;
 }
 
+@media (max-width: 480px) {
+    #mainTitle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 15px;
+    }
+}
+
 @keyframes colorBlink {
     0%, 100% { color: yellow;}
     50% {color: white;}
